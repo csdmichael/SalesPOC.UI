@@ -1,6 +1,110 @@
-# SalesPOCUI
+# SalesPOC.UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3.
+A modern Angular-based sales management dashboard application that provides comprehensive views of customers, products, sales representatives, orders, and sales analytics. The application features an AI-powered chatbot for natural language queries powered by Microsoft Foundry Agent.
+
+## Project Overview
+
+This is a proof-of-concept (POC) frontend application built with Angular 21 that consumes SalesPOC.API REST APIs. The application provides a multi-page interface for managing and viewing sales data with interactive filters and data visualization capabilities.
+
+### Key Features
+
+- **Customer Management**: View and manage customer information
+- **Product Catalog**: Browse products with filtering capabilities
+- **Sales Representatives**: Manage sales rep data
+- **Sales Orders**: Track and manage sales orders with detailed item information
+- **Sales Analytics**: View sales facts and performance metrics
+- **AI Chatbot**: Natural language interface powered by Microsoft Foundry Agent for querying sales data
+
+## Technology Stack
+
+- **Framework**: Angular 21.1.0
+- **Language**: TypeScript 5.9.2
+- **Styling**: SCSS
+- **HTTP Client**: Angular HttpClient
+- **Routing**: Angular Router (standalone components)
+- **Build Tool**: Angular CLI 21.1.3
+- **Package Manager**: npm 11.6.2
+
+## Project Architecture
+
+### Application Structure
+
+The application follows Angular best practices with a modular, component-based architecture:
+
+```
+SalesPOC.UI/
+├── src/
+│   ├── app/
+│   │   ├── components/          # Reusable UI components
+│   │   │   └── chatbot/         # AI chatbot component
+│   │   ├── pages/               # Page-level components
+│   │   │   ├── customers/       # Customers page
+│   │   │   ├── products/        # Products page
+│   │   │   ├── sales-reps/      # Sales representatives page
+│   │   │   ├── sales-orders/    # Sales orders page
+│   │   │   └── sales-facts/     # Sales analytics page
+│   │   ├── services/            # Business logic and API integration
+│   │   │   ├── chat.service.ts
+│   │   │   ├── customer.service.ts
+│   │   │   ├── order-item.service.ts
+│   │   │   ├── product.service.ts
+│   │   │   ├── sales-fact.service.ts
+│   │   │   ├── sales-order.service.ts
+│   │   │   └── sales-rep.service.ts
+│   │   ├── models/              # TypeScript interfaces and data models
+│   │   │   ├── chat-message.model.ts
+│   │   │   ├── customer.model.ts
+│   │   │   ├── order-item.model.ts
+│   │   │   ├── product.model.ts
+│   │   │   ├── sales-fact.model.ts
+│   │   │   ├── sales-order.model.ts
+│   │   │   └── sales-rep.model.ts
+│   │   ├── app.ts               # Root component (uses app.ts instead of conventional app.component.ts)
+│   │   ├── app.config.ts        # Application configuration
+│   │   ├── app.routes.ts        # Route definitions
+│   │   ├── app.html             # Root template
+│   │   └── app.scss             # Root styles
+│   ├── environments/            # Environment-specific configurations
+│   │   ├── environment.ts       # Development environment
+│   │   └── environment.prod.ts  # Production environment
+│   ├── index.html               # Main HTML file
+│   ├── main.ts                  # Application bootstrap
+│   └── styles.scss              # Global styles
+├── public/                     # Static assets
+├── angular.json               # Angular CLI configuration
+├── tsconfig.json              # TypeScript configuration
+├── proxy.conf.json            # API proxy configuration
+└── package.json               # Dependencies and scripts
+```
+
+### Architecture Patterns
+
+1. **Component-Based Architecture**: The application is built using standalone Angular components, promoting modularity and reusability.
+
+2. **Service Layer**: All API communication is abstracted into dedicated service classes, following the single responsibility principle.
+
+3. **Model-Driven**: TypeScript interfaces define the data structure for type safety and better IDE support.
+
+4. **Route-Based Navigation**: The application uses Angular Router with lazy loading capabilities for optimal performance.
+
+5. **Proxy Configuration**: API requests are proxied through `proxy.conf.json` to the Azure API Management endpoint (`https://apim-poc-my.azure-api.net/v1`).
+
+### Data Flow
+
+1. User interacts with page components (e.g., CustomersComponent)
+2. Component calls appropriate service (e.g., CustomerService)
+3. Service makes HTTP request to backend API via proxy
+4. Response is mapped to model interfaces
+5. Component updates view with data
+
+### Routing Structure
+
+- `/` → Redirects to `/customers`
+- `/customers` → Customer management page
+- `/products` → Product catalog page
+- `/sales-reps` → Sales representatives page
+- `/sales-orders` → Sales orders page
+- `/sales-facts` → Sales analytics page
 
 ## Development server
 
@@ -10,7 +114,24 @@ To start a local development server, run:
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `https://salespoc.azurewebsites.net/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+
+**Note**: The API proxy is automatically configured in `angular.json` and will forward requests from `/api/*` to `https://apim-poc-my.azure-api.net/v1/*`.
+
+## Building
+
+To build the project run:
+
+```bash
+ng build
+```
+
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+For production build:
+```bash
+ng build --configuration production
+```
 
 ## Code scaffolding
 
@@ -26,34 +147,31 @@ For a complete list of available schematics (such as `components`, `directives`,
 ng generate --help
 ```
 
-## Building
+## Configuration
 
-To build the project run:
+### API Proxy
 
-```bash
-ng build
+The application uses a proxy configuration (`proxy.conf.json`) to forward API requests during development:
+
+```json
+{
+  "/api": {
+    "target": "https://apim-poc-my.azure-api.net/v1",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Environment Configuration
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Environment-specific settings are stored in `src/environments/`:
+- `environment.ts` - Development configuration
+- `environment.prod.ts` - Production configuration
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
+- [Angular Documentation](https://angular.dev)
+- Project generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3

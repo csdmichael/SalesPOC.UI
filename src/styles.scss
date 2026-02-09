@@ -210,3 +210,95 @@ html, body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* ─── Pagination ─────────────────────────────────────────── */
+.pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 20px;
+  background: white;
+  border-top: 1px solid #e2e8f0;
+  border-radius: 0 0 12px 12px;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.pagination-info {
+  font-weight: 500;
+
+  .total-count {
+    color: #1e293b;
+    font-weight: 700;
+  }
+}
+
+.pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pagination-controls button {
+  min-width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  color: #475569;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  padding: 0 8px;
+}
+
+.pagination-controls button:hover:not(:disabled):not(.active) {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  color: #1e293b;
+}
+
+.pagination-controls button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.pagination-controls button.active {
+  background: #1a73e8;
+  border-color: #1a73e8;
+  color: white;
+  font-weight: 600;
+}
+
+.pagination-size {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  label {
+    font-size: 0.8rem;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  select {
+    padding: 6px 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    outline: none;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: #1a73e8;
+    }
+  }
+}

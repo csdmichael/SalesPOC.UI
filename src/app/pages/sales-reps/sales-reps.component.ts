@@ -20,6 +20,11 @@ export class SalesRepsComponent implements OnInit {
   filterRegion = '';
   regions: string[] = [];
 
+  // Pagination
+  currentPage = 1;
+  pageSize = 50;
+  pageSizeOptions = [10, 25, 50, 100];
+
   constructor(private salesRepService: SalesRepService) {}
 
   ngOnInit(): void {
@@ -40,11 +45,44 @@ export class SalesRepsComponent implements OnInit {
       const matchesRegion = !this.filterRegion || r.region === this.filterRegion;
       return matchesName && matchesRegion;
     });
+    this.currentPage = 1;
   }
 
   clearFilters(): void {
     this.searchName = '';
     this.filterRegion = '';
     this.filteredReps = this.salesReps;
+    this.currentPage = 1;
+  }
+
+  get totalRecords(): number {
+    return this.filteredReps.length;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalRecords / this.pageSize);
+  }
+
+  get pagedReps(): SalesRep[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredReps.slice(start, start + this.pageSize);
+  }
+
+  get pageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisible = 5;
+    let start = Math.max(1, this.currentPage - Math.floor(maxVisible / 2));
+    let end = Math.min(this.totalPages, start + maxVisible - 1);
+    start = Math.max(1, end - maxVisible + 1);
+    for (let i = start; i <= end; i++) pages.push(i);
+    return pages;
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+  }
+
+  onPageSizeChange(): void {
+    this.currentPage = 1;
   }
 }

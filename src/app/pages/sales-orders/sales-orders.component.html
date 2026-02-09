@@ -1,7 +1,7 @@
 <div class="page-container">
   <div class="page-header">
     <h1>Sales Orders</h1>
-    <span class="badge">{{ filteredOrders.length }} records</span>
+    <span class="badge">Total: <strong>{{ filteredOrders.length }}</strong> records</span>
   </div>
 
   <div class="filters-panel">
@@ -46,7 +46,7 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let o of filteredOrders">
+        <ng-container *ngFor="let o of pagedOrders">
           <tr [class.selected-row]="selectedOrder?.orderId === o.orderId">
             <td>{{ o.orderId }}</td>
             <td class="name-cell">{{ o.customer?.customerName }}</td>
@@ -107,5 +107,26 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Pagination -->
+    <div *ngIf="filteredOrders.length > 0" class="pagination-bar">
+      <div class="pagination-info">
+        Showing {{ (currentPage - 1) * pageSize + 1 }}–{{ currentPage * pageSize < totalRecords ? currentPage * pageSize : totalRecords }}
+        of <span class="total-count">{{ totalRecords }}</span> records
+      </div>
+      <div class="pagination-controls">
+        <button (click)="goToPage(1)" [disabled]="currentPage === 1">&laquo;</button>
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">&lsaquo;</button>
+        <button *ngFor="let p of pageNumbers" (click)="goToPage(p)" [class.active]="p === currentPage">{{ p }}</button>
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">&rsaquo;</button>
+        <button (click)="goToPage(totalPages)" [disabled]="currentPage === totalPages">&raquo;</button>
+      </div>
+      <div class="pagination-size">
+        <label>Page size</label>
+        <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange()">
+          <option *ngFor="let s of pageSizeOptions" [value]="s">{{ s }}</option>
+        </select>
+      </div>
+    </div>
   </div>
 </div>

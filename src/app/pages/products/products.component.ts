@@ -23,6 +23,11 @@ export class ProductsComponent implements OnInit {
   categories: string[] = [];
   statuses: string[] = [];
 
+  // Pagination
+  currentPage = 1;
+  pageSize = 50;
+  pageSizeOptions = [10, 25, 50, 100];
+
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
@@ -45,6 +50,7 @@ export class ProductsComponent implements OnInit {
       const matchesStatus = !this.filterStatus || p.lifecycleStatus === this.filterStatus;
       return matchesName && matchesCat && matchesStatus;
     });
+    this.currentPage = 1;
   }
 
   clearFilters(): void {
@@ -52,5 +58,37 @@ export class ProductsComponent implements OnInit {
     this.filterCategory = '';
     this.filterStatus = '';
     this.filteredProducts = this.products;
+    this.currentPage = 1;
+  }
+
+  get totalRecords(): number {
+    return this.filteredProducts.length;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalRecords / this.pageSize);
+  }
+
+  get pagedProducts(): Product[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredProducts.slice(start, start + this.pageSize);
+  }
+
+  get pageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisible = 5;
+    let start = Math.max(1, this.currentPage - Math.floor(maxVisible / 2));
+    let end = Math.min(this.totalPages, start + maxVisible - 1);
+    start = Math.max(1, end - maxVisible + 1);
+    for (let i = start; i <= end; i++) pages.push(i);
+    return pages;
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+  }
+
+  onPageSizeChange(): void {
+    this.currentPage = 1;
   }
 }

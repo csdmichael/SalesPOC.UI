@@ -26,6 +26,11 @@ export class SalesFactsComponent implements OnInit {
   regions: string[] = [];
   repNames: string[] = [];
 
+  // Pagination
+  currentPage = 1;
+  pageSize = 50;
+  pageSizeOptions = [10, 25, 50, 100];
+
   constructor(private salesFactService: SalesFactService) {}
 
   ngOnInit(): void {
@@ -51,6 +56,7 @@ export class SalesFactsComponent implements OnInit {
       const matchesRep = !this.filterRep || f.repName === this.filterRep;
       return matchesCust && matchesProd && matchesCat && matchesRegion && matchesRep;
     });
+    this.currentPage = 1;
   }
 
   clearFilters(): void {
@@ -60,6 +66,7 @@ export class SalesFactsComponent implements OnInit {
     this.filterRegion = '';
     this.filterRep = '';
     this.filteredFacts = this.salesFacts;
+    this.currentPage = 1;
   }
 
   get totalRevenue(): number {
@@ -68,5 +75,36 @@ export class SalesFactsComponent implements OnInit {
 
   get totalQuantity(): number {
     return this.filteredFacts.reduce((sum, f) => sum + f.quantity, 0);
+  }
+
+  get totalRecords(): number {
+    return this.filteredFacts.length;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalRecords / this.pageSize);
+  }
+
+  get pagedFacts(): SalesFact[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredFacts.slice(start, start + this.pageSize);
+  }
+
+  get pageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisible = 5;
+    let start = Math.max(1, this.currentPage - Math.floor(maxVisible / 2));
+    let end = Math.min(this.totalPages, start + maxVisible - 1);
+    start = Math.max(1, end - maxVisible + 1);
+    for (let i = start; i <= end; i++) pages.push(i);
+    return pages;
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+  }
+
+  onPageSizeChange(): void {
+    this.currentPage = 1;
   }
 }

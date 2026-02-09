@@ -27,6 +27,11 @@ export class CustomersComponent implements OnInit {
   industries: string[] = [];
   countries: string[] = [];
 
+  // Pagination
+  currentPage = 1;
+  pageSize = 50;
+  pageSizeOptions = [10, 25, 50, 100];
+
   constructor(private customerService: CustomerService) {}
 
   ngOnInit(): void {
@@ -51,6 +56,7 @@ export class CustomersComponent implements OnInit {
       const matchesCountry = !this.filterCountry || c.country === this.filterCountry;
       return matchesName && matchesType && matchesIndustry && matchesCountry;
     });
+    this.currentPage = 1;
   }
 
   clearFilters(): void {
@@ -59,5 +65,37 @@ export class CustomersComponent implements OnInit {
     this.filterIndustry = '';
     this.filterCountry = '';
     this.filteredCustomers = this.customers;
+    this.currentPage = 1;
+  }
+
+  get totalRecords(): number {
+    return this.filteredCustomers.length;
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalRecords / this.pageSize);
+  }
+
+  get pagedCustomers(): Customer[] {
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredCustomers.slice(start, start + this.pageSize);
+  }
+
+  get pageNumbers(): number[] {
+    const pages: number[] = [];
+    const maxVisible = 5;
+    let start = Math.max(1, this.currentPage - Math.floor(maxVisible / 2));
+    let end = Math.min(this.totalPages, start + maxVisible - 1);
+    start = Math.max(1, end - maxVisible + 1);
+    for (let i = start; i <= end; i++) pages.push(i);
+    return pages;
+  }
+
+  goToPage(page: number): void {
+    if (page >= 1 && page <= this.totalPages) this.currentPage = page;
+  }
+
+  onPageSizeChange(): void {
+    this.currentPage = 1;
   }
 }

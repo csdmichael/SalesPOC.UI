@@ -59,7 +59,7 @@ SalesPOC.UI/
 │   │   │   ├── sales-fact.model.ts
 │   │   │   ├── sales-order.model.ts
 │   │   │   └── sales-rep.model.ts
-│   │   ├── app.ts               # Root component
+│   │   ├── app.ts               # Root component (note: uses simplified naming)
 │   │   ├── app.config.ts        # Application configuration
 │   │   ├── app.routes.ts        # Route definitions
 │   │   ├── app.html             # Root template
@@ -116,7 +116,7 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-The API proxy will forward requests from `/api/*` to `https://apim-poc-my.azure-api.net/v1/*`.
+**Note**: The API proxy is automatically configured in `angular.json` and will forward requests from `/api/*` to `https://apim-poc-my.azure-api.net/v1/*`.
 
 ## Building
 

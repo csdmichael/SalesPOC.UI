@@ -59,7 +59,7 @@ SalesPOC.UI/
 │   │   │   ├── sales-fact.model.ts
 │   │   │   ├── sales-order.model.ts
 │   │   │   └── sales-rep.model.ts
-│   │   ├── app.ts               # Root component (note: uses simplified naming)
+│   │   ├── app.ts               # Root component (uses app.ts instead of conventional app.component.ts)
 │   │   ├── app.config.ts        # Application configuration
 │   │   ├── app.routes.ts        # Route definitions
 │   │   ├── app.html             # Root template

@@ -1,0 +1,98 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Sales Facts</h1>
+    <span class="badge">{{ filteredFacts.length }} records</span>
+  </div>
+
+  <!-- Summary Cards -->
+  <div *ngIf="!loading" class="summary-cards">
+    <div class="summary-card">
+      <div class="summary-value">{{ totalRevenue | number:'1.2-2' }}</div>
+      <div class="summary-label">Total Revenue (USD)</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-value">{{ totalQuantity | number }}</div>
+      <div class="summary-label">Total Quantity Sold</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-value">{{ filteredFacts.length | number }}</div>
+      <div class="summary-label">Line Items</div>
+    </div>
+  </div>
+
+  <div class="filters-panel">
+    <div class="filter-group">
+      <label>Customer</label>
+      <input type="text" [(ngModel)]="searchCustomer" (ngModelChange)="applyFilters()" placeholder="Search customer..." />
+    </div>
+    <div class="filter-group">
+      <label>Product</label>
+      <input type="text" [(ngModel)]="searchProduct" (ngModelChange)="applyFilters()" placeholder="Search product..." />
+    </div>
+    <div class="filter-group">
+      <label>Category</label>
+      <select [(ngModel)]="filterCategory" (ngModelChange)="applyFilters()">
+        <option value="">All Categories</option>
+        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Region</label>
+      <select [(ngModel)]="filterRegion" (ngModelChange)="applyFilters()">
+        <option value="">All Regions</option>
+        <option *ngFor="let r of regions" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Sales Rep</label>
+      <select [(ngModel)]="filterRep" (ngModelChange)="applyFilters()">
+        <option value="">All Reps</option>
+        <option *ngFor="let r of repNames" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading sales facts...</p>
+  </div>
+
+  <div *ngIf="!loading" class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Order Date</th>
+          <th>Customer</th>
+          <th>Type</th>
+          <th>Product</th>
+          <th>Category</th>
+          <th>Qty</th>
+          <th>Unit Price</th>
+          <th>Line Total</th>
+          <th>Rep</th>
+          <th>Region</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of filteredFacts">
+          <td>{{ f.orderId }}</td>
+          <td>{{ f.orderDate }}</td>
+          <td class="name-cell">{{ f.customerName }}</td>
+          <td><span class="tag">{{ f.customerType }}</span></td>
+          <td class="name-cell">{{ f.productName }}</td>
+          <td><span class="tag">{{ f.productCategory }}</span></td>
+          <td class="number-cell">{{ f.quantity }}</td>
+          <td class="number-cell">{{ f.unitPriceUsd | number:'1.2-2' }}</td>
+          <td class="number-cell">{{ f.lineTotalUsd | number:'1.2-2' }}</td>
+          <td>{{ f.repName }}</td>
+          <td><span class="tag">{{ f.region }}</span></td>
+        </tr>
+        <tr *ngIf="filteredFacts.length === 0">
+          <td colspan="11" class="empty-row">No sales facts match the current filters.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

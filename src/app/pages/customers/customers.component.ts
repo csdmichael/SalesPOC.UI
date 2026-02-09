@@ -1,0 +1,63 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Customer } from '../../models/customer.model';
+import { CustomerService } from '../../services/customer.service';
+
+@Component({
+  selector: 'app-customers',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
+  templateUrl: './customers.component.html',
+  styleUrl: './customers.component.scss'
+})
+export class CustomersComponent implements OnInit {
+  customers: Customer[] = [];
+  filteredCustomers: Customer[] = [];
+  loading = true;
+
+  // Filters
+  searchName = '';
+  filterType = '';
+  filterIndustry = '';
+  filterCountry = '';
+
+  // Distinct filter values
+  customerTypes: string[] = [];
+  industries: string[] = [];
+  countries: string[] = [];
+
+  constructor(private customerService: CustomerService) {}
+
+  ngOnInit(): void {
+    this.customerService.getAll().subscribe({
+      next: data => {
+        this.customers = data;
+        this.filteredCustomers = data;
+        this.customerTypes = [...new Set(data.map(c => c.customerType).filter(Boolean) as string[])].sort();
+        this.industries = [...new Set(data.map(c => c.industry).filter(Boolean) as string[])].sort();
+        this.countries = [...new Set(data.map(c => c.country).filter(Boolean) as string[])].sort();
+        this.loading = false;
+      },
+      error: () => this.loading = false
+    });
+  }
+
+  applyFilters(): void {
+    this.filteredCustomers = this.customers.filter(c => {
+      const matchesName = !this.searchName || c.customerName.toLowerCase().includes(this.searchName.toLowerCase());
+      const matchesType = !this.filterType || c.customerType === this.filterType;
+      const matchesIndustry = !this.filterIndustry || c.industry === this.filterIndustry;
+      const matchesCountry = !this.filterCountry || c.country === this.filterCountry;
+      return matchesName && matchesType && matchesIndustry && matchesCountry;
+    });
+  }
+
+  clearFilters(): void {
+    this.searchName = '';
+    this.filterType = '';
+    this.filterIndustry = '';
+    this.filterCountry = '';
+    this.filteredCustomers = this.customers;
+  }
+}

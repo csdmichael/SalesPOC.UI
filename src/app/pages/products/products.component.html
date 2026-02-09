@@ -1,0 +1,69 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Products</h1>
+    <span class="badge">{{ filteredProducts.length }} records</span>
+  </div>
+
+  <div class="filters-panel">
+    <div class="filter-group">
+      <label>Search Name</label>
+      <input type="text" [(ngModel)]="searchName" (ngModelChange)="applyFilters()" placeholder="Search products..." />
+    </div>
+    <div class="filter-group">
+      <label>Category</label>
+      <select [(ngModel)]="filterCategory" (ngModelChange)="applyFilters()">
+        <option value="">All Categories</option>
+        <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Lifecycle Status</label>
+      <select [(ngModel)]="filterStatus" (ngModelChange)="applyFilters()">
+        <option value="">All Statuses</option>
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading products...</p>
+  </div>
+
+  <div *ngIf="!loading" class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Process Node (nm)</th>
+          <th>Package Type</th>
+          <th>Unit Price (USD)</th>
+          <th>Lifecycle Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of filteredProducts">
+          <td>{{ p.productId }}</td>
+          <td class="name-cell">{{ p.productName }}</td>
+          <td><span class="tag">{{ p.productCategory }}</span></td>
+          <td class="number-cell">{{ p.processNodeNm }}</td>
+          <td>{{ p.packageType }}</td>
+          <td class="number-cell">{{ p.unitPriceUsd | number:'1.2-2' }}</td>
+          <td>
+            <span class="status-badge" [class.active]="p.lifecycleStatus === 'Active'"
+                  [class.eol]="p.lifecycleStatus === 'EOL'"
+                  [class.nrnd]="p.lifecycleStatus === 'NRND'">
+              {{ p.lifecycleStatus }}
+            </span>
+          </td>
+        </tr>
+        <tr *ngIf="filteredProducts.length === 0">
+          <td colspan="7" class="empty-row">No products match the current filters.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

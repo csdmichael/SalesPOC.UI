@@ -1,0 +1,111 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Sales Orders</h1>
+    <span class="badge">{{ filteredOrders.length }} records</span>
+  </div>
+
+  <div class="filters-panel">
+    <div class="filter-group">
+      <label>Customer</label>
+      <input type="text" [(ngModel)]="searchCustomer" (ngModelChange)="applyFilters()" placeholder="Search by customer..." />
+    </div>
+    <div class="filter-group">
+      <label>Status</label>
+      <select [(ngModel)]="filterStatus" (ngModelChange)="applyFilters()">
+        <option value="">All Statuses</option>
+        <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Sales Rep</label>
+      <select [(ngModel)]="filterRep" (ngModelChange)="applyFilters()">
+        <option value="">All Reps</option>
+        <option *ngFor="let r of repNames" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading orders...</p>
+  </div>
+
+  <div *ngIf="!loading" class="table-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Customer</th>
+          <th>Sales Rep</th>
+          <th>Order Date</th>
+          <th>Status</th>
+          <th>Total (USD)</th>
+          <th>Currency</th>
+          <th>Items</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let o of filteredOrders">
+          <tr [class.selected-row]="selectedOrder?.orderId === o.orderId">
+            <td>{{ o.orderId }}</td>
+            <td class="name-cell">{{ o.customer?.customerName }}</td>
+            <td>{{ o.salesRep?.repName }}</td>
+            <td>{{ o.orderDate }}</td>
+            <td>
+              <span class="status-badge"
+                    [class.completed]="o.orderStatus === 'Completed'"
+                    [class.pending]="o.orderStatus === 'Pending'"
+                    [class.shipped]="o.orderStatus === 'Shipped'"
+                    [class.cancelled]="o.orderStatus === 'Cancelled'">
+                {{ o.orderStatus }}
+              </span>
+            </td>
+            <td class="number-cell">{{ o.totalAmountUsd | number:'1.2-2' }}</td>
+            <td>{{ o.currency }}</td>
+            <td>
+              <button class="btn-view" (click)="viewOrderItems(o)">
+                {{ selectedOrder?.orderId === o.orderId ? 'Hide' : 'View' }}
+              </button>
+            </td>
+          </tr>
+          <!-- Expanded Order Items Row -->
+          <tr *ngIf="selectedOrder?.orderId === o.orderId" class="detail-row">
+            <td colspan="8">
+              <div class="order-items-panel">
+                <h3>Order Items for Order #{{ o.orderId }}</h3>
+                <div *ngIf="loadingItems" class="loading-spinner small">
+                  <div class="spinner"></div>
+                </div>
+                <table *ngIf="!loadingItems && orderItems.length > 0" class="data-table nested-table">
+                  <thead>
+                    <tr>
+                      <th>Item ID</th>
+                      <th>Product</th>
+                      <th>Quantity</th>
+                      <th>Unit Price (USD)</th>
+                      <th>Line Total (USD)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of orderItems">
+                      <td>{{ item.orderItemId }}</td>
+                      <td class="name-cell">{{ item.product?.productName }}</td>
+                      <td class="number-cell">{{ item.quantity }}</td>
+                      <td class="number-cell">{{ item.unitPriceUsd | number:'1.2-2' }}</td>
+                      <td class="number-cell">{{ item.lineTotalUsd | number:'1.2-2' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p *ngIf="!loadingItems && orderItems.length === 0" class="empty-row">No items found for this order.</p>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+        <tr *ngIf="filteredOrders.length === 0">
+          <td colspan="8" class="empty-row">No orders match the current filters.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

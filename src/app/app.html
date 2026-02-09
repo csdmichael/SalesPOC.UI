@@ -1,0 +1,59 @@
+<div class="app-layout" [class.sidebar-collapsed]="sidebarCollapsed">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">&#x1F4CA;</span>
+        <span class="logo-text" *ngIf="!sidebarCollapsed">SalesPOC</span>
+      </div>
+      <button class="toggle-btn" (click)="toggleSidebar()">
+        {{ sidebarCollapsed ? '&#9776;' : '&#10005;' }}
+      </button>
+    </div>
+
+    <ul class="nav-links">
+      <li>
+        <a routerLink="/customers" routerLinkActive="active">
+          <span class="nav-icon">&#x1F465;</span>
+          <span class="nav-text" *ngIf="!sidebarCollapsed">Customers</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/products" routerLinkActive="active">
+          <span class="nav-icon">&#x1F4E6;</span>
+          <span class="nav-text" *ngIf="!sidebarCollapsed">Products</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/sales-reps" routerLinkActive="active">
+          <span class="nav-icon">&#x1F9D1;&#x200D;&#x1F4BC;</span>
+          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales Reps</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/sales-orders" routerLinkActive="active">
+          <span class="nav-icon">&#x1F6D2;</span>
+          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales Orders</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/sales-facts" routerLinkActive="active">
+          <span class="nav-icon">&#x1F4C8;</span>
+          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales Facts</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer" *ngIf="!sidebarCollapsed">
+      <small>Arrow Electronics POC</small>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Chatbot (floating) -->
+  <app-chatbot></app-chatbot>
+</div>

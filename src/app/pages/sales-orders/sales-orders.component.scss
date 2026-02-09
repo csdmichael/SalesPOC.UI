@@ -1,0 +1,52 @@
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  &.completed { background: #d4edda; color: #155724; }
+  &.pending { background: #fff3cd; color: #856404; }
+  &.shipped { background: #cce5ff; color: #004085; }
+  &.cancelled { background: #f8d7da; color: #721c24; }
+}
+
+.selected-row {
+  background: #e8f0fe !important;
+}
+
+.detail-row td {
+  padding: 0 !important;
+  background: #f8f9fa;
+}
+
+.order-items-panel {
+  padding: 16px 24px;
+  h3 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    color: #1a73e8;
+  }
+}
+
+.nested-table {
+  margin: 0;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.btn-view {
+  background: #1a73e8;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  &:hover { background: #1557b0; }
+}
+
+.loading-spinner.small {
+  padding: 12px;
+  .spinner { width: 24px; height: 24px; }
+}

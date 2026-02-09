@@ -67,9 +67,9 @@ SalesPOC.UI/
 │   ├── environments/            # Environment-specific configurations
 │   │   ├── environment.ts       # Development environment
 │   │   └── environment.prod.ts  # Production environment
-│   ├── index.html              # Main HTML file
-│   ├── main.ts                 # Application bootstrap
-│   └── styles.scss             # Global styles
+│   ├── index.html               # Main HTML file
+│   ├── main.ts                  # Application bootstrap
+│   └── styles.scss              # Global styles
 ├── public/                     # Static assets
 ├── angular.json               # Angular CLI configuration
 ├── tsconfig.json              # TypeScript configuration

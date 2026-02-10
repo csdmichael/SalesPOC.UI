@@ -24,7 +24,7 @@ export class ChatbotComponent {
     if (this.isOpen && this.messages.length === 0) {
       this.messages.push({
         role: 'assistant',
-        content: 'Hi! I\'m the Arrow Sales Assistant. Ask me anything about sales data, customers, products, or orders.',
+        content: 'Hi! I\'m the Sales Assistant. Ask me anything about sales data, customers, products, or orders.',
         timestamp: new Date()
       });
     }

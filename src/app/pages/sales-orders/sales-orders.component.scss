@@ -76,3 +76,49 @@
   .spinner { width: 20px; height: 20px; }
   p { margin: 0; font-size: 0.85rem; }
 }
+
+.required {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.customer-filter-group {
+  min-width: 260px;
+}
+
+.loading-inline {
+  font-size: 0.85rem;
+  color: #64748b;
+  padding: 6px 0;
+}
+
+.select-customer-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: #64748b;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+
+  .prompt-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    margin: 0 0 8px;
+    font-size: 1.25rem;
+    color: #334155;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    max-width: 400px;
+  }
+}

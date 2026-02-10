@@ -1,29 +1,40 @@
 <div class="page-container">
   <div class="page-header">
     <h1>Sales Orders</h1>
-    <span class="badge">Total: <strong>{{ filteredOrders.length }}</strong> records</span>
+    <span class="badge" *ngIf="selectedCustomerId">Total: <strong>{{ filteredOrders.length }}</strong> records</span>
   </div>
 
   <div class="filters-panel">
-    <div class="filter-group">
-      <label>Customer</label>
-      <input type="text" [(ngModel)]="searchCustomer" (ngModelChange)="applyFilters()" placeholder="Search by customer..." />
+    <div class="filter-group customer-filter-group">
+      <label>Customer <span class="required">*</span></label>
+      <div *ngIf="loadingCustomers" class="loading-inline">Loading customers...</div>
+      <select *ngIf="!loadingCustomers" [(ngModel)]="selectedCustomerId" (ngModelChange)="onCustomerSelected()">
+        <option [ngValue]="null">— Select a Customer —</option>
+        <option *ngFor="let c of customers" [ngValue]="c.customerId">{{ c.customerName }}</option>
+      </select>
     </div>
-    <div class="filter-group">
+    <div class="filter-group" *ngIf="selectedCustomerId">
       <label>Status</label>
       <select [(ngModel)]="filterStatus" (ngModelChange)="applyFilters()">
         <option value="">All Statuses</option>
         <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
       </select>
     </div>
-    <div class="filter-group">
+    <div class="filter-group" *ngIf="selectedCustomerId">
       <label>Sales Rep</label>
       <select [(ngModel)]="filterRep" (ngModelChange)="applyFilters()">
         <option value="">All Reps</option>
         <option *ngFor="let r of repNames" [value]="r">{{ r }}</option>
       </select>
     </div>
-    <button class="btn-clear" (click)="applyFilters()">Apply Filters</button>
+    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <!-- Prompt to select customer -->
+  <div *ngIf="!selectedCustomerId && !loading && !loadingCustomers && !errorMessage" class="select-customer-prompt">
+    <div class="prompt-icon">&#128269;</div>
+    <h2>Select a Customer</h2>
+    <p>Please select a customer from the dropdown above to view their sales orders.</p>
   </div>
 
   <div *ngIf="loading" class="loading-spinner">
@@ -36,7 +47,7 @@
     <p>{{ errorMessage }}</p>
   </div>
 
-  <div *ngIf="!loading && !errorMessage" class="table-container">
+  <div *ngIf="!loading && !errorMessage && selectedCustomerId" class="table-container">
     <table class="data-table">
       <thead>
         <tr>

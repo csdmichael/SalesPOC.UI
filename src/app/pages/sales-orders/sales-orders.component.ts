@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SalesOrder } from '../../models/sales-order.model';
 import { OrderItem } from '../../models/order-item.model';
+import { Customer } from '../../models/customer.model';
 import { SalesOrderService } from '../../services/sales-order.service';
 import { OrderItemService } from '../../services/order-item.service';
-import { forkJoin } from 'rxjs';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-sales-orders',
@@ -17,10 +18,15 @@ import { forkJoin } from 'rxjs';
 export class SalesOrdersComponent implements OnInit {
   orders: SalesOrder[] = [];
   filteredOrders: SalesOrder[] = [];
-  loading = true;
+  loading = false;
+  loadingCustomers = true;
   errorMessage = '';
 
-  searchCustomer = '';
+  // Customer filter (required)
+  customers: Customer[] = [];
+  selectedCustomerId: number | null = null;
+  customerSearchText = '';
+
   filterStatus = '';
   filterRep = '';
   statuses: string[] = [];
@@ -38,11 +44,47 @@ export class SalesOrdersComponent implements OnInit {
 
   constructor(
     private salesOrderService: SalesOrderService,
-    private orderItemService: OrderItemService
+    private orderItemService: OrderItemService,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit(): void {
-    this.salesOrderService.getAll().subscribe({
+    this.customerService.getAll().subscribe({
+      next: data => {
+        this.customers = data.sort((a, b) => a.customerName.localeCompare(b.customerName));
+        this.loadingCustomers = false;
+      },
+      error: (err) => {
+        this.loadingCustomers = false;
+        this.errorMessage = 'Failed to load customers. Please try again later.';
+        console.error('Customers load error:', err);
+      }
+    });
+  }
+
+  get filteredCustomers(): Customer[] {
+    if (!this.customerSearchText) return this.customers;
+    const search = this.customerSearchText.toLowerCase();
+    return this.customers.filter(c => c.customerName.toLowerCase().includes(search));
+  }
+
+  onCustomerSelected(): void {
+    if (!this.selectedCustomerId) {
+      this.orders = [];
+      this.filteredOrders = [];
+      this.statuses = [];
+      this.repNames = [];
+      this.expandedOrderIds.clear();
+      this.orderItemsMap.clear();
+      return;
+    }
+
+    this.loading = true;
+    this.errorMessage = '';
+    this.expandedOrderIds.clear();
+    this.orderItemsMap.clear();
+
+    this.salesOrderService.getByCustomer(this.selectedCustomerId).subscribe({
       next: data => {
         this.orders = data;
         this.statuses = [...new Set(data.map(o => o.orderStatus).filter(Boolean) as string[])].sort();
@@ -62,22 +104,25 @@ export class SalesOrdersComponent implements OnInit {
 
   applyFilters(): void {
     this.filteredOrders = this.orders.filter(o => {
-      const customerName = o.customer?.customerName || '';
-      const matchesCustomer = !this.searchCustomer ||
-        customerName.toLowerCase().includes(this.searchCustomer.toLowerCase());
       const matchesStatus = !this.filterStatus || o.orderStatus === this.filterStatus;
       const repName = o.salesRep?.repName || '';
       const matchesRep = !this.filterRep || repName === this.filterRep;
-      return matchesCustomer && matchesStatus && matchesRep;
+      return matchesStatus && matchesRep;
     });
     this.currentPage = 1;
   }
 
   clearFilters(): void {
-    this.searchCustomer = '';
+    this.selectedCustomerId = null;
+    this.customerSearchText = '';
     this.filterStatus = '';
     this.filterRep = '';
-    this.filteredOrders = this.orders;
+    this.orders = [];
+    this.filteredOrders = [];
+    this.statuses = [];
+    this.repNames = [];
+    this.expandedOrderIds.clear();
+    this.orderItemsMap.clear();
     this.currentPage = 1;
   }
 

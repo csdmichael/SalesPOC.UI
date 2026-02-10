@@ -1,6 +1,7 @@
 List Products
 List Products of category as Sensor
-Get top 10 products by price
+Plot top 10 products by price on a bar chart
 List Customers
-Get Sales Orders for Customer 1
+What is total amount for Sales Orders for Customer 1 that are confirmed? List them.
+How many orders did customer 3 cancel?
 Plot a bar chart for orders by total for Customer 1. Exclude cancelled orders

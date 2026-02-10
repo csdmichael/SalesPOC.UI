@@ -38,11 +38,11 @@ export class CustomersComponent implements OnInit {
     this.customerService.getAll().subscribe({
       next: data => {
         this.customers = data;
-        this.filteredCustomers = data;
         this.customerTypes = [...new Set(data.map(c => c.customerType).filter(Boolean) as string[])].sort();
         this.industries = [...new Set(data.map(c => c.industry).filter(Boolean) as string[])].sort();
         this.countries = [...new Set(data.map(c => c.country).filter(Boolean) as string[])].sort();
         this.loading = false;
+        this.applyFilters();
       },
       error: () => this.loading = false
     });

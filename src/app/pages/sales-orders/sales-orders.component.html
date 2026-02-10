@@ -23,7 +23,7 @@
         <option *ngFor="let r of repNames" [value]="r">{{ r }}</option>
       </select>
     </div>
-    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+    <button class="btn-clear" (click)="applyFilters()">Apply Filters</button>
   </div>
 
   <div *ngIf="loading" class="loading-spinner">
@@ -31,10 +31,16 @@
     <p>Loading orders...</p>
   </div>
 
-  <div *ngIf="!loading" class="table-container">
+  <!-- Error State -->
+  <div *ngIf="errorMessage && !loading" class="error-banner">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <div *ngIf="!loading && !errorMessage" class="table-container">
     <table class="data-table">
       <thead>
         <tr>
+          <th></th>
           <th>Order ID</th>
           <th>Customer</th>
           <th>Sales Rep</th>
@@ -42,15 +48,17 @@
           <th>Status</th>
           <th>Total (USD)</th>
           <th>Currency</th>
-          <th>Items</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let o of pagedOrders">
-          <tr [class.selected-row]="selectedOrder?.orderId === o.orderId">
+          <tr [class.selected-row]="isExpanded(o.orderId)" (click)="toggleOrderItems(o)" class="clickable-row">
+            <td class="expand-cell">
+              <span class="expand-icon" [class.expanded]="isExpanded(o.orderId)">&#9656;</span>
+            </td>
             <td>{{ o.orderId }}</td>
-            <td class="name-cell">{{ o.customer?.customerName }}</td>
-            <td>{{ o.salesRep?.repName }}</td>
+            <td class="name-cell">{{ o.customer?.customerName || ('Customer #' + o.customerId) }}</td>
+            <td>{{ o.salesRep?.repName || (o.salesRepId ? 'Rep #' + o.salesRepId : '—') }}</td>
             <td>{{ o.orderDate }}</td>
             <td>
               <span class="status-badge"
@@ -63,21 +71,17 @@
             </td>
             <td class="number-cell">{{ o.totalAmountUsd | number:'1.2-2' }}</td>
             <td>{{ o.currency }}</td>
-            <td>
-              <button class="btn-view" (click)="viewOrderItems(o)">
-                {{ selectedOrder?.orderId === o.orderId ? 'Hide' : 'View' }}
-              </button>
-            </td>
           </tr>
-          <!-- Expanded Order Items Row -->
-          <tr *ngIf="selectedOrder?.orderId === o.orderId" class="detail-row">
+          <!-- Expanded Order Items Row (master-detail) -->
+          <tr *ngIf="isExpanded(o.orderId)" class="detail-row">
             <td colspan="8">
               <div class="order-items-panel">
-                <h3>Order Items for Order #{{ o.orderId }}</h3>
-                <div *ngIf="loadingItems" class="loading-spinner small">
+                <h3>Line Items for Order #{{ o.orderId }}</h3>
+                <div *ngIf="isLoadingItems(o.orderId)" class="loading-spinner small">
                   <div class="spinner"></div>
+                  <p>Loading line items...</p>
                 </div>
-                <table *ngIf="!loadingItems && orderItems.length > 0" class="data-table nested-table">
+                <table *ngIf="!isLoadingItems(o.orderId) && getOrderItems(o.orderId).length > 0" class="data-table nested-table">
                   <thead>
                     <tr>
                       <th>Item ID</th>
@@ -88,16 +92,16 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of orderItems">
+                    <tr *ngFor="let item of getOrderItems(o.orderId)">
                       <td>{{ item.orderItemId }}</td>
-                      <td class="name-cell">{{ item.product?.productName }}</td>
+                      <td class="name-cell">{{ item.product?.productName || ('Product #' + item.productId) }}</td>
                       <td class="number-cell">{{ item.quantity }}</td>
                       <td class="number-cell">{{ item.unitPriceUsd | number:'1.2-2' }}</td>
                       <td class="number-cell">{{ item.lineTotalUsd | number:'1.2-2' }}</td>
                     </tr>
                   </tbody>
                 </table>
-                <p *ngIf="!loadingItems && orderItems.length === 0" class="empty-row">No items found for this order.</p>
+                <p *ngIf="!isLoadingItems(o.orderId) && getOrderItems(o.orderId).length === 0" class="empty-row">No line items found for this order.</p>
               </div>
             </td>
           </tr>

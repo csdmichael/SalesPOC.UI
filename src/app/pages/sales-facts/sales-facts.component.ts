@@ -37,11 +37,11 @@ export class SalesFactsComponent implements OnInit {
     this.salesFactService.getAll().subscribe({
       next: data => {
         this.salesFacts = data;
-        this.filteredFacts = data;
         this.categories = [...new Set(data.map(f => f.productCategory).filter(Boolean) as string[])].sort();
         this.regions = [...new Set(data.map(f => f.region).filter(Boolean) as string[])].sort();
         this.repNames = [...new Set(data.map(f => f.repName).filter(Boolean) as string[])].sort();
         this.loading = false;
+        this.applyFilters();
       },
       error: () => this.loading = false
     });

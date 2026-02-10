@@ -5,6 +5,7 @@ import { SalesOrder } from '../../models/sales-order.model';
 import { OrderItem } from '../../models/order-item.model';
 import { SalesOrderService } from '../../services/sales-order.service';
 import { OrderItemService } from '../../services/order-item.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-sales-orders',
@@ -17,6 +18,7 @@ export class SalesOrdersComponent implements OnInit {
   orders: SalesOrder[] = [];
   filteredOrders: SalesOrder[] = [];
   loading = true;
+  errorMessage = '';
 
   searchCustomer = '';
   filterStatus = '';
@@ -29,10 +31,10 @@ export class SalesOrdersComponent implements OnInit {
   pageSize = 50;
   pageSizeOptions = [10, 25, 50, 100];
 
-  // Order items detail
-  selectedOrder: SalesOrder | null = null;
-  orderItems: OrderItem[] = [];
-  loadingItems = false;
+  // Order items detail - track expanded orders by ID
+  expandedOrderIds = new Set<number>();
+  orderItemsMap = new Map<number, OrderItem[]>();
+  loadingItemsMap = new Map<number, boolean>();
 
   constructor(
     private salesOrderService: SalesOrderService,
@@ -43,21 +45,29 @@ export class SalesOrdersComponent implements OnInit {
     this.salesOrderService.getAll().subscribe({
       next: data => {
         this.orders = data;
-        this.filteredOrders = data;
         this.statuses = [...new Set(data.map(o => o.orderStatus).filter(Boolean) as string[])].sort();
-        this.repNames = [...new Set(data.map(o => o.salesRep?.repName).filter(Boolean) as string[])].sort();
+        this.repNames = [...new Set(data.map(o => {
+          return o.salesRep?.repName || '';
+        }).filter(Boolean) as string[])].sort();
         this.loading = false;
+        this.applyFilters();
       },
-      error: () => this.loading = false
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = 'Failed to load sales orders. Please try again later.';
+        console.error('Sales Orders load error:', err);
+      }
     });
   }
 
   applyFilters(): void {
     this.filteredOrders = this.orders.filter(o => {
+      const customerName = o.customer?.customerName || '';
       const matchesCustomer = !this.searchCustomer ||
-        (o.customer?.customerName?.toLowerCase().includes(this.searchCustomer.toLowerCase()));
+        customerName.toLowerCase().includes(this.searchCustomer.toLowerCase());
       const matchesStatus = !this.filterStatus || o.orderStatus === this.filterStatus;
-      const matchesRep = !this.filterRep || o.salesRep?.repName === this.filterRep;
+      const repName = o.salesRep?.repName || '';
+      const matchesRep = !this.filterRep || repName === this.filterRep;
       return matchesCustomer && matchesStatus && matchesRep;
     });
     this.currentPage = 1;
@@ -102,24 +112,46 @@ export class SalesOrdersComponent implements OnInit {
     this.currentPage = 1;
   }
 
-  viewOrderItems(order: SalesOrder): void {
-    if (this.selectedOrder?.orderId === order.orderId) {
-      this.selectedOrder = null;
-      this.orderItems = [];
+  isExpanded(orderId: number): boolean {
+    return this.expandedOrderIds.has(orderId);
+  }
+
+  isLoadingItems(orderId: number): boolean {
+    return this.loadingItemsMap.get(orderId) || false;
+  }
+
+  getOrderItems(orderId: number): OrderItem[] {
+    return this.orderItemsMap.get(orderId) || [];
+  }
+
+  toggleOrderItems(order: SalesOrder): void {
+    const orderId = order.orderId;
+    if (this.expandedOrderIds.has(orderId)) {
+      this.expandedOrderIds.delete(orderId);
       return;
     }
-    this.selectedOrder = order;
-    // Use inline items if available from the includes
+
+    this.expandedOrderIds.add(orderId);
+
+    // Already loaded
+    if (this.orderItemsMap.has(orderId)) {
+      return;
+    }
+
+    // Use inline items if available
     if (order.orderItems && order.orderItems.length > 0) {
-      this.orderItems = order.orderItems;
+      this.orderItemsMap.set(orderId, order.orderItems);
     } else {
-      this.loadingItems = true;
-      this.orderItemService.getByOrder(order.orderId).subscribe({
+      this.loadingItemsMap.set(orderId, true);
+      this.orderItemService.getByOrder(orderId).subscribe({
         next: items => {
-          this.orderItems = items;
-          this.loadingItems = false;
+          this.orderItemsMap.set(orderId, items);
+          this.loadingItemsMap.set(orderId, false);
         },
-        error: () => this.loadingItems = false
+        error: () => {
+          this.orderItemsMap.set(orderId, []);
+          this.loadingItemsMap.set(orderId, false);
+        }
       });
     }
   }

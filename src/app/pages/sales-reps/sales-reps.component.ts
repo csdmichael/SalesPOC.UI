@@ -31,9 +31,9 @@ export class SalesRepsComponent implements OnInit {
     this.salesRepService.getAll().subscribe({
       next: data => {
         this.salesReps = data;
-        this.filteredReps = data;
         this.regions = [...new Set(data.map(r => r.region).filter(Boolean) as string[])].sort();
         this.loading = false;
+        this.applyFilters();
       },
       error: () => this.loading = false
     });

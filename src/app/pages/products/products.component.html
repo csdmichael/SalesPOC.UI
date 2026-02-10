@@ -23,7 +23,7 @@
         <option *ngFor="let s of statuses" [value]="s">{{ s }}</option>
       </select>
     </div>
-    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+    <button class="btn-clear" (click)="applyFilters()">Apply Filters</button>
   </div>
 
   <div *ngIf="loading" class="loading-spinner">

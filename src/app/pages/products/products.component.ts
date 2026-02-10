@@ -34,10 +34,10 @@ export class ProductsComponent implements OnInit {
     this.productService.getAll().subscribe({
       next: data => {
         this.products = data;
-        this.filteredProducts = data;
         this.categories = [...new Set(data.map(p => p.productCategory).filter(Boolean) as string[])].sort();
         this.statuses = [...new Set(data.map(p => p.lifecycleStatus).filter(Boolean) as string[])].sort();
         this.loading = false;
+        this.applyFilters();
       },
       error: () => this.loading = false
     });

@@ -34,7 +34,7 @@
   position: fixed;
   bottom: 96px;
   right: 24px;
-  width: 400px;
+  width: 800px;
   height: 520px;
   background: white;
   border-radius: 16px;
@@ -122,6 +122,112 @@
   font-size: 0.7rem;
   opacity: 0.6;
   margin-top: 4px;
+}
+
+// Markdown rendered content inside assistant bubbles
+.markdown-body {
+  ::ng-deep {
+    p {
+      margin: 0 0 8px 0;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    strong {
+      font-weight: 700;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0;
+      font-size: 0.82rem;
+
+      th,
+      td {
+        border: 1px solid #d0d7de;
+        padding: 6px 10px;
+        text-align: left;
+      }
+
+      th {
+        background: #f0f4f8;
+        font-weight: 600;
+      }
+
+      tr:nth-child(even) {
+        background: #f8f9fa;
+      }
+    }
+
+    ul,
+    ol {
+      margin: 6px 0;
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 2px;
+    }
+
+    code {
+      background: #f0f0f0;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 0.84rem;
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+
+    pre {
+      background: #f0f0f0;
+      border-radius: 6px;
+      padding: 10px;
+      overflow-x: auto;
+      margin: 8px 0;
+
+      code {
+        background: none;
+        padding: 0;
+      }
+    }
+
+    blockquote {
+      border-left: 3px solid #1a73e8;
+      margin: 8px 0;
+      padding: 4px 12px;
+      color: #555;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 8px 0 4px 0;
+      font-weight: 600;
+    }
+
+    h1 { font-size: 1.1rem; }
+    h2 { font-size: 1.05rem; }
+    h3 { font-size: 1rem; }
+
+    hr {
+      border: none;
+      border-top: 1px solid #d0d7de;
+      margin: 8px 0;
+    }
+
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 .typing {

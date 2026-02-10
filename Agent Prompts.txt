@@ -1,7 +1,8 @@
 List Products
+List Customers
 List Products of category as Sensor
 Plot top 10 products by price on a bar chart
-List Customers
+How many units did Sales Rep 10 sell?
 What is total amount for Sales Orders for Customer 1 that are confirmed? List them.
 How many orders did customer 3 cancel?
 Plot a bar chart for orders by total for Customer 1. Exclude cancelled orders

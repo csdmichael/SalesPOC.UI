@@ -51,7 +51,7 @@ export class SalesOrdersComponent implements OnInit {
   ngOnInit(): void {
     this.customerService.getAll().subscribe({
       next: data => {
-        this.customers = data.sort((a, b) => a.customerName.localeCompare(b.customerName));
+        this.customers = data.sort((a, b) => a.customerId - b.customerId);
         this.loadingCustomers = false;
       },
       error: (err) => {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Customer } from '../../models/customer.model';
@@ -32,7 +32,7 @@ export class CustomersComponent implements OnInit {
   pageSize = 50;
   pageSizeOptions = [10, 25, 50, 100];
 
-  constructor(private customerService: CustomerService) {}
+  constructor(private customerService: CustomerService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.customerService.getAll().subscribe({
@@ -43,8 +43,9 @@ export class CustomersComponent implements OnInit {
         this.countries = [...new Set(data.map(c => c.country).filter(Boolean) as string[])].sort();
         this.loading = false;
         this.applyFilters();
+        this.cdr.markForCheck();
       },
-      error: () => this.loading = false
+      error: () => { this.loading = false; this.cdr.markForCheck(); }
     });
   }
 

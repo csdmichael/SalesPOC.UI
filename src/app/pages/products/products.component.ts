@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../models/product.model';
@@ -28,7 +28,7 @@ export class ProductsComponent implements OnInit {
   pageSize = 50;
   pageSizeOptions = [10, 25, 50, 100];
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.productService.getAll().subscribe({
@@ -38,8 +38,9 @@ export class ProductsComponent implements OnInit {
         this.statuses = [...new Set(data.map(p => p.lifecycleStatus).filter(Boolean) as string[])].sort();
         this.loading = false;
         this.applyFilters();
+        this.cdr.markForCheck();
       },
-      error: () => this.loading = false
+      error: () => { this.loading = false; this.cdr.markForCheck(); }
     });
   }
 

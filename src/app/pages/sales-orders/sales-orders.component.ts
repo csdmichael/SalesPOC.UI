@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SalesOrder } from '../../models/sales-order.model';
@@ -45,7 +45,8 @@ export class SalesOrdersComponent implements OnInit {
   constructor(
     private salesOrderService: SalesOrderService,
     private orderItemService: OrderItemService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -53,11 +54,13 @@ export class SalesOrdersComponent implements OnInit {
       next: data => {
         this.customers = data.sort((a, b) => a.customerId - b.customerId);
         this.loadingCustomers = false;
+        this.cdr.markForCheck();
       },
       error: (err) => {
         this.loadingCustomers = false;
         this.errorMessage = 'Failed to load customers. Please try again later.';
         console.error('Customers load error:', err);
+        this.cdr.markForCheck();
       }
     });
   }
@@ -93,11 +96,13 @@ export class SalesOrdersComponent implements OnInit {
         }).filter(Boolean) as string[])].sort();
         this.loading = false;
         this.applyFilters();
+        this.cdr.markForCheck();
       },
       error: (err) => {
         this.loading = false;
         this.errorMessage = 'Failed to load sales orders. Please try again later.';
         console.error('Sales Orders load error:', err);
+        this.cdr.markForCheck();
       }
     });
   }
@@ -192,10 +197,12 @@ export class SalesOrdersComponent implements OnInit {
         next: items => {
           this.orderItemsMap.set(orderId, items);
           this.loadingItemsMap.set(orderId, false);
+          this.cdr.markForCheck();
         },
         error: () => {
           this.orderItemsMap.set(orderId, []);
           this.loadingItemsMap.set(orderId, false);
+          this.cdr.markForCheck();
         }
       });
     }

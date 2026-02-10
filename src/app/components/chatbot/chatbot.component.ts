@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatMessage } from '../../models/chat-message.model';
@@ -17,7 +17,7 @@ export class ChatbotComponent {
   userInput = '';
   sending = false;
 
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService, private cdr: ChangeDetectorRef) {}
 
   toggleChat(): void {
     this.isOpen = !this.isOpen;
@@ -42,6 +42,7 @@ export class ChatbotComponent {
       next: reply => {
         this.messages.push({ role: 'assistant', content: reply, timestamp: new Date() });
         this.sending = false;
+        this.cdr.markForCheck();
         setTimeout(() => this.scrollToBottom(), 50);
       },
       error: () => {
@@ -51,6 +52,7 @@ export class ChatbotComponent {
           timestamp: new Date()
         });
         this.sending = false;
+        this.cdr.markForCheck();
       }
     });
 

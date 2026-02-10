@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SalesRep } from '../../models/sales-rep.model';
@@ -25,7 +25,7 @@ export class SalesRepsComponent implements OnInit {
   pageSize = 50;
   pageSizeOptions = [10, 25, 50, 100];
 
-  constructor(private salesRepService: SalesRepService) {}
+  constructor(private salesRepService: SalesRepService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.salesRepService.getAll().subscribe({
@@ -34,8 +34,9 @@ export class SalesRepsComponent implements OnInit {
         this.regions = [...new Set(data.map(r => r.region).filter(Boolean) as string[])].sort();
         this.loading = false;
         this.applyFilters();
+        this.cdr.markForCheck();
       },
-      error: () => this.loading = false
+      error: () => { this.loading = false; this.cdr.markForCheck(); }
     });
   }
 

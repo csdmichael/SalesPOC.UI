@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SalesFact } from '../../models/sales-fact.model';
@@ -31,7 +31,7 @@ export class SalesFactsComponent implements OnInit {
   pageSize = 50;
   pageSizeOptions = [10, 25, 50, 100];
 
-  constructor(private salesFactService: SalesFactService) {}
+  constructor(private salesFactService: SalesFactService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.salesFactService.getAll().subscribe({
@@ -42,8 +42,9 @@ export class SalesFactsComponent implements OnInit {
         this.repNames = [...new Set(data.map(f => f.repName).filter(Boolean) as string[])].sort();
         this.loading = false;
         this.applyFilters();
+        this.cdr.markForCheck();
       },
-      error: () => this.loading = false
+      error: () => { this.loading = false; this.cdr.markForCheck(); }
     });
   }
 

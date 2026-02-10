@@ -7,7 +7,7 @@
   <!-- Summary Cards -->
   <div *ngIf="!loading" class="summary-cards">
     <div class="summary-card">
-      <div class="summary-value">{{ totalRevenue | number:'1.2-2' }}</div>
+      <div class="summary-value">${{ totalRevenue | number:'1.2-2' }}</div>
       <div class="summary-label">Total Revenue (USD)</div>
     </div>
     <div class="summary-card">
@@ -84,8 +84,8 @@
           <td class="name-cell">{{ f.productName }}</td>
           <td><span class="tag">{{ f.productCategory }}</span></td>
           <td class="number-cell">{{ f.quantity }}</td>
-          <td class="number-cell">{{ f.unitPriceUsd | number:'1.2-2' }}</td>
-          <td class="number-cell">{{ f.lineTotalUsd | number:'1.2-2' }}</td>
+          <td class="number-cell">${{ f.unitPriceUsd | number:'1.2-2' }}</td>
+          <td class="number-cell">${{ f.lineTotalUsd | number:'1.2-2' }}</td>
           <td>{{ f.repName }}</td>
           <td><span class="tag">{{ f.region }}</span></td>
         </tr>

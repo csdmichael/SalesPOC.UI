@@ -51,7 +51,7 @@
           <td><span class="tag">{{ p.productCategory }}</span></td>
           <td class="number-cell">{{ p.processNodeNm }}</td>
           <td>{{ p.packageType }}</td>
-          <td class="number-cell">{{ p.unitPriceUsd | number:'1.2-2' }}</td>
+          <td class="number-cell">${{ p.unitPriceUsd | number:'1.2-2' }}</td>
           <td>
             <span class="status-badge" [class.active]="p.lifecycleStatus === 'Active'"
                   [class.eol]="p.lifecycleStatus === 'EOL'"

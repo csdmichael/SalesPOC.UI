@@ -80,7 +80,7 @@
                 {{ o.orderStatus }}
               </span>
             </td>
-            <td class="number-cell">{{ o.totalAmountUsd | number:'1.2-2' }}</td>
+            <td class="number-cell">${{ o.totalAmountUsd | number:'1.2-2' }}</td>
             <td>{{ o.currency }}</td>
           </tr>
           <!-- Expanded Order Items Row (master-detail) -->
@@ -107,8 +107,8 @@
                       <td>{{ item.orderItemId }}</td>
                       <td class="name-cell">{{ item.product?.productName || ('Product #' + item.productId) }}</td>
                       <td class="number-cell">{{ item.quantity }}</td>
-                      <td class="number-cell">{{ item.unitPriceUsd | number:'1.2-2' }}</td>
-                      <td class="number-cell">{{ item.lineTotalUsd | number:'1.2-2' }}</td>
+                      <td class="number-cell">${{ item.unitPriceUsd | number:'1.2-2' }}</td>
+                      <td class="number-cell">${{ item.lineTotalUsd | number:'1.2-2' }}</td>
                     </tr>
                   </tbody>
                 </table>

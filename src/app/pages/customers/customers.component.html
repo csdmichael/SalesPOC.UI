@@ -64,7 +64,7 @@
           <td>{{ c.country }}</td>
           <td>{{ c.state }}</td>
           <td>{{ c.city }}</td>
-          <td class="number-cell">{{ c.annualRevenueUsd | number:'1.2-2' }}</td>
+          <td class="number-cell">${{ c.annualRevenueUsd | number:'1.2-2' }}</td>
         </tr>
         <tr *ngIf="filteredCustomers.length === 0">
           <td colspan="8" class="empty-row">No customers match the current filters.</td>

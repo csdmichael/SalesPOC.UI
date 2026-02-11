@@ -1,5 +1,6 @@
 List Products
 List Customers
+What is product description for Chip-50? Also retrieve Sales One Pager,  Datasheet and market brief documentation
 List Products of category as Sensor
 What is description of chip-16?
 Plot top 10 products by price on a bar chart

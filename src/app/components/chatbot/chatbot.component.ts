@@ -95,7 +95,7 @@ export class ChatbotComponent {
       const parsed = new URL(url);
       const segments = parsed.pathname.split('/').filter(s => s.length > 0);
       const fileName = segments.length > 1 ? segments.slice(1).join('/') : segments[0] || url;
-      return `${environment.apiBaseUrl2}/ProductDocuments/download?fileName=${encodeURIComponent(fileName)}`;
+      return `${environment.apiBaseUrl2}/ProductDocuments/download?blobName=${encodeURIComponent(fileName)}`;
     } catch {
       return url;
     }

@@ -2,6 +2,10 @@
 
 A modern Angular-based sales management dashboard application that provides comprehensive views of customers, products, sales representatives, orders, and sales analytics. The application features an AI-powered chatbot for natural language queries powered by Microsoft Foundry Agent.
 
+## Live Application
+
+The application is deployed and accessible at: **[https://salespoc.azurewebsites.net](https://salespoc.azurewebsites.net)**
+
 ## Architecture
 
 ![Architecture](Architecture.png)
@@ -38,6 +42,25 @@ This is a proof-of-concept (POC) frontend application built with Angular 21 that
 - **Sales Orders**: Track and manage sales orders with detailed item information
 - **Sales Analytics**: View sales facts and performance metrics
 - **AI Chatbot**: Natural language interface powered by Microsoft Foundry Agent for querying sales data
+
+## Sales Chat Assistant
+
+The application includes an AI-powered Sales Chat Assistant that allows you to interact with your sales data using natural language. The chat icon is located at the **bottom right corner** of the screen.
+
+### Sample Questions to Ask
+
+Here are some example queries you can ask the Sales Chat Assistant:
+
+1. List Products
+2. List Customers
+3. What is product description for Chip-50? Also retrieve Sales One Pager, Datasheet and market brief documentation. Finally check its unit price and status of its life cycle
+4. List Products of category as Sensor
+5. What is description of chip-16?
+6. Plot top 10 products by price on a bar chart
+7. How many units did Sales Rep 10 sell?
+8. What is total amount for Sales Orders for Customer 1 that are confirmed? List them.
+9. How many orders did customer 3 cancel?
+10. Plot a bar chart for orders by total for Customer 1. Exclude cancelled orders
 
 ## Technology Stack
 

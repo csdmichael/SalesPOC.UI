@@ -78,17 +78,6 @@ Here are some example queries you can ask the Sales Chat Assistant:
 10. Plot a bar chart for orders by total for Customer 1. Exclude cancelled orders
 
 
-## API Center
-
-The APIs used by this application are documented in the Azure API Center:
-
-**API Center URL**: [https://api-center-poc-my.portal.eastus.azure-apicenter.ms/](https://api-center-poc-my.portal.eastus.azure-apicenter.ms/)
-
-### APIs Used in This Application
-
-1. **Sales API MCP** (production, mcp) - Used by AI Foundry Sales Agent
-2. **SalesAPI** (production, rest)
-
 ## Technology Stack
 
 - **Framework**: Angular 21.1.0

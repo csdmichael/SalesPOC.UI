@@ -34,17 +34,6 @@ The application is deployed and accessible at: **[https://salespoc.azurewebsites
   </tr>
 </table>
 
-## API Center
-
-The APIs used by this application are documented in the Azure API Center:
-
-**API Center URL**: [https://api-center-poc-my.portal.eastus.azure-apicenter.ms/](https://api-center-poc-my.portal.eastus.azure-apicenter.ms/)
-
-### APIs Used in This Application
-
-1. **Sales API MCP** (production, mcp) - Used by AI Foundry Sales Agent
-2. **SalesAPI** (production, rest)
-
 ## Project Overview
 
 This is a proof-of-concept (POC) frontend application built with Angular 21 that consumes SalesPOC.API REST APIs. The application provides a multi-page interface for managing and viewing sales data with interactive filters and data visualization capabilities.
@@ -76,6 +65,18 @@ Here are some example queries you can ask the Sales Chat Assistant:
 8. What is total amount for Sales Orders for Customer 1 that are confirmed? List them.
 9. How many orders did customer 3 cancel?
 10. Plot a bar chart for orders by total for Customer 1. Exclude cancelled orders
+
+
+## API Center
+
+The APIs used by this application are documented in the Azure API Center:
+
+**API Center URL**: [https://api-center-poc-my.portal.eastus.azure-apicenter.ms/](https://api-center-poc-my.portal.eastus.azure-apicenter.ms/)
+
+### APIs Used in This Application
+
+1. **Sales API MCP** (production, mcp) - Used by AI Foundry Sales Agent
+2. **SalesAPI** (production, rest)
 
 
 ## Technology Stack

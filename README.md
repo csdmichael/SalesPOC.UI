@@ -15,6 +15,17 @@ A modern Angular-based sales management dashboard application that provides comp
 | [SalesPOC.DB](https://github.com/csdmichael/SalesPOC.DB) | Database project |
 | [SalesPOC.AI](https://github.com/csdmichael/SalesPOC.AI) | AI Agent (Azure AI Foundry) |
 
+## API Center
+
+The APIs used by this application are documented in the Azure API Center:
+
+**API Center URL**: [https://api-center-poc-my.portal.eastus.azure-apicenter.ms/](https://api-center-poc-my.portal.eastus.azure-apicenter.ms/)
+
+### APIs Used in This Application
+
+1. **Sales API MCP** (production, mcp) - Used by AI Foundry Sales Agent
+2. **SalesAPI** (production, rest)
+
 ## Project Overview
 
 This is a proof-of-concept (POC) frontend application built with Angular 21 that consumes SalesPOC.API REST APIs. The application provides a multi-page interface for managing and viewing sales data with interactive filters and data visualization capabilities.

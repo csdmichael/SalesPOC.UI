@@ -15,6 +15,21 @@ A modern Angular-based sales management dashboard application that provides comp
 | [SalesPOC.DB](https://github.com/csdmichael/SalesPOC.DB) | Database project |
 | [SalesPOC.AI](https://github.com/csdmichael/SalesPOC.AI) | AI Agent (Azure AI Foundry) |
 
+## UI Screenshots
+
+<table>
+  <tr>
+    <td align="center"><b>Customers</b><br/><a href="UI%20Screenshots/Customers.png" target="_blank"><img src="UI%20Screenshots/Customers.png" width="280"/></a></td>
+    <td align="center"><b>Products</b><br/><a href="UI%20Screenshots/Products.png" target="_blank"><img src="UI%20Screenshots/Products.png" width="280"/></a></td>
+    <td align="center"><b>Sales Reps</b><br/><a href="UI%20Screenshots/Sales%20Reps.png" target="_blank"><img src="UI%20Screenshots/Sales%20Reps.png" width="280"/></a></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Sales Orders</b><br/><a href="UI%20Screenshots/Sales%20Orders.png" target="_blank"><img src="UI%20Screenshots/Sales%20Orders.png" width="280"/></a></td>
+    <td align="center"><b>Sales Facts (Stats)</b><br/><a href="UI%20Screenshots/Sales%20Facts%20(Stats).png" target="_blank"><img src="UI%20Screenshots/Sales%20Facts%20(Stats).png" width="280"/></a></td>
+    <td align="center"><b>Sales Assistant</b><br/><a href="UI%20Screenshots/Sales%20Assistant.png" target="_blank"><img src="UI%20Screenshots/Sales%20Assistant.png" width="280"/></a></td>
+  </tr>
+</table>
+
 ## Project Overview
 
 This is a proof-of-concept (POC) frontend application built with Angular 21 that consumes SalesPOC.API REST APIs. The application provides a multi-page interface for managing and viewing sales data with interactive filters and data visualization capabilities.

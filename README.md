@@ -2,6 +2,19 @@
 
 A modern Angular-based sales management dashboard application that provides comprehensive views of customers, products, sales representatives, orders, and sales analytics. The application features an AI-powered chatbot for natural language queries powered by Microsoft Foundry Agent.
 
+## Architecture
+
+![Architecture](Architecture.png)
+
+## Related Repositories
+
+| Repository | Description |
+|---|---|
+| [SalesPOC.API](https://github.com/csdmichael/SalesPOC.API) | REST API (Azure App Service) |
+| [SalesPOC.Containerized.API](https://github.com/csdmichael/SalesPOC.Containerized.API) | REST API (Azure Container Apps) |
+| [SalesPOC.DB](https://github.com/csdmichael/SalesPOC.DB) | Database project |
+| [SalesPOC.AI](https://github.com/csdmichael/SalesPOC.AI) | AI Agent (Azure AI Foundry) |
+
 ## Project Overview
 
 This is a proof-of-concept (POC) frontend application built with Angular 21 that consumes SalesPOC.API REST APIs. The application provides a multi-page interface for managing and viewing sales data with interactive filters and data visualization capabilities.

@@ -1,0 +1,34 @@
+Generate an architecture diagram that shows: 
+
+Data sources: 
+- SQL Database - Stores Products, Customers, Sales Reps, Sales Orders, Line Items per Sales Order
+- CosmosDB - Stores Product descriptions as hash map (Product Id, Description)
+- Azure Blob Storage Account - Stores 3 documents per product (Datasheet, Marketing brief, Sales One Pager)
+
+REST APIs (Sales-API):
+- Connects to data from 3 data sources and handle crud operations
+- Hosted on Azure Container Apps
+
+API Management has 3 instances to host dev, test, prod Sales-API. IT acts as gateway
+API Center is central inventory for 3 APIM instances for discovery
+
+The Sales-API is exposed as MCP Server hosted in APIM
+
+AI Foundry hosts an agent called "Sales-Agent" that leverages MCP Server of Sales-API hosted on APIM
+
+Frontend Reporting Application called "Sales POC" leverages Sales-API from APIM and has a chat assistant that leverages "Sales-Agent" 
+Sales Team leverage Frontend to ask questions to Chat Assistant which leverages "Sales-Agent" 
+---------------------------------------------------------------
+
+Generate an architecture diagram that shows: 
+
+Data sources: 
+- SQL Database - Stores Products, Customers, Sales Reps, Sales Orders, Line Items per Sales Order
+- CosmosDB - Stores Product descriptions as hash map (Product Id, Description)
+- Azure Blob Storage Account - Stores 3 documents per product (Datasheet, Marketing brief, Sales One Pager)
+
+Fabric OneLake has all these data sources in OneLake, then there is a Dataflow Gen2 that transforms this data.
+Semantic Models are built to join data. Fabric IQ correlates semantic Models
+
+PowerBI Reports are built using Semantic Models from Fabric OneLake
+Fabric Data Agent is exposed in Copilot for internal Users to query data

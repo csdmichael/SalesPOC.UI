@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../models/product.model';
+import { ProductDescription, ProductDocument } from '../../models/product-document.model';
 import { ProductService } from '../../services/product.service';
 
 @Component({
@@ -27,6 +28,13 @@ export class ProductsComponent implements OnInit {
   currentPage = 1;
   pageSize = 50;
   pageSizeOptions = [10, 25, 50, 100];
+
+  // Expanded row detail tracking
+  expandedProductId: number | null = null;
+  descriptionLoading = false;
+  documentsLoading = false;
+  productDescription: string | null = null;
+  productDocuments: ProductDocument[] = [];
 
   constructor(private productService: ProductService, private cdr: ChangeDetectorRef) {}
 
@@ -91,5 +99,55 @@ export class ProductsComponent implements OnInit {
 
   onPageSizeChange(): void {
     this.currentPage = 1;
+  }
+
+  toggleDetails(product: Product): void {
+    if (this.expandedProductId === product.productId) {
+      this.expandedProductId = null;
+      this.productDescription = null;
+      this.productDocuments = [];
+      return;
+    }
+
+    this.expandedProductId = product.productId;
+    this.productDescription = null;
+    this.productDocuments = [];
+
+    const productKey = product.productName.toLowerCase();
+
+    // Fetch description
+    this.descriptionLoading = true;
+    this.productService.getDescription(productKey).subscribe({
+      next: data => {
+        this.productDescription = data.description;
+        this.descriptionLoading = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.productDescription = 'Description not available.';
+        this.descriptionLoading = false;
+        this.cdr.markForCheck();
+      }
+    });
+
+    // Fetch documents
+    this.documentsLoading = true;
+    this.productService.getDocuments(productKey).subscribe({
+      next: docs => {
+        this.productDocuments = docs;
+        this.documentsLoading = false;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.productDocuments = [];
+        this.documentsLoading = false;
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
+  downloadDocument(doc: ProductDocument): void {
+    const downloadUrl = this.productService.getDocumentDownloadUrl(doc.fileName);
+    window.open(downloadUrl, '_blank');
   }
 }

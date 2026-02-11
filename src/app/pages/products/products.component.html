@@ -35,6 +35,7 @@
     <table class="data-table">
       <thead>
         <tr>
+          <th class="col-expand"></th>
           <th>ID</th>
           <th>Name</th>
           <th>Category</th>
@@ -45,23 +46,67 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let p of pagedProducts">
-          <td>{{ p.productId }}</td>
-          <td class="name-cell">{{ p.productName }}</td>
-          <td><span class="tag">{{ p.productCategory }}</span></td>
-          <td class="number-cell">{{ p.processNodeNm }}</td>
-          <td>{{ p.packageType }}</td>
-          <td class="number-cell">${{ p.unitPriceUsd | number:'1.2-2' }}</td>
-          <td>
-            <span class="status-badge" [class.active]="p.lifecycleStatus === 'Active'"
-                  [class.eol]="p.lifecycleStatus === 'EOL'"
-                  [class.nrnd]="p.lifecycleStatus === 'NRND'">
-              {{ p.lifecycleStatus }}
-            </span>
-          </td>
-        </tr>
+        <ng-container *ngFor="let p of pagedProducts">
+          <tr [class.expanded-row]="expandedProductId === p.productId">
+            <td class="col-expand">
+              <button class="btn-expand" (click)="toggleDetails(p)" [title]="expandedProductId === p.productId ? 'Hide details' : 'Show details'">
+                {{ expandedProductId === p.productId ? '▾' : '▸' }}
+              </button>
+            </td>
+            <td>{{ p.productId }}</td>
+            <td class="name-cell">{{ p.productName }}</td>
+            <td><span class="tag">{{ p.productCategory }}</span></td>
+            <td class="number-cell">{{ p.processNodeNm }}</td>
+            <td>{{ p.packageType }}</td>
+            <td class="number-cell">${{ p.unitPriceUsd | number:'1.2-2' }}</td>
+            <td>
+              <span class="status-badge" [class.active]="p.lifecycleStatus === 'Active'"
+                    [class.eol]="p.lifecycleStatus === 'EOL'"
+                    [class.nrnd]="p.lifecycleStatus === 'NRND'">
+                {{ p.lifecycleStatus }}
+              </span>
+            </td>
+          </tr>
+          <!-- Expanded Detail Row -->
+          <tr *ngIf="expandedProductId === p.productId" class="detail-row">
+            <td colspan="8">
+              <div class="detail-panel">
+                <!-- Description Section -->
+                <div class="detail-section">
+                  <h3>📋 Product Description</h3>
+                  <div *ngIf="descriptionLoading" class="detail-loading">
+                    <div class="spinner-small"></div>
+                    <span>Loading description...</span>
+                  </div>
+                  <p *ngIf="!descriptionLoading && productDescription" class="description-text">{{ productDescription }}</p>
+                </div>
+
+                <!-- Documents Section -->
+                <div class="detail-section">
+                  <h3>📄 Product Documents</h3>
+                  <div *ngIf="documentsLoading" class="detail-loading">
+                    <div class="spinner-small"></div>
+                    <span>Loading documents...</span>
+                  </div>
+                  <div *ngIf="!documentsLoading && productDocuments.length > 0" class="documents-list">
+                    <div class="document-card" *ngFor="let doc of productDocuments">
+                      <div class="document-info">
+                        <span class="document-type-badge">{{ doc.documentType }}</span>
+                        <span class="document-name">{{ doc.fileName }}</span>
+                      </div>
+                      <button class="btn-download" (click)="downloadDocument(doc)" title="Download document">
+                        ⬇ Download
+                      </button>
+                    </div>
+                  </div>
+                  <p *ngIf="!documentsLoading && productDocuments.length === 0" class="no-docs">No documents available for this product.</p>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
         <tr *ngIf="filteredProducts.length === 0">
-          <td colspan="7" class="empty-row">No products match the current filters.</td>
+          <td colspan="8" class="empty-row">No products match the current filters.</td>
         </tr>
       </tbody>
     </table>

@@ -7,3 +7,154 @@
   &.eol { background: #f8d7da; color: #721c24; }
   &.nrnd { background: #fff3cd; color: #856404; }
 }
+
+/* Expand column */
+.col-expand {
+  width: 40px;
+  text-align: center;
+}
+
+.btn-expand {
+  background: none;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 2px 8px;
+  color: #495057;
+  transition: all 0.15s;
+
+  &:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+  }
+}
+
+.expanded-row {
+  background-color: #f0f4ff !important;
+}
+
+/* Detail row */
+.detail-row > td {
+  padding: 0 !important;
+  border-top: none !important;
+}
+
+.detail-panel {
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+  border-top: 2px solid #4a6cf7;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.detail-section {
+  h3 {
+    margin: 0 0 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2d3748;
+  }
+}
+
+.detail-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.spinner-small {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #dee2e6;
+  border-top: 2px solid #4a6cf7;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.description-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4a5568;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Documents */
+.documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.document-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  transition: box-shadow 0.15s;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.document-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.document-type-badge {
+  background: #4a6cf7;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.document-name {
+  font-size: 0.85rem;
+  color: #2d3748;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-download {
+  background: #4a6cf7;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #3b5de7;
+  }
+}
+
+.no-docs {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #a0aec0;
+  font-style: italic;
+}

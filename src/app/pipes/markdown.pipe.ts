@@ -31,7 +31,7 @@ export class MarkdownPipe implements PipeTransform {
   private rewriteBlobUrls(html: string): string {
     return html.replace(this.blobUrlPattern, (blobUrl: string) => {
       const fileName = this.extractBlobName(blobUrl);
-      return `${environment.apiBaseUrl2}/ProductDocuments/download?blobName=${encodeURIComponent(fileName)}`;
+      return `${environment.apiBaseUrl}/ProductDocuments/download?blobName=${encodeURIComponent(fileName)}`;
     });
   }
 

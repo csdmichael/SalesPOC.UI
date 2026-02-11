@@ -63,7 +63,7 @@ export class ChatService {
       }
     }
 
-    const proxyUrl = `${environment.apiBaseUrl2}/Chat`;
+    const proxyUrl = `${environment.apiBaseUrl}/Chat`;
     return this.http.post<AgentResponse>(proxyUrl, { question: message }).pipe(
       map(res => ({ reply: res.reply, citations: res.citations })),
       retryWhen(errors =>

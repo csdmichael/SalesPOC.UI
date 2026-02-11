@@ -1,6 +1,7 @@
 List Products
 List Customers
 List Products of category as Sensor
+What is description of chip-16?
 Plot top 10 products by price on a bar chart
 How many units did Sales Rep 10 sell?
 What is total amount for Sales Orders for Customer 1 that are confirmed? List them.

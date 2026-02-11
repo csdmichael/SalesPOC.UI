@@ -4,8 +4,15 @@ import { Observable, of, throwError, timer } from 'rxjs';
 import { catchError, map, retryWhen, switchMap, scan } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
+export interface AgentCitation {
+  title: string;
+  url: string;
+  content: string;
+}
+
 export interface AgentResponse {
   reply: string;
+  citations?: AgentCitation[];
 }
 
 /**
@@ -44,7 +51,7 @@ export class ChatService {
    *
    * Implements retry (up to 5 attempts) with circuit breaker for HTTP 500 errors.
    */
-  sendMessage(message: string): Observable<string> {
+  sendMessage(message: string): Observable<{ reply: string; citations?: AgentCitation[] }> {
     // If circuit is OPEN, check if enough time has passed to transition to HALF_OPEN
     if (this.circuitState === CircuitState.OPEN) {
       const elapsed = Date.now() - this.lastFailureTime;
@@ -52,13 +59,13 @@ export class ChatService {
         this.circuitState = CircuitState.HALF_OPEN;
       } else {
         console.warn('Circuit breaker is OPEN. Rejecting request.');
-        return of('The AI assistant is temporarily unavailable due to repeated failures. Please try again later.');
+        return of({ reply: 'The AI assistant is temporarily unavailable due to repeated failures. Please try again later.' });
       }
     }
 
     const proxyUrl = `${environment.apiBaseUrl2}/Chat`;
     return this.http.post<AgentResponse>(proxyUrl, { question: message }).pipe(
-      map(res => res.reply),
+      map(res => ({ reply: res.reply, citations: res.citations })),
       retryWhen(errors =>
         errors.pipe(
           scan((retryCount, error) => {
@@ -79,12 +86,12 @@ export class ChatService {
         } else {
           console.error('Chat agent error:', err);
         }
-        return of('Sorry, I could not reach the AI assistant right now. Please try again later.');
+        return of({ reply: 'Sorry, I could not reach the AI assistant right now. Please try again later.' });
       }),
-      map(reply => {
+      map(response => {
         // Successful response — reset circuit breaker
         this.recordSuccess();
-        return reply;
+        return response;
       })
     );
   }

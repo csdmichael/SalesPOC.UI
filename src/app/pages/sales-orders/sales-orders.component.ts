@@ -50,6 +50,14 @@ export class SalesOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Preload customers from sessionStorage cache for instant display
+    const cached = this.customerService.getCachedAll();
+    if (cached) {
+      this.customers = cached.sort((a, b) => a.customerId - b.customerId);
+      this.loadingCustomers = false;
+    }
+
+    // Fetch fresh customer data from API (uses shareReplay for in-session caching)
     this.customerService.getAll().subscribe({
       next: data => {
         this.customers = data.sort((a, b) => a.customerId - b.customerId);

@@ -35,18 +35,29 @@ export class CustomersComponent implements OnInit {
   constructor(private customerService: CustomerService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    // Preload from sessionStorage cache for instant display
+    const cached = this.customerService.getCachedAll();
+    if (cached) {
+      this.initializeData(cached);
+    }
+
+    // Fetch fresh data from API (uses shareReplay for in-session caching)
     this.customerService.getAll().subscribe({
       next: data => {
-        this.customers = data;
-        this.customerTypes = [...new Set(data.map(c => c.customerType).filter(Boolean) as string[])].sort();
-        this.industries = [...new Set(data.map(c => c.industry).filter(Boolean) as string[])].sort();
-        this.countries = [...new Set(data.map(c => c.country).filter(Boolean) as string[])].sort();
-        this.loading = false;
-        this.applyFilters();
+        this.initializeData(data);
         this.cdr.markForCheck();
       },
       error: () => { this.loading = false; this.cdr.markForCheck(); }
     });
+  }
+
+  private initializeData(data: Customer[]): void {
+    this.customers = data;
+    this.customerTypes = [...new Set(data.map(c => c.customerType).filter(Boolean) as string[])].sort();
+    this.industries = [...new Set(data.map(c => c.industry).filter(Boolean) as string[])].sort();
+    this.countries = [...new Set(data.map(c => c.country).filter(Boolean) as string[])].sort();
+    this.loading = false;
+    this.applyFilters();
   }
 
   applyFilters(): void {

@@ -34,18 +34,29 @@ export class SalesFactsComponent implements OnInit {
   constructor(private salesFactService: SalesFactService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    // Preload from sessionStorage cache for instant display
+    const cached = this.salesFactService.getCachedAll();
+    if (cached) {
+      this.initializeData(cached);
+    }
+
+    // Fetch fresh data from API (uses shareReplay for in-session caching)
     this.salesFactService.getAll().subscribe({
       next: data => {
-        this.salesFacts = data;
-        this.categories = [...new Set(data.map(f => f.productCategory).filter(Boolean) as string[])].sort();
-        this.regions = [...new Set(data.map(f => f.region).filter(Boolean) as string[])].sort();
-        this.repNames = [...new Set(data.map(f => f.repName).filter(Boolean) as string[])].sort();
-        this.loading = false;
-        this.applyFilters();
+        this.initializeData(data);
         this.cdr.markForCheck();
       },
       error: () => { this.loading = false; this.cdr.markForCheck(); }
     });
+  }
+
+  private initializeData(data: SalesFact[]): void {
+    this.salesFacts = data;
+    this.categories = [...new Set(data.map(f => f.productCategory).filter(Boolean) as string[])].sort();
+    this.regions = [...new Set(data.map(f => f.region).filter(Boolean) as string[])].sort();
+    this.repNames = [...new Set(data.map(f => f.repName).filter(Boolean) as string[])].sort();
+    this.loading = false;
+    this.applyFilters();
   }
 
   applyFilters(): void {

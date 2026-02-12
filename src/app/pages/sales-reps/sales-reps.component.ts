@@ -28,16 +28,27 @@ export class SalesRepsComponent implements OnInit {
   constructor(private salesRepService: SalesRepService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    // Preload from sessionStorage cache for instant display
+    const cached = this.salesRepService.getCachedAll();
+    if (cached) {
+      this.initializeData(cached);
+    }
+
+    // Fetch fresh data from API (uses shareReplay for in-session caching)
     this.salesRepService.getAll().subscribe({
       next: data => {
-        this.salesReps = data;
-        this.regions = [...new Set(data.map(r => r.region).filter(Boolean) as string[])].sort();
-        this.loading = false;
-        this.applyFilters();
+        this.initializeData(data);
         this.cdr.markForCheck();
       },
       error: () => { this.loading = false; this.cdr.markForCheck(); }
     });
+  }
+
+  private initializeData(data: SalesRep[]): void {
+    this.salesReps = data;
+    this.regions = [...new Set(data.map(r => r.region).filter(Boolean) as string[])].sort();
+    this.loading = false;
+    this.applyFilters();
   }
 
   applyFilters(): void {

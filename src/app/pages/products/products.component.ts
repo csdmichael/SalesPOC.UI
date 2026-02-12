@@ -39,17 +39,28 @@ export class ProductsComponent implements OnInit {
   constructor(private productService: ProductService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    // Preload from sessionStorage cache for instant display
+    const cached = this.productService.getCachedAll();
+    if (cached) {
+      this.initializeData(cached);
+    }
+
+    // Fetch fresh data from API (uses shareReplay for in-session caching)
     this.productService.getAll().subscribe({
       next: data => {
-        this.products = data;
-        this.categories = [...new Set(data.map(p => p.productCategory).filter(Boolean) as string[])].sort();
-        this.statuses = [...new Set(data.map(p => p.lifecycleStatus).filter(Boolean) as string[])].sort();
-        this.loading = false;
-        this.applyFilters();
+        this.initializeData(data);
         this.cdr.markForCheck();
       },
       error: () => { this.loading = false; this.cdr.markForCheck(); }
     });
+  }
+
+  private initializeData(data: Product[]): void {
+    this.products = data;
+    this.categories = [...new Set(data.map(p => p.productCategory).filter(Boolean) as string[])].sort();
+    this.statuses = [...new Set(data.map(p => p.lifecycleStatus).filter(Boolean) as string[])].sort();
+    this.loading = false;
+    this.applyFilters();
   }
 
   applyFilters(): void {
@@ -152,8 +163,28 @@ export class ProductsComponent implements OnInit {
   }
 
   viewDocument(doc: ProductDocument): void {
-    // Open the document URL in a new tab for viewing
-    // Using noopener and noreferrer for security
-    window.open(doc.url, '_blank', 'noopener,noreferrer');
+    // Open the window synchronously (in the click handler) to avoid popup blockers,
+    // then fetch the blob via API proxy and render it inline.
+    const viewWindow = window.open('', '_blank');
+    if (!viewWindow) return;
+
+    // Show a loading state while fetching
+    viewWindow.document.write(
+      `<html><head><title>${doc.fileName}</title></head>` +
+      `<body style="margin:0;display:flex;align-items:center;justify-content:center;height:100vh;font-family:sans-serif;color:#555;">` +
+      `<p>Loading document...</p></body></html>`
+    );
+
+    this.productService.getDocumentBlob(doc.fileName).subscribe({
+      next: (blob) => {
+        const viewBlob = new Blob([blob], { type: doc.contentType || blob.type });
+        const objectUrl = URL.createObjectURL(viewBlob);
+        viewWindow.location.href = objectUrl;
+      },
+      error: () => {
+        // Fallback: redirect to the download URL
+        viewWindow.location.href = this.productService.getDocumentDownloadUrl(doc.fileName);
+      }
+    });
   }
 }

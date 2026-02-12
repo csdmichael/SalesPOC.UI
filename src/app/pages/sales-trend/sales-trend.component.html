@@ -1,0 +1,48 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Sales Trend</h1>
+    <span class="badge">Monthly Sales Amount</span>
+  </div>
+
+  <div class="filters-panel">
+    <div class="filter-group">
+      <label>Customer</label>
+      <select [(ngModel)]="selectedCustomer" (ngModelChange)="applyFilters()">
+        <option value="">All Customers</option>
+        <option *ngFor="let c of customers" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Product</label>
+      <select [(ngModel)]="selectedProduct" (ngModelChange)="applyFilters()">
+        <option value="">All Products</option>
+        <option *ngFor="let p of products" [value]="p">{{ p }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Sales Rep</label>
+      <select [(ngModel)]="selectedRep" (ngModelChange)="applyFilters()">
+        <option value="">All Reps</option>
+        <option *ngFor="let r of reps" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Date From</label>
+      <input type="date" [(ngModel)]="dateFrom" (ngModelChange)="applyFilters()">
+    </div>
+    <div class="filter-group">
+      <label>Date To</label>
+      <input type="date" [(ngModel)]="dateTo" (ngModelChange)="applyFilters()">
+    </div>
+    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading sales data...</p>
+  </div>
+
+  <div *ngIf="!loading" class="chart-container">
+    <canvas #trendChart></canvas>
+  </div>
+</div>

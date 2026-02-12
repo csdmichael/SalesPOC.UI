@@ -1,0 +1,35 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Sales Statistics</h1>
+    <span class="badge">Top 10 Analysis</span>
+  </div>
+
+  <div class="filters-panel">
+    <div class="filter-group">
+      <label>Date From</label>
+      <input type="date" [(ngModel)]="dateFrom" (ngModelChange)="applyFilters()">
+    </div>
+    <div class="filter-group">
+      <label>Date To</label>
+      <input type="date" [(ngModel)]="dateTo" (ngModelChange)="applyFilters()">
+    </div>
+    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading sales data...</p>
+  </div>
+
+  <div *ngIf="!loading && chartsReady" class="charts-grid">
+    <div class="chart-card">
+      <canvas #customerChart></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas #productChart></canvas>
+    </div>
+    <div class="chart-card">
+      <canvas #repChart></canvas>
+    </div>
+  </div>
+</div>

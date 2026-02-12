@@ -1,0 +1,70 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Sales by Region</h1>
+    <span class="badge">Geographic Distribution</span>
+  </div>
+
+  <div class="filters-panel">
+    <div class="filter-group">
+      <label>Customer</label>
+      <select [(ngModel)]="selectedCustomer" (ngModelChange)="applyFilters()">
+        <option value="">All Customers</option>
+        <option *ngFor="let c of customers" [value]="c">{{ c }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Product</label>
+      <select [(ngModel)]="selectedProduct" (ngModelChange)="applyFilters()">
+        <option value="">All Products</option>
+        <option *ngFor="let p of products" [value]="p">{{ p }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Sales Rep</label>
+      <select [(ngModel)]="selectedRep" (ngModelChange)="applyFilters()">
+        <option value="">All Reps</option>
+        <option *ngFor="let r of reps" [value]="r">{{ r }}</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label>Date From</label>
+      <input type="date" [(ngModel)]="dateFrom" (ngModelChange)="applyFilters()">
+    </div>
+    <div class="filter-group">
+      <label>Date To</label>
+      <input type="date" [(ngModel)]="dateTo" (ngModelChange)="applyFilters()">
+    </div>
+    <button class="btn-clear" (click)="clearFilters()">Clear Filters</button>
+  </div>
+
+  <div *ngIf="loading" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading sales data...</p>
+  </div>
+
+  <div class="map-layout" *ngIf="!loading">
+    <div class="map-wrapper">
+      <div id="regionMap"></div>
+    </div>
+
+    <div class="region-summary" *ngIf="regionSummary.length > 0">
+      <h3>Region Summary</h3>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Region</th>
+            <th>Total Sales (USD)</th>
+            <th>Orders</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of regionSummary">
+            <td class="name-cell">{{ r.region }}</td>
+            <td class="number-cell">${{ r.total | number:'1.2-2' }}</td>
+            <td class="number-cell">{{ r.orders | number }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

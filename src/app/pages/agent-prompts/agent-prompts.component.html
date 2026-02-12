@@ -1,0 +1,32 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Sales Agent Prompts</h1>
+    <span class="badge">Sample queries for the AI Sales Assistant</span>
+  </div>
+
+  <p class="page-description">
+    Click the <strong>chat icon</strong> at the bottom-right corner of the screen, then copy any prompt below to start interacting with the Sales Assistant.
+  </p>
+
+  <div class="categories-grid">
+    <div *ngFor="let cat of categories" class="category-card">
+      <div class="category-header" [style.border-left-color]="cat.color">
+        <div class="category-title">
+          <span class="category-icon">{{ cat.icon }}</span>
+          <h2>{{ cat.title }}</h2>
+        </div>
+        <p class="category-desc">{{ cat.description }}</p>
+      </div>
+      <div class="prompts-list">
+        <div *ngFor="let p of cat.prompts; let i = index" class="prompt-item">
+          <div class="prompt-number">{{ i + 1 }}</div>
+          <div class="prompt-text">{{ p.text }}</div>
+          <button class="btn-copy" [class.copied]="p.copied" (click)="copyToClipboard(p)" [title]="p.copied ? 'Copied!' : 'Copy to clipboard'">
+            <span *ngIf="!p.copied">&#x1F4CB;</span>
+            <span *ngIf="p.copied">&#x2705;</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,6 @@ export class SalesOrdersComponent implements OnInit {
   // Customer filter (required)
   customers: Customer[] = [];
   selectedCustomerId: number | null = null;
-  customerSearchText = '';
 
   filterStatus = '';
   filterRep = '';
@@ -50,33 +49,24 @@ export class SalesOrdersComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Preload customers from sessionStorage cache for instant display
+    // Load customers for filter dropdown
     const cached = this.customerService.getCachedAll();
     if (cached) {
       this.customers = cached.sort((a, b) => a.customerId - b.customerId);
       this.loadingCustomers = false;
     }
 
-    // Fetch fresh customer data from API (uses shareReplay for in-session caching)
     this.customerService.getAll().subscribe({
       next: data => {
         this.customers = data.sort((a, b) => a.customerId - b.customerId);
         this.loadingCustomers = false;
         this.cdr.markForCheck();
       },
-      error: (err) => {
+      error: () => {
         this.loadingCustomers = false;
-        this.errorMessage = 'Failed to load customers. Please try again later.';
-        console.error('Customers load error:', err);
         this.cdr.markForCheck();
       }
     });
-  }
-
-  get filteredCustomers(): Customer[] {
-    if (!this.customerSearchText) return this.customers;
-    const search = this.customerSearchText.toLowerCase();
-    return this.customers.filter(c => c.customerName.toLowerCase().includes(search));
   }
 
   onCustomerSelected(): void {
@@ -97,11 +87,10 @@ export class SalesOrdersComponent implements OnInit {
 
     this.salesOrderService.getByCustomer(this.selectedCustomerId).subscribe({
       next: data => {
-        this.orders = data;
+        // Sort by orderDate descending (reverse chronological)
+        this.orders = data.sort((a, b) => new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime());
         this.statuses = [...new Set(data.map(o => o.orderStatus).filter(Boolean) as string[])].sort();
-        this.repNames = [...new Set(data.map(o => {
-          return o.salesRep?.repName || '';
-        }).filter(Boolean) as string[])].sort();
+        this.repNames = [...new Set(data.map(o => o.salesRep?.repName || '').filter(Boolean) as string[])].sort();
         this.loading = false;
         this.applyFilters();
         this.cdr.markForCheck();
@@ -127,7 +116,6 @@ export class SalesOrdersComponent implements OnInit {
 
   clearFilters(): void {
     this.selectedCustomerId = null;
-    this.customerSearchText = '';
     this.filterStatus = '';
     this.filterRep = '';
     this.orders = [];
@@ -191,12 +179,10 @@ export class SalesOrdersComponent implements OnInit {
 
     this.expandedOrderIds.add(orderId);
 
-    // Already loaded
     if (this.orderItemsMap.has(orderId)) {
       return;
     }
 
-    // Use inline items if available
     if (order.orderItems && order.orderItems.length > 0) {
       this.orderItemsMap.set(orderId, order.orderItems);
     } else {

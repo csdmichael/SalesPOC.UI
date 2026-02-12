@@ -61,16 +61,23 @@ The application includes an AI-powered Sales Chat Assistant that allows you to i
 
 Here are some example queries you can ask the Sales Chat Assistant:
 
+**Basic**
 1. List Products
 2. List Customers
-3. What is product description for Chip-50? Also retrieve Sales One Pager, Datasheet and market brief documentation. Finally check its unit price and status of its life cycle
-4. List Products of category as Sensor
-5. What is description of chip-16?
-6. Plot top 10 products by price on a bar chart
-7. How many units did Sales Rep 10 sell?
-8. What is total amount for Sales Orders for Customer 1 that are confirmed? List them.
-9. How many orders did customer 3 cancel?
-10. Plot a bar chart for orders by total for Customer 1. Exclude cancelled orders
+
+**Medium**
+1. List Products of category as Sensor
+2. What is description of chip-16?
+3. Plot top 10 products by price on a bar chart
+4. How many units did Sales Rep 10 sell?
+6. How many orders did customer 3 cancel?
+
+**Advanced**
+1. What is product description for Chip-50? Also retrieve Sales One Pager, Datasheet and market brief documentation. Finally check its unit price and status of its life cycle
+2. From Sales Facts, show top 3 Research Customers by Line Total in West Region
+3. What is total amount for Sales Orders for Customer 1 that are confirmed? List them.
+4. Plot a bar chart for orders by total for Customer 1. Exclude cancelled orders
+
 
 
 ## API Center

@@ -150,4 +150,9 @@ export class ProductsComponent implements OnInit {
     const downloadUrl = this.productService.getDocumentDownloadUrl(doc.fileName);
     window.open(downloadUrl, '_blank');
   }
+
+  viewDocument(doc: ProductDocument): void {
+    // Open the document URL in a new tab for viewing
+    window.open(doc.url, '_blank');
+  }
 }

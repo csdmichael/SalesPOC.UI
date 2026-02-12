@@ -135,6 +135,29 @@
   white-space: nowrap;
 }
 
+.document-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-view {
+  background: #48bb78;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #38a169;
+  }
+}
+
 .btn-download {
   background: #4a6cf7;
   color: #fff;

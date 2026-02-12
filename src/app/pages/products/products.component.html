@@ -94,9 +94,14 @@
                         <span class="document-type-badge">{{ doc.documentType }}</span>
                         <span class="document-name">{{ doc.fileName }}</span>
                       </div>
-                      <button class="btn-download" (click)="downloadDocument(doc)" title="Download document">
-                        ⬇ Download
-                      </button>
+                      <div class="document-actions">
+                        <button class="btn-view" (click)="viewDocument(doc)" title="View document in browser" aria-label="View document in browser">
+                          👁 View
+                        </button>
+                        <button class="btn-download" (click)="downloadDocument(doc)" title="Download document" aria-label="Download document">
+                          ⬇ Download
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <p *ngIf="!documentsLoading && productDocuments.length === 0" class="no-docs">No documents available for this product.</p>

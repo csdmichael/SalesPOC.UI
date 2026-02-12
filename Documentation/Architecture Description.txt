@@ -32,3 +32,22 @@ Semantic Models are built to join data. Fabric IQ correlates semantic Models
 
 PowerBI Reports are built using Semantic Models from Fabric OneLake
 Fabric Data Agent is exposed in Copilot for internal Users to query data
+-------------------------------------------------------------------------------------
+Draw a diagram for Chip Sales Transactional System (Chips Store) as a microservices architecture as follows: 
+
+Data sources: 
+- SQL Database - Stores Products, Customers, Sales Reps, Sales Orders, Line Items per Sales Order
+- CosmosDB - Stores Product descriptions as hash map (Product Id, Description)
+- Azure Blob Storage Account - Stores 3 documents per product (Datasheet, Marketing brief, Sales One Pager)
+
+REST APIs (Sales-API):
+- Connects to data from 3 data sources and handle crud operations
+- Hosted on Azure Container Apps
+
+Frontend:
+- Customers use "Chips Store" Frontend to place purchase orders and track delivery.
+- The request is processed by a microservice called Transaction Handler and it gets placed in a Pub/Sub queue (Azure Event Hub or Event Grid depending on which service can be used as pub / sub).
+- Another microservice called Transaction Processor will process message from queue and pass it to Sales-API (REST API) and will send a notification to team responsible to process order and notification to Customer that order placed successfully with shipment estimate
+- When shipment is scheduled, send notification to customer about shipment date
+- Conclude the rest of Workflow and include in diagram
+- For micro-services, use Azure Functions except for Sales-API which is Azure Container Apps

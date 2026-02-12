@@ -1,0 +1,7 @@
+“Generate a web application using Angular and Typescript to display and filter data using this API End-Point {Paste 
+Sales-API URL from APIM}. 
+Create a separate screen for Customers, Products, Sales Reps, Sales Orders, Sales Facts. 
+For each product in Products screen, add a button to show the Product description and Product documentation 
+which includes 3 documents per product (Datasheet, Marketing Brief, Sales One Pager).
+Finally, add a Sales Chat Assistant that uses sales-agent from AI Foundry. 
+AI Foundry Project Endpoint is {Paste Foundry Project Endpoint} and API Key is {Paste API Key}”

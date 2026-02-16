@@ -8,9 +8,10 @@ import { AgentPromptsComponent } from './pages/agent-prompts/agent-prompts.compo
 import { SalesTrendComponent } from './pages/sales-trend/sales-trend.component';
 import { SalesStatisticsComponent } from './pages/sales-statistics/sales-statistics.component';
 import { SalesRegionComponent } from './pages/sales-region/sales-region.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/customers', pathMatch: 'full' },
+  { path: '', component: LandingComponent, title: 'Welcome' },
   { path: 'customers', component: CustomersComponent, title: 'Customers' },
   { path: 'products', component: ProductsComponent, title: 'Products' },
   { path: 'sales-reps', component: SalesRepsComponent, title: 'Sales Reps' },
@@ -20,5 +21,5 @@ export const routes: Routes = [
   { path: 'sales-statistics', component: SalesStatisticsComponent, title: 'Sales Statistics' },
   { path: 'sales-region', component: SalesRegionComponent, title: 'Sales by Region' },
   { path: 'agent-prompts', component: AgentPromptsComponent, title: 'Agent Prompts' },
-  { path: '**', redirectTo: '/customers' }
+  { path: '**', redirectTo: '' }
 ];

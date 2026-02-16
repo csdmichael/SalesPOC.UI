@@ -1,0 +1,86 @@
+.landing-page {
+  padding: 24px;
+  color: #1e293b;
+}
+
+.hero {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+
+  h1 {
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.entities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.entity-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 1.45;
+  }
+
+  a {
+    color: #1a73e8;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.assistant {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.45;
+  }
+}
+
+.preload-status {
+  margin: 0;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.preload-done {
+  color: #1e293b;
+}

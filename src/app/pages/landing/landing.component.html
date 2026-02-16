@@ -1,0 +1,45 @@
+<section class="landing-page" aria-labelledby="welcome-title">
+  <header class="hero">
+    <h1 id="welcome-title">Welcome to Sales POC</h1>
+    <p>
+      This application gives a consolidated view of your sales data and lets teams explore key business entities quickly.
+    </p>
+  </header>
+
+  <section class="entities" aria-label="Main entities">
+    <article class="entity-card">
+      <h2>Customers</h2>
+      <p>Review customer profiles, industries, geography, and customer type details.</p>
+      <a routerLink="/customers">Open Customers</a>
+    </article>
+
+    <article class="entity-card">
+      <h2>Products</h2>
+      <p>Browse products, lifecycle status, category information, and associated documents.</p>
+      <a routerLink="/products">Open Products</a>
+    </article>
+
+    <article class="entity-card">
+      <h2>Orders</h2>
+      <p>Track sales orders and understand what was sold, to whom, and in what quantities.</p>
+      <a routerLink="/sales-orders">Open Orders</a>
+    </article>
+
+    <article class="entity-card">
+      <h2>Sales Facts</h2>
+      <p>Analyze measurable sales outcomes and key indicators for business performance.</p>
+      <a routerLink="/sales-facts">Open Sales Facts</a>
+    </article>
+  </section>
+
+  <section class="assistant" aria-label="AI assistant">
+    <h2>AI Chat Assistant</h2>
+    <p>
+      Use the AI Chat Assistant in the bottom-right corner to ask questions about customers, products, orders, and sales insights.
+    </p>
+  </section>
+
+  <p class="preload-status" [class.preload-done]="preloadComplete()">
+    {{ preloadComplete() ? 'Customers and products are preloaded for faster page navigation.' : 'Preloading customers and products for faster navigation...' }}
+  </p>
+</section>

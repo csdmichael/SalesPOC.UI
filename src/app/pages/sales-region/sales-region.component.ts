@@ -63,8 +63,6 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
   // Summary
   regionSummary: { region: string; total: number; orders: number }[] = [];
 
-  private mapInitialized = false;
-
   constructor(private salesFactService: SalesFactService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -83,10 +81,7 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.initMap();
-    if (!this.loading && this.salesFacts.length > 0) {
-      this.renderMap();
-    }
+    setTimeout(() => this.tryInitMapAndRender(), 0);
   }
 
   ngOnDestroy(): void {
@@ -94,10 +89,12 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private initMap(): void {
-    if (this.mapInitialized) return;
-    this.mapInitialized = true;
+    if (this.map) return;
 
-    this.map = L.map('regionMap', {
+    const mapContainer = document.getElementById('regionMap');
+    if (!mapContainer) return;
+
+    this.map = L.map(mapContainer, {
       center: [20, 0], // World center
       zoom: 2,
       scrollWheelZoom: true
@@ -123,9 +120,7 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.loading = false;
-    if (this.mapInitialized) {
-      this.renderMap();
-    }
+    setTimeout(() => this.tryInitMapAndRender(), 0);
   }
 
   applyFilters(): void {
@@ -213,5 +208,12 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
     });
 
     this.cdr.detectChanges();
+  }
+
+  private tryInitMapAndRender(): void {
+    this.initMap();
+    if (!this.map) return;
+    this.renderMap();
+    this.map.invalidateSize();
   }
 }

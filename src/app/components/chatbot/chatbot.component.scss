@@ -34,8 +34,9 @@
   position: fixed;
   bottom: 96px;
   right: 24px;
-  width: 800px;
-  height: 520px;
+  width: min(800px, calc(100vw - 32px));
+  height: min(520px, calc(100vh - 128px));
+  max-height: calc(100vh - 128px);
   background: white;
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
@@ -44,6 +45,37 @@
   flex-direction: column;
   overflow: hidden;
   animation: slideUp 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .chat-fab {
+    right: 16px;
+    bottom: 16px;
+    width: 52px;
+    height: 52px;
+  }
+
+  .chat-panel {
+    right: 12px;
+    left: 12px;
+    bottom: 76px;
+    width: auto;
+    height: calc(100vh - 92px);
+    max-height: calc(100vh - 92px);
+    border-radius: 12px;
+  }
+
+  .chat-header {
+    padding: 12px 14px;
+  }
+
+  .chat-messages {
+    padding: 12px;
+  }
+
+  .chat-input-area {
+    padding: 10px 12px;
+  }
 }
 
 @keyframes slideUp {

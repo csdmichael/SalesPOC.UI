@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "echo No tests configured"
+    "test": "echo No tests configured",
+    "ionic:build": "ng build",
+    "ionic:serve": "ng serve"
   },
   "prettier": {
     "printWidth": 100,

@@ -7,11 +7,12 @@ import { Customer } from '../../models/customer.model';
 import { SalesOrderService } from '../../services/sales-order.service';
 import { OrderItemService } from '../../services/order-item.service';
 import { CustomerService } from '../../services/customer.service';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-sales-orders',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons],
   templateUrl: './sales-orders.component.html',
   styleUrl: './sales-orders.component.scss'
 })

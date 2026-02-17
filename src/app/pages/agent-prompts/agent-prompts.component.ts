@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 interface PromptItem {
   text: string;
@@ -17,7 +18,7 @@ interface PromptCategory {
 @Component({
   selector: 'app-agent-prompts',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons],
   templateUrl: './agent-prompts.component.html',
   styleUrl: './agent-prompts.component.scss'
 })

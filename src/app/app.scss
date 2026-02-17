@@ -6,7 +6,7 @@
 /* ─── Sidebar ────────────────────────────────────────────── */
 .sidebar {
   width: 240px;
-  background: #1e293b;
+  background: #0f172a;
   color: #e2e8f0;
   display: flex;
   flex-direction: column;
@@ -17,6 +17,8 @@
   bottom: 0;
   z-index: 100;
   overflow: hidden;
+  border-right: 1px solid #1e293b;
+  box-shadow: 2px 0 10px rgba(15, 23, 42, 0.12);
 }
 
 .sidebar-collapsed .sidebar {
@@ -55,10 +57,15 @@
   font-size: 1.2rem;
   padding: 4px 8px;
   border-radius: 6px;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
   &:hover {
     background: #334155;
     color: white;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #1a73e8;
+    outline-offset: 2px;
   }
 }
 
@@ -88,6 +95,7 @@
     &.active {
       background: #1a73e8;
       color: white;
+      font-weight: 600;
     }
   }
 }
@@ -107,7 +115,8 @@
   padding: 16px;
   border-top: 1px solid #334155;
   text-align: center;
-  color: #64748b;
+  color: #94a3b8;
+  font-size: 0.78rem;
 }
 
 /* ─── Main Content ────────────────────────────────────────── */
@@ -121,4 +130,32 @@
 
 .sidebar-collapsed .main-content {
   margin-left: 64px;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .main-content {
+    margin-left: 200px;
+  }
+
+  .sidebar-collapsed .main-content {
+    margin-left: 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sidebar {
+    width: 64px;
+  }
+
+  .main-content {
+    margin-left: 64px;
+  }
+
+  .sidebar-header {
+    padding: 12px;
+  }
 }

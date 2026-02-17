@@ -1,5 +1,7 @@
 .landing-page {
   padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
   color: #1e293b;
 }
 
@@ -7,80 +9,79 @@
   background: white;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 16px;
+  padding: 22px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 
   h1 {
     margin: 0 0 8px 0;
+    font-size: 1.8rem;
+    line-height: 1.2;
   }
 
   p {
     margin: 0;
     line-height: 1.5;
+    color: #475569;
   }
 }
 
 .entities {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
-.entity-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 16px;
-
-  h2 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-size: 1.1rem;
-  }
-
-  p {
-    margin-top: 0;
-    margin-bottom: 12px;
-    line-height: 1.45;
-  }
-
-  a {
-    color: #1a73e8;
-    font-weight: 600;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-}
-
-.assistant {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-
-  h2 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-size: 1.1rem;
-  }
-
-  p {
-    margin: 0;
-    line-height: 1.45;
-  }
-}
-
-.preload-status {
+.entities ion-card,
+.landing-page > ion-card {
   margin: 0;
-  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.08);
+  }
+}
+
+.entities ion-card-title,
+.landing-page > ion-card ion-card-title {
+  font-size: 1.05rem;
+}
+
+.entities ion-card-content,
+.landing-page > ion-card ion-card-content {
+  p {
+    margin: 0 0 12px 0;
+    line-height: 1.45;
+    color: #475569;
+  }
+
+  ion-button {
+    margin-top: 6px;
+    --border-radius: 10px;
+    font-weight: 600;
+  }
+}
+
+.landing-page ion-text p {
+  margin-top: 14px;
   font-weight: 500;
 }
 
-.preload-done {
-  color: #1e293b;
+@media (max-width: 640px) {
+  .landing-page {
+    padding: 14px;
+  }
+
+  .hero {
+    padding: 16px;
+
+    h1 {
+      font-size: 1.45rem;
+    }
+  }
 }

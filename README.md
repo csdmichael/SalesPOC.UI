@@ -190,11 +190,15 @@ SalesPOC.UI/
 - `/sales-orders` → Sales orders page
 - `/sales-facts` → Sales analytics page
 
-## Development server
+## Development Server
 
 To start a local development server, run:
 
 ```bash
+npm start
+# or
+npm run ionic:serve
+# or
 ng serve
 ```
 
@@ -207,6 +211,8 @@ Once the server is running, open your browser and navigate to `http://localhost:
 To build the project run:
 
 ```bash
+npm run ionic:build
+# or
 ng build
 ```
 
@@ -214,8 +220,22 @@ This will compile your project and store the build artifacts in the `dist/` dire
 
 For production build:
 ```bash
-ng build --configuration production
+npm run ionic:build -- --configuration production
 ```
+
+For development build:
+```bash
+npm run ionic:build -- --configuration development
+```
+
+## CI/CD Deployment (Azure Web App)
+
+The GitHub workflow at `.github/workflows/main_salespoc.yml` is configured for the Ionic app:
+
+- Installs dependencies with `npm ci`
+- Builds with `npm run ionic:build -- --configuration development`
+- Uploads compiled output from `dist/` as the deployment artifact
+- Deploys `./dist` to Azure Web App (`SalesPOC`)
 
 ## Code scaffolding
 

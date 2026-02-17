@@ -9,6 +9,12 @@
   --ion-color-primary-contrast-rgb: 255, 255, 255;
   --ion-color-primary-shade: #1763cc;
   --ion-color-primary-tint: #3081ea;
+
+  --app-surface: #ffffff;
+  --app-border: #e2e8f0;
+  --app-muted: #64748b;
+  --app-text: #0f172a;
+  --app-radius: 12px;
 }
 
 *, *::before, *::after {
@@ -26,32 +32,41 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+ion-content {
+  --background: #f1f5f9;
+}
+
 /* ─── Page Container ─────────────────────────────────────── */
 .page-container {
   padding: 28px 32px;
   max-width: 1400px;
+  margin: 0 auto;
 }
 
 .page-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 20px;
 
   h1 {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--app-text);
+    line-height: 1.15;
   }
 }
 
 .badge {
   background: #e0e7ff;
   color: #3730a3;
-  padding: 4px 12px;
+  padding: 6px 12px;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
+  border: 1px solid #c7d2fe;
 }
 
 /* ─── Filters Panel ──────────────────────────────────────── */
@@ -60,9 +75,10 @@ html, body {
   flex-wrap: wrap;
   gap: 12px;
   align-items: flex-end;
-  background: white;
+  background: var(--app-surface);
   padding: 16px 20px;
-  border-radius: 12px;
+  border-radius: var(--app-radius);
+  border: 1px solid var(--app-border);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   margin-bottom: 20px;
 }
@@ -98,14 +114,14 @@ html, body {
 }
 
 .btn-clear {
-  padding: 8px 16px;
+  padding: 9px 16px;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
-  background: white;
-  color: #64748b;
+  background: #f8fafc;
+  color: #475569;
   cursor: pointer;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   transition: all 0.2s;
   align-self: flex-end;
 
@@ -119,8 +135,9 @@ html, body {
 /* ─── Data Table ─────────────────────────────────────────── */
 .table-container {
   overflow-x: auto;
-  background: white;
-  border-radius: 12px;
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  border: 1px solid var(--app-border);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
@@ -138,7 +155,7 @@ html, body {
       text-align: left;
       font-size: 0.75rem;
       font-weight: 700;
-      color: #64748b;
+      color: var(--app-muted);
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -194,7 +211,7 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 48px;
-  color: #64748b;
+  color: var(--app-muted);
 
   p {
     margin-top: 12px;
@@ -229,11 +246,11 @@ html, body {
   flex-wrap: wrap;
   gap: 12px;
   padding: 12px 20px;
-  background: white;
+  background: var(--app-surface);
   border-top: 1px solid #e2e8f0;
   border-radius: 0 0 12px 12px;
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--app-muted);
 }
 
 .pagination-info {
@@ -310,5 +327,46 @@ html, body {
     &:focus {
       border-color: #1a73e8;
     }
+  }
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid #1a73e8;
+  outline-offset: 2px;
+}
+
+@media (max-width: 1024px) {
+  .page-container {
+    padding: 20px;
+  }
+
+  .page-header h1 {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-container {
+    padding: 14px;
+  }
+
+  .filters-panel {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .filter-group {
+    min-width: 100%;
+  }
+
+  .btn-clear {
+    width: 100%;
+  }
+
+  .data-table thead th,
+  .data-table tbody td {
+    padding: 10px 12px;
   }
 }

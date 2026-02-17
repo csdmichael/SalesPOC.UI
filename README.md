@@ -2,6 +2,8 @@
 
 A modern Angular-based sales management dashboard application that provides comprehensive views of customers, products, sales representatives, orders, and sales analytics. The application features an AI-powered chatbot for natural language queries powered by Microsoft Foundry Agent.
 
+**🎉 Now a Hybrid/Cross-Platform Application!** Built with Ionic Framework and Capacitor, this app runs seamlessly on web, iOS, and Android devices.
+
 ## Live Application
 
 The application is deployed and accessible at: **[https://salespoc.azurewebsites.net](https://salespoc.azurewebsites.net)**
@@ -52,6 +54,9 @@ This is a proof-of-concept (POC) frontend application built with Angular 21 that
 - **Sales Orders**: Track and manage sales orders with detailed item information
 - **Sales Analytics**: View sales facts and performance metrics
 - **AI Chatbot**: Natural language interface powered by Microsoft Foundry Agent for querying sales data
+- **🆕 Cross-Platform**: Runs on web browsers, iOS devices, and Android devices
+- **🆕 Responsive Design**: Adaptive UI with Ionic components that work seamlessly on all screen sizes
+- **🆕 Native Features**: Ready for native device capabilities through Capacitor
 
 ## Sales Chat Assistant
 
@@ -95,10 +100,12 @@ The APIs used by this application are documented in the Azure API Center:
 ## Technology Stack
 
 - **Framework**: Angular 21.1.0
+- **UI Framework**: Ionic 8.7.17 (for hybrid/cross-platform support)
+- **Native Runtime**: Capacitor 8.1.0 (for iOS and Android builds)
 - **Language**: TypeScript 5.9.2
-- **Styling**: SCSS
+- **Styling**: SCSS with Ionic CSS utilities
 - **HTTP Client**: Angular HttpClient
-- **Routing**: Angular Router (standalone components)
+- **Routing**: Angular Router with Ionic Router Outlet (standalone components)
 - **Build Tool**: Angular CLI 21.1.3
 - **Package Manager**: npm 11.6.2
 
@@ -246,6 +253,94 @@ The application uses a proxy configuration (`proxy.conf.json`) to forward API re
 Environment-specific settings are stored in `src/environments/`:
 - `environment.ts` - Development configuration
 - `environment.prod.ts` - Production configuration
+
+## Hybrid/Cross-Platform Development
+
+This application uses **Ionic Framework** and **Capacitor** to provide a true hybrid experience that works seamlessly across web, iOS, and Android platforms.
+
+### Ionic Framework
+
+Ionic provides:
+- Mobile-optimized UI components that adapt to platform conventions
+- Responsive layouts that work on any screen size
+- Native-like navigation and gestures
+- Automatic theming based on the platform
+
+### Building for Different Platforms
+
+#### Web (Browser)
+```bash
+# Development server
+npm start
+# or
+ng serve
+
+# Production build
+ng build --configuration production
+```
+
+#### iOS
+```bash
+# Build the web assets
+ng build --configuration production
+
+# Sync web assets to iOS
+npx cap sync ios
+
+# Open in Xcode
+npx cap open ios
+
+# Build and run from Xcode or command line
+```
+
+**Requirements**: macOS with Xcode installed
+
+#### Android
+```bash
+# Build the web assets
+ng build --configuration production
+
+# Sync web assets to Android
+npx cap sync android
+
+# Open in Android Studio
+npx cap open android
+
+# Build and run from Android Studio or command line
+```
+
+**Requirements**: Android Studio with Android SDK installed
+
+### Capacitor Configuration
+
+The Capacitor configuration is stored in `capacitor.config.ts`:
+- **App ID**: `com.salespoc.app`
+- **App Name**: SalesPOC
+- **Web Directory**: `dist`
+
+### Adding Native Capabilities
+
+To add native device features (camera, geolocation, etc.):
+
+```bash
+# Install a Capacitor plugin
+npm install @capacitor/camera
+
+# Sync with native projects
+npx cap sync
+```
+
+### Platform-Specific Notes
+
+- **iOS**: Native projects are in the `ios/` directory (excluded from git)
+- **Android**: Native projects are in the `android/` directory (excluded from git)
+- **Web**: Runs directly from the `dist/` directory after build
+
+To regenerate native projects:
+```bash
+npx cap add ios
+npx cap add android
+```
 
 ## Additional Resources
 

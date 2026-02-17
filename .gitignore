@@ -6,6 +6,22 @@
 /out-tsc
 /bazel-out
 
+# Build artifacts in root (from Angular build)
+/index.html
+/main.js
+/main.js.map
+/main-*.js
+/polyfills-*.js
+/polyfills.js
+/polyfills.js.map
+/styles.css
+/styles.css.map
+/styles-*.css
+/3rdpartylicenses.txt
+/prerendered-routes.json
+/*.component.css.map
+/app.css.map
+
 # Node
 /node_modules
 npm-debug.log

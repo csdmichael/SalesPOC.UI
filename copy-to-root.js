@@ -24,6 +24,12 @@ function copyDir(src, dest) {
   }
 }
 
+// Check if dist directory exists
+if (!fs.existsSync(distDir)) {
+  console.error('Error: dist/ directory not found. Please run the build first.');
+  process.exit(1);
+}
+
 // Read all files from dist directory
 const files = fs.readdirSync(distDir, { withFileTypes: true });
 let copiedCount = 0;
@@ -49,4 +55,3 @@ files.forEach(entry => {
 });
 
 console.log(`\nSuccessfully copied ${copiedCount} item(s) to root directory.`);
-

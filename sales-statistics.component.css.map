@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/pages/sales-statistics/sales-statistics.component.scss"],
-  "sourcesContent": [".charts-grid {\r\n  display: grid;\r\n  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));\r\n  gap: 24px;\r\n}\r\n\r\n.chart-card {\r\n  background: white;\r\n  border-radius: 12px;\r\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);\r\n  padding: 24px;\r\n  height: 400px;\r\n  position: relative;\r\n}\r\n"],
-  "mappings": ";AAAA,CAAA;AACE,WAAA;AACA,yBAAA,OAAA,QAAA,EAAA,OAAA,KAAA,EAAA;AACA,OAAA;;AAGF,CAAA;AACE,cAAA;AACA,iBAAA;AACA,cAAA,EAAA,IAAA,IAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;AACA,WAAA;AACA,UAAA;AACA,YAAA;;",
-  "names": []
-}

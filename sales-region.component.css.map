@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/sales-region/sales-region.component.scss"],
+  "sourcesContent": [".map-layout {\r\n  display: flex;\r\n  flex-direction: column;\r\n  gap: 24px;\r\n}\r\n\r\n.map-wrapper {\r\n  background: white;\r\n  border-radius: 12px;\r\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);\r\n  overflow: hidden;\r\n\r\n  #regionMap {\r\n    height: 500px;\r\n    width: 100%;\r\n  }\r\n}\r\n\r\n.region-summary {\r\n  background: white;\r\n  border-radius: 12px;\r\n  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);\r\n  padding: 20px;\r\n\r\n  h3 {\r\n    margin: 0 0 16px;\r\n    font-size: 1rem;\r\n    font-weight: 700;\r\n    color: #0f172a;\r\n  }\r\n}\r\n"],
+  "mappings": ";AAAA,CAAA;AACE,WAAA;AACA,kBAAA;AACA,OAAA;;AAGF,CAAA;AACE,cAAA;AACA,iBAAA;AACA,cAAA,EAAA,IAAA,IAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;AACA,YAAA;;AAEA,CANF,YAME,CAAA;AACE,UAAA;AACA,SAAA;;AAIJ,CAAA;AACE,cAAA;AACA,iBAAA;AACA,cAAA,EAAA,IAAA,IAAA,KAAA,CAAA,EAAA,CAAA,EAAA,CAAA,EAAA;AACA,WAAA;;AAEA,CANF,eAME;AACE,UAAA,EAAA,EAAA;AACA,aAAA;AACA,eAAA;AACA,SAAA;;",
+  "names": []
+}

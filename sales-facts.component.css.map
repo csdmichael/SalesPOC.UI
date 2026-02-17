@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/pages/sales-facts/sales-facts.component.scss"],
+  "sourcesContent": [".summary-cards {\r\n  display: flex;\r\n  gap: 16px;\r\n  margin-bottom: 20px;\r\n}\r\n\r\n.summary-card {\r\n  flex: 1;\r\n  background: linear-gradient(135deg, #1a73e8, #4285f4);\r\n  color: white;\r\n  padding: 20px 24px;\r\n  border-radius: 12px;\r\n  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);\r\n\r\n  .summary-value {\r\n    font-size: 1.8rem;\r\n    font-weight: 700;\r\n    margin-bottom: 4px;\r\n  }\r\n\r\n  .summary-label {\r\n    font-size: 0.85rem;\r\n    opacity: 0.9;\r\n  }\r\n}\r\n"],
+  "mappings": ";AAAA,CAAA;AACE,WAAA;AACA,OAAA;AACA,iBAAA;;AAGF,CAAA;AACE,QAAA;AACA;IAAA;MAAA,MAAA;MAAA,OAAA;MAAA;AACA,SAAA;AACA,WAAA,KAAA;AACA,iBAAA;AACA,cAAA,EAAA,IAAA,KAAA,KAAA,EAAA,EAAA,GAAA,EAAA,GAAA,EAAA;;AAEA,CARF,aAQE,CAAA;AACE,aAAA;AACA,eAAA;AACA,iBAAA;;AAGF,CAdF,aAcE,CAAA;AACE,aAAA;AACA,WAAA;;",
+  "names": []
+}

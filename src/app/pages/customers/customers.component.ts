@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Customer } from '../../models/customer.model';
 import { CustomerService } from '../../services/customer.service';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-customers',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons],
   templateUrl: './customers.component.html',
   styleUrl: './customers.component.scss'
 })

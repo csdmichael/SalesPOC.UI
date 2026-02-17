@@ -1,6 +1,16 @@
 /* ─── Global Styles for SalesPOC UI ──────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
+/* ─── Ionic Theme Variables ──────────────────────────────── */
+:root {
+  --ion-color-primary: #1a73e8;
+  --ion-color-primary-rgb: 26, 115, 232;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1763cc;
+  --ion-color-primary-tint: #3081ea;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;

@@ -1,20 +1,50 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
+import { IonApp, IonSplitPane, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonIcon, IonRouterOutlet } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { homeOutline, peopleOutline, cubeOutline, briefcaseOutline, cartOutline, statsChartOutline, trendingUpOutline, barChartOutline, mapOutline, chatbubbleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, ChatbotComponent],
+  imports: [
+    CommonModule, 
+    RouterLink, 
+    RouterLinkActive, 
+    ChatbotComponent,
+    IonApp,
+    IonSplitPane,
+    IonMenu,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonIcon,
+    IonRouterOutlet
+  ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
   protected title = 'SalesPOC';
-  sidebarCollapsed = false;
 
-  toggleSidebar(): void {
-    this.sidebarCollapsed = !this.sidebarCollapsed;
+  constructor() {
+    addIcons({ 
+      homeOutline, 
+      peopleOutline, 
+      cubeOutline, 
+      briefcaseOutline, 
+      cartOutline, 
+      statsChartOutline, 
+      trendingUpOutline, 
+      barChartOutline, 
+      mapOutline, 
+      chatbubbleOutline 
+    });
   }
 }

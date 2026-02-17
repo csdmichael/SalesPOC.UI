@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 import { SalesFact } from '../../models/sales-fact.model';
 import { SalesFactService } from '../../services/sales-fact.service';
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-sales-statistics',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons],
   templateUrl: './sales-statistics.component.html',
   styleUrl: './sales-statistics.component.scss'
 })

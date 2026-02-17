@@ -1,89 +1,64 @@
-<div class="app-layout" [class.sidebar-collapsed]="sidebarCollapsed">
-  <!-- Sidebar -->
-  <nav class="sidebar">
-    <div class="sidebar-header">
-      <div class="logo">
-        <span class="logo-icon">&#x1F4CA;</span>
-        <span class="logo-text" *ngIf="!sidebarCollapsed">Sales POC</span>
-      </div>
-      <button class="toggle-btn" (click)="toggleSidebar()">
-        {{ sidebarCollapsed ? '&#9776;' : '&#10005;' }}
-      </button>
+<ion-app>
+  <ion-split-pane contentId="main-content" when="md">
+    <!-- Side Menu -->
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Sales POC</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-item button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            <ion-label>Home</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/customers" routerLinkActive="active">
+            <ion-icon name="people-outline" slot="start"></ion-icon>
+            <ion-label>Customers</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/products" routerLinkActive="active">
+            <ion-icon name="cube-outline" slot="start"></ion-icon>
+            <ion-label>Products</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/sales-reps" routerLinkActive="active">
+            <ion-icon name="briefcase-outline" slot="start"></ion-icon>
+            <ion-label>Sales Reps</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/sales-orders" routerLinkActive="active">
+            <ion-icon name="cart-outline" slot="start"></ion-icon>
+            <ion-label>Sales Orders</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/sales-facts" routerLinkActive="active">
+            <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
+            <ion-label>Sales Facts</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/sales-trend" routerLinkActive="active">
+            <ion-icon name="trending-up-outline" slot="start"></ion-icon>
+            <ion-label>Sales Trend</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/sales-statistics" routerLinkActive="active">
+            <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
+            <ion-label>Sales Statistics</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/sales-region" routerLinkActive="active">
+            <ion-icon name="map-outline" slot="start"></ion-icon>
+            <ion-label>Sales by Region</ion-label>
+          </ion-item>
+          <ion-item button routerLink="/agent-prompts" routerLinkActive="active">
+            <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
+            <ion-label>Agent Prompts</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+
+    <!-- Main Content -->
+    <div class="ion-page" id="main-content">
+      <ion-router-outlet></ion-router-outlet>
     </div>
-
-    <ul class="nav-links">
-      <li>
-        <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">
-          <span class="nav-icon">&#x1F3E0;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Home</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/customers" routerLinkActive="active">
-          <span class="nav-icon">&#x1F465;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Customers</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/products" routerLinkActive="active">
-          <span class="nav-icon">&#x1F4E6;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Products</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/sales-reps" routerLinkActive="active">
-          <span class="nav-icon">&#x1F9D1;&#x200D;&#x1F4BC;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales Reps</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/sales-orders" routerLinkActive="active">
-          <span class="nav-icon">&#x1F6D2;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales Orders</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/sales-facts" routerLinkActive="active">
-          <span class="nav-icon">&#x1F4C8;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales Facts</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/sales-trend" routerLinkActive="active">
-          <span class="nav-icon">&#x1F4C9;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales Trend</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/sales-statistics" routerLinkActive="active">
-          <span class="nav-icon">&#x1F4CA;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales Statistics</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/sales-region" routerLinkActive="active">
-          <span class="nav-icon">&#x1F5FA;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Sales by Region</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/agent-prompts" routerLinkActive="active">
-          <span class="nav-icon">&#x1F4AC;</span>
-          <span class="nav-text" *ngIf="!sidebarCollapsed">Agent Prompts</span>
-        </a>
-      </li>
-    </ul>
-
-    <div class="sidebar-footer" *ngIf="!sidebarCollapsed">
-      <small>Sales POC</small>
-    </div>
-  </nav>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
+  </ion-split-pane>
 
   <!-- Chatbot (floating) -->
   <app-chatbot></app-chatbot>
-</div>
+</ion-app>

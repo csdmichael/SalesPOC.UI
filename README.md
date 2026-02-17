@@ -197,18 +197,55 @@ Once the server is running, open your browser and navigate to `http://localhost:
 
 ## Building
 
-To build the project run:
+The project uses a two-step build process:
 
+1. **Angular Build**: Compiles the application to the `dist/` directory
+2. **Copy to Root**: Automatically copies build artifacts to the project root directory
+
+### Build Commands
+
+#### Production Build (Recommended)
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This command:
+- Builds the project with production optimizations
+- Copies compiled files (index.html, main-*.js, styles-*.css, etc.) to the root directory
+- Optimizes for performance and speed
 
-For production build:
+#### Development Build
 ```bash
-ng build --configuration production
+npm run build:dev
 ```
+
+This command:
+- Builds without optimizations for faster build times
+- Includes source maps for debugging
+- Copies compiled files to the root directory
+
+### Output Location
+
+Build artifacts are placed in both locations:
+- **dist/**: Original Angular build output
+- **Root directory**: Final deployment location (copied from dist/)
+
+The following files are created in the root after build:
+- `index.html` - Main HTML file
+- `main-*.js` - Application JavaScript bundle
+- `styles-*.css` - Application styles
+- `3rdpartylicenses.txt` - Third-party license information
+- `media/` - Static assets (images, icons)
+- `favicon.ico` - Application icon
+
+### Build Configuration
+
+The build process is configured via:
+- `angular.json` - Angular build settings (outputs to `dist/`)
+- `copy-to-root.js` - Post-build script that copies files to root
+- `.gitignore` - Excludes build artifacts from version control
+
+**Note**: Build artifacts in the root directory are excluded from git via `.gitignore` to keep the repository clean.
 
 ## Code scaffolding
 

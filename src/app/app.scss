@@ -139,6 +139,16 @@
   color: #475569;
   font-size: 0.85rem;
   text-align: center;
+
+  a {
+    color: #1a73e8;
+    text-decoration: none;
+    margin: 0 4px;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .backdrop {

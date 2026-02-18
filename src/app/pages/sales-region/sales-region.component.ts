@@ -60,7 +60,7 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
   dateTo = '';
 
   // Summary
-  regionSummary: { region: string; total: number; orders: number }[] = [];
+  regionSummary: { region: string; total: number; orders: number; percentage: number }[] = [];
 
   constructor(private salesFactService: SalesFactService, private cdr: ChangeDetectorRef) {}
 
@@ -169,9 +169,15 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
       regionMap.set(region, existing);
     });
 
+    const overallTotalSales = [...regionMap.values()].reduce((sum, data) => sum + data.total, 0);
+
     // Build summary
     this.regionSummary = [...regionMap.entries()]
-      .map(([region, data]) => ({ region, ...data }))
+      .map(([region, data]) => ({
+        region,
+        ...data,
+        percentage: overallTotalSales > 0 ? (data.total / overallTotalSales) * 100 : 0
+      }))
       .sort((a, b) => b.total - a.total);
 
     // Find max total for scaling
@@ -181,6 +187,8 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
     regionMap.forEach((data, region) => {
       const coords = REGION_COORDS[region];
       if (!coords) return;
+
+      const percentage = overallTotalSales > 0 ? (data.total / overallTotalSales) * 100 : 0;
 
       const radius = Math.max(15, Math.min(50, (data.total / maxTotal) * 50));
       const marker = L.circleMarker(coords, {
@@ -198,10 +206,19 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
             <strong>Total Sales:</strong> $${data.total.toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </p>
           <p style="margin: 4px 0; font-size: 0.85rem; color: #475569;">
+            <strong>Share:</strong> ${percentage.toFixed(1)}%
+          </p>
+          <p style="margin: 4px 0; font-size: 0.85rem; color: #475569;">
             <strong>Orders:</strong> ${data.orders.toLocaleString()}
           </p>
         </div>
       `);
+
+      marker.bindTooltip(`${percentage.toFixed(1)}%`, {
+        permanent: true,
+        direction: 'center',
+        className: 'region-percentage-label'
+      });
 
       this.markers.push(marker);
     });

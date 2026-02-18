@@ -54,6 +54,7 @@
           <tr>
             <th>Region</th>
             <th>Total Sales (USD)</th>
+            <th>Share of Sales</th>
             <th>Orders</th>
           </tr>
         </thead>
@@ -61,6 +62,7 @@
           <tr *ngFor="let r of regionSummary">
             <td class="name-cell">{{ r.region }}</td>
             <td class="number-cell">${{ r.total | number:'1.2-2' }}</td>
+            <td class="number-cell">{{ r.percentage | number:'1.1-1' }}%</td>
             <td class="number-cell">{{ r.orders | number }}</td>
           </tr>
         </tbody>

@@ -31,11 +31,16 @@
     <header class="topbar">
       <button class="menu-toggle" type="button" (click)="toggleMenu()" aria-label="Open navigation menu">☰</button>
       <h1>Sales POC</h1>
+      <img class="topbar-logo" src="/microsoft-logo.svg" alt="Microsoft logo" />
     </header>
 
     <main class="main-content">
       <router-outlet></router-outlet>
     </main>
+
+    <footer class="app-footer">
+      © Michael Yaacoub - Sr Solution Engineer at Microsoft
+    </footer>
   </div>
 
   <app-chatbot></app-chatbot>

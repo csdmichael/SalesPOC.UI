@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ChatbotComponent } from './components/chatbot/chatbot.component';
-import { IonApp, IonSplitPane, IonMenu, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonIcon, IonRouterOutlet } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { homeOutline, peopleOutline, cubeOutline, briefcaseOutline, cartOutline, statsChartOutline, trendingUpOutline, barChartOutline, mapOutline, chatbubbleOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -13,38 +10,20 @@ import { homeOutline, peopleOutline, cubeOutline, briefcaseOutline, cartOutline,
     CommonModule, 
     RouterLink, 
     RouterLinkActive, 
+    RouterOutlet,
     ChatbotComponent,
-    IonApp,
-    IonSplitPane,
-    IonMenu,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
-    IonContent,
-    IonList,
-    IonItem,
-    IonLabel,
-    IonIcon,
-    IonRouterOutlet
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
 export class App {
-  protected title = 'SalesPOC';
+  readonly menuOpen = signal(false);
 
-  constructor() {
-    addIcons({ 
-      homeOutline, 
-      peopleOutline, 
-      cubeOutline, 
-      briefcaseOutline, 
-      cartOutline, 
-      statsChartOutline, 
-      trendingUpOutline, 
-      barChartOutline, 
-      mapOutline, 
-      chatbubbleOutline 
-    });
+  toggleMenu(): void {
+    this.menuOpen.update((open) => !open);
+  }
+
+  closeMenu(): void {
+    this.menuOpen.set(false);
   }
 }

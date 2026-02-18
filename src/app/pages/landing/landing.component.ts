@@ -4,25 +4,12 @@ import { RouterLink } from '@angular/router';
 import { catchError, forkJoin, of, take } from 'rxjs';
 import { CustomerService } from '../../services/customer.service';
 import { ProductService } from '../../services/product.service';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonText, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-landing',
   imports: [
     CommonModule, 
-    RouterLink, 
-    IonHeader, 
-    IonToolbar, 
-    IonTitle, 
-    IonContent, 
-    IonCard, 
-    IonCardHeader, 
-    IonCardTitle, 
-    IonCardContent, 
-    IonButton, 
-    IonText,
-    IonMenuButton,
-    IonButtons
+    RouterLink
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',

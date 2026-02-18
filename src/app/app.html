@@ -1,64 +1,42 @@
-<ion-app>
-  <ion-split-pane contentId="main-content" when="md">
-    <!-- Side Menu -->
-    <ion-menu contentId="main-content" type="overlay">
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Sales POC</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-          <ion-item button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            <ion-icon name="home-outline" slot="start"></ion-icon>
-            <ion-label>Home</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/customers" routerLinkActive="active">
-            <ion-icon name="people-outline" slot="start"></ion-icon>
-            <ion-label>Customers</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/products" routerLinkActive="active">
-            <ion-icon name="cube-outline" slot="start"></ion-icon>
-            <ion-label>Products</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/sales-reps" routerLinkActive="active">
-            <ion-icon name="briefcase-outline" slot="start"></ion-icon>
-            <ion-label>Sales Reps</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/sales-orders" routerLinkActive="active">
-            <ion-icon name="cart-outline" slot="start"></ion-icon>
-            <ion-label>Sales Orders</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/sales-facts" routerLinkActive="active">
-            <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
-            <ion-label>Sales Facts</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/sales-trend" routerLinkActive="active">
-            <ion-icon name="trending-up-outline" slot="start"></ion-icon>
-            <ion-label>Sales Trend</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/sales-statistics" routerLinkActive="active">
-            <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
-            <ion-label>Sales Statistics</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/sales-region" routerLinkActive="active">
-            <ion-icon name="map-outline" slot="start"></ion-icon>
-            <ion-label>Sales by Region</ion-label>
-          </ion-item>
-          <ion-item button routerLink="/agent-prompts" routerLinkActive="active">
-            <ion-icon name="chatbubble-outline" slot="start"></ion-icon>
-            <ion-label>Agent Prompts</ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
+<div class="app-layout" [class.menu-open]="menuOpen()">
+  <button
+    class="backdrop"
+    type="button"
+    [class.visible]="menuOpen()"
+    (click)="closeMenu()"
+    aria-label="Close navigation menu"
+  ></button>
 
-    <!-- Main Content -->
-    <div class="ion-page" id="main-content">
-      <ion-router-outlet></ion-router-outlet>
+  <aside class="sidebar" aria-label="Primary navigation">
+    <div class="sidebar-header">
+      <a class="logo-text" routerLink="/" (click)="closeMenu()">Sales POC</a>
+      <button class="mobile-close" type="button" (click)="closeMenu()" aria-label="Close menu">×</button>
     </div>
-  </ion-split-pane>
 
-  <!-- Chatbot (floating) -->
+    <nav class="nav-links" aria-label="Main sections">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">Home</a>
+      <a routerLink="/customers" routerLinkActive="active" (click)="closeMenu()">Customers</a>
+      <a routerLink="/products" routerLinkActive="active" (click)="closeMenu()">Products</a>
+      <a routerLink="/sales-reps" routerLinkActive="active" (click)="closeMenu()">Sales Reps</a>
+      <a routerLink="/sales-orders" routerLinkActive="active" (click)="closeMenu()">Sales Orders</a>
+      <a routerLink="/sales-facts" routerLinkActive="active" (click)="closeMenu()">Sales Facts</a>
+      <a routerLink="/sales-trend" routerLinkActive="active" (click)="closeMenu()">Sales Trend</a>
+      <a routerLink="/sales-statistics" routerLinkActive="active" (click)="closeMenu()">Sales Statistics</a>
+      <a routerLink="/sales-region" routerLinkActive="active" (click)="closeMenu()">Sales by Region</a>
+      <a routerLink="/agent-prompts" routerLinkActive="active" (click)="closeMenu()">Agent Prompts</a>
+    </nav>
+  </aside>
+
+  <div class="main-shell">
+    <header class="topbar">
+      <button class="menu-toggle" type="button" (click)="toggleMenu()" aria-label="Open navigation menu">☰</button>
+      <h1>Sales POC</h1>
+    </header>
+
+    <main class="main-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
   <app-chatbot></app-chatbot>
-</ion-app>
+</div>

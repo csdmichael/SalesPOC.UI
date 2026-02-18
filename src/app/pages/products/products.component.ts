@@ -4,12 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Product } from '../../models/product.model';
 import { ProductDescription, ProductDocument } from '../../models/product-document.model';
 import { ProductService } from '../../services/product.service';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons],
+  imports: [CommonModule, FormsModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })

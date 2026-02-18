@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import * as L from 'leaflet';
 import { SalesFact } from '../../models/sales-fact.model';
 import { SalesFactService } from '../../services/sales-fact.service';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 // Region coordinates (approximate centers)
 const REGION_COORDS: Record<string, [number, number]> = {
@@ -40,7 +39,7 @@ const REGION_COORDS: Record<string, [number, number]> = {
 @Component({
   selector: 'app-sales-region',
   standalone: true,
-  imports: [CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons],
+  imports: [CommonModule, FormsModule],
   templateUrl: './sales-region.component.html',
   styleUrl: './sales-region.component.scss'
 })

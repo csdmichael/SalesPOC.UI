@@ -1,7 +1,4 @@
 .landing-page {
-  padding: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
   color: #1e293b;
 }
 
@@ -33,13 +30,15 @@
   margin-bottom: 18px;
 }
 
-.entities ion-card,
-.landing-page > ion-card {
+.entity-card,
+.assistant-card {
   margin: 0;
+  background: white;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  padding: 18px;
 
   &:hover {
     transform: translateY(-1px);
@@ -47,36 +46,53 @@
   }
 }
 
-.entities ion-card-title,
-.landing-page > ion-card ion-card-title {
+.entity-card h2,
+.assistant-card h2 {
+  margin: 0 0 10px;
   font-size: 1.05rem;
 }
 
-.entities ion-card-content,
-.landing-page > ion-card ion-card-content {
-  p {
-    margin: 0 0 12px 0;
-    line-height: 1.45;
-    color: #475569;
-  }
+.entity-card p,
+.assistant-card p {
+  margin: 0 0 12px 0;
+  line-height: 1.45;
+  color: #475569;
+}
 
-  ion-button {
-    margin-top: 6px;
-    --border-radius: 10px;
-    font-weight: 600;
+.assistant-card {
+  margin-bottom: 14px;
+}
+
+.primary-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0 14px;
+  background: #1a73e8;
+  border: 1px solid #1763cc;
+  border-radius: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+
+  &:hover {
+    background: #1763cc;
   }
 }
 
-.landing-page ion-text p {
+.preload-status {
   margin-top: 14px;
+  text-align: center;
   font-weight: 500;
+  color: #64748b;
+}
+
+.preload-status.ready {
+  color: #166534;
 }
 
 @media (max-width: 640px) {
-  .landing-page {
-    padding: 14px;
-  }
-
   .hero {
     padding: 16px;
 

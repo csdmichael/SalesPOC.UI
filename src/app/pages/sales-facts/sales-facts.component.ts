@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SalesFact } from '../../models/sales-fact.model';
 import { SalesFactService } from '../../services/sales-fact.service';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-sales-facts',
   standalone: true,
-  imports: [CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons],
+  imports: [CommonModule, FormsModule],
   templateUrl: './sales-facts.component.html',
   styleUrl: './sales-facts.component.scss'
 })

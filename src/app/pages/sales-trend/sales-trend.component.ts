@@ -4,14 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { Chart, registerables } from 'chart.js';
 import { SalesFact } from '../../models/sales-fact.model';
 import { SalesFactService } from '../../services/sales-fact.service';
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons } from '@ionic/angular/standalone';
 
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-sales-trend',
   standalone: true,
-  imports: [CommonModule, FormsModule, IonHeader, IonToolbar, IonTitle, IonContent, IonMenuButton, IonButtons],
+  imports: [CommonModule, FormsModule],
   templateUrl: './sales-trend.component.html',
   styleUrl: './sales-trend.component.scss'
 })

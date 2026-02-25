@@ -26,7 +26,8 @@ A comprehensive presentation on how to implement the entire application and host
 | [SalesPOC.Containerized.API](https://github.com/csdmichael/SalesPOC.Containerized.API) | REST API (Azure Container Apps) |
 | [SalesPOC.DB](https://github.com/csdmichael/SalesPOC.DB) | Database project |
 | [SalesPOC.AI](https://github.com/csdmichael/SalesPOC.AI) | AI Agent (Azure AI Foundry) |
-| [SalesPOC.APIM.APIC](https://github.com/csdmichael/SalesPOC.APIM.APIC) | API Management + API Center project |
+| [SalesPOC.APIM](https://github.com/csdmichael/SalesPOC.APIM) | API Management |
+| [SalesPOC.APIC](https://github.com/csdmichael/SalesPOC.APIC) | API Center project |
 
 ## UI Screenshots
 

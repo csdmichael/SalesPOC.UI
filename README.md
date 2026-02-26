@@ -173,7 +173,7 @@ SalesPOC.UI/
 
 4. **Route-Based Navigation**: The application uses Angular Router with lazy loading capabilities for optimal performance.
 
-5. **Proxy Configuration**: API requests are proxied through `proxy.conf.json` to the Azure API Management endpoint (`https://apim-poc-my.azure-api.net/v1`).
+5. **Proxy Configuration**: API requests are proxied through `proxy.conf.json` to the Azure API Management endpoint (`https://apim-poc-my.azure-api.net/salesapiv1`).
 
 ### Data Flow
 
@@ -206,7 +206,7 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-**Note**: The API proxy is automatically configured in `angular.json` and will forward requests from `/api/*` to `https://apim-poc-my.azure-api.net/v1/*`.
+**Note**: The API proxy is automatically configured in `angular.json` and will forward requests from `/api/*` to `https://apim-poc-my.azure-api.net/salesapiv1/*`.
 
 ## Building
 
@@ -262,7 +262,7 @@ The application uses a proxy configuration (`proxy.conf.json`) to forward API re
 ```json
 {
   "/api": {
-    "target": "https://apim-poc-my.azure-api.net/v1",
+    "target": "https://apim-poc-my.azure-api.net/salesapiv1",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"

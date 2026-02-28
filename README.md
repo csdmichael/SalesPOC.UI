@@ -18,6 +18,18 @@ A comprehensive presentation on how to implement the entire application and host
 
 **[Microsoft Azure Apps - Demo Sales POC (PDF)](docs/Microsoft%20Azure%20Apps%20-%20Demo%20Sales%20POC.pdf)**
 
+## Contest Submission Kit
+
+For GitHub Copilot SDK Enterprise Challenge packaging, use:
+
+- [AGENTS.md](AGENTS.md)
+- [mcp.json](mcp.json)
+- [Contest Summary](docs/contest-summary.md)
+- [Contest Checklist](docs/contest-checklist.md)
+- [Responsible AI Notes](docs/rai-notes.md)
+- [Operational Readiness](docs/operational-readiness.md)
+- [Presentations Folder](presentations/README.md)
+
 ## Related Repositories
 
 | Repository | Description |

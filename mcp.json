@@ -1,0 +1,24 @@
+{
+  "servers": {
+    "angular-cli": {
+      "command": "npx",
+      "args": ["-y", "@angular/cli", "mcp"]
+    },
+    "BlobMcpServer": {
+      "type": "http",
+      "url": "https://apim-poc-my.azure-api.net/blob/mcp"
+    },
+    "CosmosMcpServer": {
+      "type": "http",
+      "url": "https://apim-poc-my.azure-api.net/cosmos/mcp"
+    },
+    "SalesApiMcpServer": {
+      "type": "http",
+      "url": "https://apim-poc-my.azure-api.net/sales-api-mcp/mcp"
+    },
+    "SqlMcpServer": {
+      "type": "http",
+      "url": "https://apim-poc-my.azure-api.net/sql/mcp"
+    }
+  }
+}

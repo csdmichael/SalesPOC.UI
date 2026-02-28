@@ -1,0 +1,5 @@
+# Contest Submission Summary (<=150 words)
+
+Use this exact section in the form submission.
+
+SalesPOC is an enterprise sales intelligence solution that combines a production-ready Angular/Ionic front end, governed APIs, and AI-assisted workflows to accelerate seller productivity. The solution integrates operational sales data (customers, products, orders, regions, reps) with a conversational assistant and analytics views to support fast decision-making. It is designed for reuse across business units through modular services, API-first contracts, and MCP-based extensibility. The architecture is cloud-deployable, observable, and secure by default, with clear CI/CD, environment configuration, and Responsible AI controls. Our approach demonstrates how GitHub Copilot SDK-aligned agent patterns can be embedded into business applications to deliver measurable impact: reduced time-to-insight, improved query accessibility for non-technical users, and faster go-to-market analytics iterations. The solution is implementation-ready for enterprise adoption and includes setup, architecture, governance, and demo assets.

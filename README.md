@@ -10,13 +10,13 @@ The application is deployed and accessible at: **[https://salespoc.azurewebsites
 
 ## Architecture
 
-![Architecture](Documentation/Architecture.png)
+![Architecture](docs/Architecture.png)
 
 ## Presentation
 
 A comprehensive presentation on how to implement the entire application and host it on Azure as a PaaS App is available here:
 
-**[Microsoft Azure Apps - Demo Sales POC (PDF)](Documentation/Microsoft%20Azure%20Apps%20-%20Demo%20Sales%20POC.pdf)**
+**[Microsoft Azure Apps - Demo Sales POC (PDF)](docs/Microsoft%20Azure%20Apps%20-%20Demo%20Sales%20POC.pdf)**
 
 ## Related Repositories
 
@@ -33,14 +33,14 @@ A comprehensive presentation on how to implement the entire application and host
 
 <table>
   <tr>
-    <td align="center"><b>Customers</b><br/><a href="Documentation/UI%20Screenshots/Customers.png" target="_blank"><img src="Documentation/UI%20Screenshots/Customers.png" width="280"/></a></td>
-    <td align="center"><b>Products</b><br/><a href="Documentation/UI%20Screenshots/Products.png" target="_blank"><img src="Documentation/UI%20Screenshots/Products.png" width="280"/></a></td>
-    <td align="center"><b>Sales Reps</b><br/><a href="Documentation/UI%20Screenshots/Sales%20Reps.png" target="_blank"><img src="Documentation/UI%20Screenshots/Sales%20Reps.png" width="280"/></a></td>
+    <td align="center"><b>Customers</b><br/><a href="docs/UI%20Screenshots/Customers.png" target="_blank"><img src="docs/UI%20Screenshots/Customers.png" width="280"/></a></td>
+    <td align="center"><b>Products</b><br/><a href="docs/UI%20Screenshots/Products.png" target="_blank"><img src="docs/UI%20Screenshots/Products.png" width="280"/></a></td>
+    <td align="center"><b>Sales Reps</b><br/><a href="docs/UI%20Screenshots/Sales%20Reps.png" target="_blank"><img src="docs/UI%20Screenshots/Sales%20Reps.png" width="280"/></a></td>
   </tr>
   <tr>
-    <td align="center"><b>Sales Orders</b><br/><a href="Documentation/UI%20Screenshots/Sales%20Orders.png" target="_blank"><img src="Documentation/UI%20Screenshots/Sales%20Orders.png" width="280"/></a></td>
-    <td align="center"><b>Sales Facts (Stats)</b><br/><a href="Documentation/UI%20Screenshots/Sales%20Facts%20(Stats).png" target="_blank"><img src="Documentation/UI%20Screenshots/Sales%20Facts%20(Stats).png" width="280"/></a></td>
-    <td align="center"><b>Sales Assistant</b><br/><a href="Documentation/UI%20Screenshots/Sales%20Assistant.png" target="_blank"><img src="Documentation/UI%20Screenshots/Sales%20Assistant.png" width="280"/></a></td>
+    <td align="center"><b>Sales Orders</b><br/><a href="docs/UI%20Screenshots/Sales%20Orders.png" target="_blank"><img src="docs/UI%20Screenshots/Sales%20Orders.png" width="280"/></a></td>
+    <td align="center"><b>Sales Facts (Stats)</b><br/><a href="docs/UI%20Screenshots/Sales%20Facts%20(Stats).png" target="_blank"><img src="docs/UI%20Screenshots/Sales%20Facts%20(Stats).png" width="280"/></a></td>
+    <td align="center"><b>Sales Assistant</b><br/><a href="docs/UI%20Screenshots/Sales%20Assistant.png" target="_blank"><img src="docs/UI%20Screenshots/Sales%20Assistant.png" width="280"/></a></td>
   </tr>
 </table>
 

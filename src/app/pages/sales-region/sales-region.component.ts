@@ -36,6 +36,15 @@ const REGION_COORDS: Record<string, [number, number]> = {
   'Southeast Asia': [13.7563, 100.5018]
 };
 
+const CONTINENT_LABELS: Array<{ name: string; coords: [number, number] }> = [
+  { name: 'North America', coords: [58, -132] },
+  { name: 'South America', coords: [-32, -63] },
+  { name: 'Europe', coords: [66, 24] },
+  { name: 'Africa', coords: [-10, 18] },
+  { name: 'Asia', coords: [56, 95] },
+  { name: 'Australia', coords: [-40, 134] }
+];
+
 @Component({
   selector: 'app-sales-region',
   standalone: true,
@@ -48,6 +57,7 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
   loading = true;
   map: L.Map | null = null;
   markers: L.CircleMarker[] = [];
+  continentLabelMarkers: L.Marker[] = [];
 
   // Filters
   customers: string[] = [];
@@ -85,6 +95,15 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.map?.remove();
+  }
+
+  private escapeHtml(value: string): string {
+    return value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   private initMap(): void {
@@ -214,10 +233,15 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
         </div>
       `);
 
-      marker.bindTooltip(`${percentage.toFixed(1)}%`, {
+      marker.bindTooltip(`
+        <div class="region-bubble-label-content">
+          <span class="region-name">${this.escapeHtml(region)}</span>
+          <span class="region-percentage">${percentage.toFixed(1)}%</span>
+        </div>
+      `, {
         permanent: true,
         direction: 'center',
-        className: 'region-percentage-label'
+        className: 'region-bubble-label'
       });
 
       this.markers.push(marker);
@@ -226,10 +250,34 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
     this.cdr.detectChanges();
   }
 
+  private renderContinentLabels(): void {
+    if (!this.map) return;
+
+    this.continentLabelMarkers.forEach(m => m.remove());
+    this.continentLabelMarkers = [];
+
+    CONTINENT_LABELS.forEach(({ name, coords }) => {
+      const labelMarker = L.marker(coords, {
+        interactive: false,
+        keyboard: false,
+        icon: L.divIcon({ className: 'continent-label-anchor', html: '', iconSize: [0, 0] })
+      }).addTo(this.map!);
+
+      labelMarker.bindTooltip(name, {
+        permanent: true,
+        direction: 'center',
+        className: 'continent-label'
+      });
+
+      this.continentLabelMarkers.push(labelMarker);
+    });
+  }
+
   private tryInitMapAndRender(): void {
     this.initMap();
     if (!this.map) return;
     this.renderMap();
+    this.renderContinentLabels();
     this.map.invalidateSize();
   }
 }

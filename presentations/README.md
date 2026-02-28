@@ -14,3 +14,6 @@ If the deck is hosted externally, add the public link to this file and to `READM
 
 Current local presentation PDF:
 - [Microsoft Azure Apps - Demo Sales POC](Microsoft%20Azure%20Apps%20-%20Demo%20Sales%20POC.pdf)
+
+Generated minimum slide content:
+- [SalesPOC Minimum Slide Coverage](SalesPOC-Minimum-Slide-Coverage.md)

@@ -16,7 +16,7 @@ The application is deployed and accessible at: **[https://salespoc.azurewebsites
 
 A comprehensive presentation on how to implement the entire application and host it on Azure as a PaaS App is available here:
 
-**[Microsoft Azure Apps - Demo Sales POC (PDF)](docs/Microsoft%20Azure%20Apps%20-%20Demo%20Sales%20POC.pdf)**
+**[Microsoft Azure Apps - Demo Sales POC (PDF)](presentations/Microsoft%20Azure%20Apps%20-%20Demo%20Sales%20POC.pdf)**
 
 ## Contest Submission Kit
 
@@ -29,6 +29,7 @@ For GitHub Copilot SDK Enterprise Challenge packaging, use:
 - [Responsible AI Notes](docs/rai-notes.md)
 - [Operational Readiness](docs/operational-readiness.md)
 - [Presentations Folder](presentations/README.md)
+- [Presentation Assets](presentations/Microsoft%20Azure%20Apps%20-%20Demo%20Sales%20POC.pdf)
 
 ## Related Repositories
 

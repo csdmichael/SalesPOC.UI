@@ -40,6 +40,11 @@
   <div *ngIf="loading" class="loading-spinner">
     <div class="spinner"></div>
     <p>Loading sales data...</p>
+    <p>{{ warmupMessage }}</p>
+  </div>
+
+  <div *ngIf="!loading && loadFailed && salesFacts.length === 0" class="loading-spinner">
+    <p>{{ warmupMessage }}</p>
   </div>
 
   <div *ngIf="!loading" class="chart-container">

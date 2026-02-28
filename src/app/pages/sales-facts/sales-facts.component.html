@@ -56,6 +56,7 @@
   <div *ngIf="loading" class="loading-spinner">
     <div class="spinner"></div>
     <p>Loading sales facts...</p>
+    <p>{{ warmupMessage }}</p>
   </div>
 
   <div *ngIf="!loading" class="table-container">
@@ -90,7 +91,9 @@
           <td><span class="tag">{{ f.region }}</span></td>
         </tr>
         <tr *ngIf="filteredFacts.length === 0">
-          <td colspan="11" class="empty-row">No sales facts match the current filters.</td>
+          <td colspan="11" class="empty-row">
+            {{ hasActiveFilters ? 'No sales facts match the current filters.' : (loadFailed ? warmupMessage : 'Sales facts data is loading. Please wait and try again shortly.') }}
+          </td>
         </tr>
       </tbody>
     </table>

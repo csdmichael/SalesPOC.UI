@@ -19,6 +19,8 @@ export class SalesTrendComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   salesFacts: SalesFact[] = [];
   loading = true;
+  loadFailed = false;
+  readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
   chart: Chart | null = null;
   private pendingRender = false;
 
@@ -36,16 +38,22 @@ export class SalesTrendComponent implements OnInit, OnDestroy, AfterViewChecked 
 
   ngOnInit(): void {
     const cached = this.salesFactService.getCachedAll();
+    const hasCachedData = !!cached?.length;
     if (cached) {
       this.initializeData(cached);
     }
 
     this.salesFactService.getAll().subscribe({
       next: data => {
+        this.loadFailed = false;
         this.initializeData(data);
         this.cdr.markForCheck();
       },
-      error: () => { this.loading = false; this.cdr.markForCheck(); }
+      error: () => {
+        this.loading = false;
+        this.loadFailed = !hasCachedData;
+        this.cdr.markForCheck();
+      }
     });
   }
 

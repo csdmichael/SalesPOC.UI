@@ -20,7 +20,9 @@ export class SalesOrdersComponent implements OnInit {
   filteredOrders: SalesOrder[] = [];
   loading = false;
   loadingCustomers = true;
+  loadCustomersFailed = false;
   errorMessage = '';
+  readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
 
   // Customer filter (required)
   customers: Customer[] = [];
@@ -51,6 +53,7 @@ export class SalesOrdersComponent implements OnInit {
   ngOnInit(): void {
     // Load customers for filter dropdown
     const cached = this.customerService.getCachedAll();
+    const hasCachedCustomers = !!cached?.length;
     if (cached) {
       this.customers = cached.sort((a, b) => a.customerId - b.customerId);
       this.loadingCustomers = false;
@@ -60,10 +63,12 @@ export class SalesOrdersComponent implements OnInit {
       next: data => {
         this.customers = data.sort((a, b) => a.customerId - b.customerId);
         this.loadingCustomers = false;
+        this.loadCustomersFailed = false;
         this.cdr.markForCheck();
       },
       error: () => {
         this.loadingCustomers = false;
+        this.loadCustomersFailed = !hasCachedCustomers;
         this.cdr.markForCheck();
       }
     });
@@ -97,7 +102,7 @@ export class SalesOrdersComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = 'Failed to load sales orders. Please try again later.';
+        this.errorMessage = this.warmupMessage;
         console.error('Sales Orders load error:', err);
         this.cdr.markForCheck();
       }
@@ -156,6 +161,10 @@ export class SalesOrdersComponent implements OnInit {
 
   onPageSizeChange(): void {
     this.currentPage = 1;
+  }
+
+  get hasActiveFilters(): boolean {
+    return !!(this.filterStatus || this.filterRep);
   }
 
   isExpanded(orderId: number): boolean {

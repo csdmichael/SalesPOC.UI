@@ -16,6 +16,8 @@ export class ProductsComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   loading = true;
+  loadFailed = false;
+  readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
 
   searchName = '';
   filterCategory = '';
@@ -41,6 +43,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     // Preload from sessionStorage cache for instant display
     const cached = this.productService.getCachedAll();
+    const hasCachedData = !!cached?.length;
     if (cached) {
       this.initializeData(cached);
     }
@@ -48,10 +51,15 @@ export class ProductsComponent implements OnInit {
     // Fetch fresh data from API (uses shareReplay for in-session caching)
     this.productService.getAll().subscribe({
       next: data => {
+        this.loadFailed = false;
         this.initializeData(data);
         this.cdr.markForCheck();
       },
-      error: () => { this.loading = false; this.cdr.markForCheck(); }
+      error: () => {
+        this.loading = false;
+        this.loadFailed = !hasCachedData;
+        this.cdr.markForCheck();
+      }
     });
   }
 
@@ -110,6 +118,10 @@ export class ProductsComponent implements OnInit {
 
   onPageSizeChange(): void {
     this.currentPage = 1;
+  }
+
+  get hasActiveFilters(): boolean {
+    return !!(this.searchName || this.filterCategory || this.filterStatus);
   }
 
   toggleDetails(product: Product): void {

@@ -7,11 +7,12 @@
   <div class="filters-panel">
     <div class="filter-group customer-filter-group">
       <label>Customer <span class="required">*</span></label>
-      <div *ngIf="loadingCustomers" class="loading-inline">Loading customers...</div>
+      <div *ngIf="loadingCustomers" class="loading-inline">Loading customers... {{ warmupMessage }}</div>
       <select *ngIf="!loadingCustomers" [(ngModel)]="selectedCustomerId" (ngModelChange)="onCustomerSelected()">
         <option [ngValue]="null">— Select a Customer —</option>
         <option *ngFor="let c of customers" [ngValue]="c.customerId">{{ c.customerName }}</option>
       </select>
+      <div *ngIf="!loadingCustomers && loadCustomersFailed" class="loading-inline">{{ warmupMessage }}</div>
     </div>
     <div class="filter-group" *ngIf="selectedCustomerId">
       <label>Status</label>
@@ -40,6 +41,7 @@
   <div *ngIf="loading" class="loading-spinner">
     <div class="spinner"></div>
     <p>Loading orders...</p>
+    <p>{{ warmupMessage }}</p>
   </div>
 
   <!-- Error State -->
@@ -118,7 +120,9 @@
           </tr>
         </ng-container>
         <tr *ngIf="filteredOrders.length === 0">
-          <td colspan="8" class="empty-row">No orders match the current filters.</td>
+          <td colspan="8" class="empty-row">
+            {{ hasActiveFilters ? 'No orders match the current filters.' : 'No orders are available yet for this customer. ' + warmupMessage }}
+          </td>
         </tr>
       </tbody>
     </table>

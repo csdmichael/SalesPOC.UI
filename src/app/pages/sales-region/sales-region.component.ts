@@ -55,6 +55,8 @@ const CONTINENT_LABELS: Array<{ name: string; coords: [number, number] }> = [
 export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
   salesFacts: SalesFact[] = [];
   loading = true;
+  loadFailed = false;
+  readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
   map: L.Map | null = null;
   markers: L.CircleMarker[] = [];
   continentLabelMarkers: L.Marker[] = [];
@@ -76,16 +78,22 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     const cached = this.salesFactService.getCachedAll();
+    const hasCachedData = !!cached?.length;
     if (cached) {
       this.initializeData(cached);
     }
 
     this.salesFactService.getAll().subscribe({
       next: data => {
+        this.loadFailed = false;
         this.initializeData(data);
         this.cdr.markForCheck();
       },
-      error: () => { this.loading = false; this.cdr.markForCheck(); }
+      error: () => {
+        this.loading = false;
+        this.loadFailed = !hasCachedData;
+        this.cdr.markForCheck();
+      }
     });
   }
 

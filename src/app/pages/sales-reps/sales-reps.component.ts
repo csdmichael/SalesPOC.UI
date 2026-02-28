@@ -15,6 +15,8 @@ export class SalesRepsComponent implements OnInit {
   salesReps: SalesRep[] = [];
   filteredReps: SalesRep[] = [];
   loading = true;
+  loadFailed = false;
+  readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
 
   searchName = '';
   filterRegion = '';
@@ -30,6 +32,7 @@ export class SalesRepsComponent implements OnInit {
   ngOnInit(): void {
     // Preload from sessionStorage cache for instant display
     const cached = this.salesRepService.getCachedAll();
+    const hasCachedData = !!cached?.length;
     if (cached) {
       this.initializeData(cached);
     }
@@ -37,10 +40,15 @@ export class SalesRepsComponent implements OnInit {
     // Fetch fresh data from API (uses shareReplay for in-session caching)
     this.salesRepService.getAll().subscribe({
       next: data => {
+        this.loadFailed = false;
         this.initializeData(data);
         this.cdr.markForCheck();
       },
-      error: () => { this.loading = false; this.cdr.markForCheck(); }
+      error: () => {
+        this.loading = false;
+        this.loadFailed = !hasCachedData;
+        this.cdr.markForCheck();
+      }
     });
   }
 
@@ -96,5 +104,9 @@ export class SalesRepsComponent implements OnInit {
 
   onPageSizeChange(): void {
     this.currentPage = 1;
+  }
+
+  get hasActiveFilters(): boolean {
+    return !!(this.searchName || this.filterRegion);
   }
 }

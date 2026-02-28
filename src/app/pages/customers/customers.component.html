@@ -38,6 +38,7 @@
   <div *ngIf="loading" class="loading-spinner">
     <div class="spinner"></div>
     <p>Loading customers...</p>
+    <p>{{ warmupMessage }}</p>
   </div>
 
   <!-- Data Table -->
@@ -67,7 +68,9 @@
           <td class="number-cell">${{ c.annualRevenueUsd | number:'1.2-2' }}</td>
         </tr>
         <tr *ngIf="filteredCustomers.length === 0">
-          <td colspan="8" class="empty-row">No customers match the current filters.</td>
+          <td colspan="8" class="empty-row">
+            {{ hasActiveFilters ? 'No customers match the current filters.' : (loadFailed ? warmupMessage : 'Customer data is loading. Please wait and try again shortly.') }}
+          </td>
         </tr>
       </tbody>
     </table>

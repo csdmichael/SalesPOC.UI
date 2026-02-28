@@ -22,6 +22,7 @@
   <div *ngIf="loading" class="loading-spinner">
     <div class="spinner"></div>
     <p>Loading sales reps...</p>
+    <p>{{ warmupMessage }}</p>
   </div>
 
   <div *ngIf="!loading" class="table-container">
@@ -44,7 +45,9 @@
           <td>{{ r.hireDate }}</td>
         </tr>
         <tr *ngIf="filteredReps.length === 0">
-          <td colspan="5" class="empty-row">No sales reps match the current filters.</td>
+          <td colspan="5" class="empty-row">
+            {{ hasActiveFilters ? 'No sales reps match the current filters.' : (loadFailed ? warmupMessage : 'Sales representative data is loading. Please wait and try again shortly.') }}
+          </td>
         </tr>
       </tbody>
     </table>

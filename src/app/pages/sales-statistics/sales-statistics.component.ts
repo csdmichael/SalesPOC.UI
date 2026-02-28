@@ -84,6 +84,8 @@ export class SalesStatisticsComponent implements OnInit, OnDestroy {
 
   salesFacts: SalesFact[] = [];
   loading = true;
+  loadFailed = false;
+  readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
   chartsReady = false;
 
   customerChart: Chart | null = null;
@@ -104,16 +106,22 @@ export class SalesStatisticsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const cached = this.salesFactService.getCachedAll();
+    const hasCachedData = !!cached?.length;
     if (cached) {
       this.initializeData(cached);
     }
 
     this.salesFactService.getAll().subscribe({
       next: data => {
+        this.loadFailed = false;
         this.initializeData(data);
         this.cdr.markForCheck();
       },
-      error: () => { this.loading = false; this.cdr.markForCheck(); }
+      error: () => {
+        this.loading = false;
+        this.loadFailed = !hasCachedData;
+        this.cdr.markForCheck();
+      }
     });
   }
 

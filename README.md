@@ -50,18 +50,22 @@ For GitHub Copilot SDK Enterprise Challenge packaging, use:
 
 ## UI Screenshots
 
-<table>
-  <tr>
-    <td align="center"><b>Customers</b><br/><a href="docs/UI%20Screenshots/Customers.png" target="_blank"><img src="docs/UI%20Screenshots/Customers.png" width="280"/></a></td>
-    <td align="center"><b>Products</b><br/><a href="docs/UI%20Screenshots/Products.png" target="_blank"><img src="docs/UI%20Screenshots/Products.png" width="280"/></a></td>
-    <td align="center"><b>Sales Reps</b><br/><a href="docs/UI%20Screenshots/Sales%20Reps.png" target="_blank"><img src="docs/UI%20Screenshots/Sales%20Reps.png" width="280"/></a></td>
-  </tr>
-  <tr>
-    <td align="center"><b>Sales Orders</b><br/><a href="docs/UI%20Screenshots/Sales%20Orders.png" target="_blank"><img src="docs/UI%20Screenshots/Sales%20Orders.png" width="280"/></a></td>
-    <td align="center"><b>Sales Facts (Stats)</b><br/><a href="docs/UI%20Screenshots/Sales%20Facts%20(Stats).png" target="_blank"><img src="docs/UI%20Screenshots/Sales%20Facts%20(Stats).png" width="280"/></a></td>
-    <td align="center"><b>Sales Assistant</b><br/><a href="docs/UI%20Screenshots/Sales%20Assistant.png" target="_blank"><img src="docs/UI%20Screenshots/Sales%20Assistant.png" width="280"/></a></td>
-  </tr>
-</table>
+| Screenshot | Description |
+|---|---|
+| <a href="docs/UI%20Screenshots/01.%20Home.png" target="_blank"><img src="docs/UI%20Screenshots/01.%20Home.png" width="280" alt="Home"/></a><br/><b>1) Home</b> | Landing page with navigation entry points into dashboards, data views, and AI-assisted workflows. |
+| <a href="docs/UI%20Screenshots/02.%20Customers.png" target="_blank"><img src="docs/UI%20Screenshots/02.%20Customers.png" width="280" alt="Customers"/></a><br/><b>2) Customers</b> | Customer listing with filters, pagination, and quick navigation to each customer account. |
+| <a href="docs/UI%20Screenshots/03.%20Customer%20Account%20-%20Copilot%20Analyzing%20Deal%20Strategy.png" target="_blank"><img src="docs/UI%20Screenshots/03.%20Customer%20Account%20-%20Copilot%20Analyzing%20Deal%20Strategy.png" width="280" alt="Customer Account - Copilot Analyzing Deal Strategy"/></a><br/><b>3) Customer Account - Copilot Analyzing Deal Strategy</b> | Customer account detail view showing the side-panel copilot running contextual strategy analysis. |
+| <a href="docs/UI%20Screenshots/04.%20Customer%20Account%20-%20CopilotDeal%20Strategy%20Result.png" target="_blank"><img src="docs/UI%20Screenshots/04.%20Customer%20Account%20-%20CopilotDeal%20Strategy%20Result.png" width="280" alt="Customer Account - Copilot Deal Strategy Result"/></a><br/><b>4) Customer Account - Copilot Deal Strategy Result</b> | Structured strategy output with risk, cross-sell recommendations, actions, and executive summary. |
+| <a href="docs/UI%20Screenshots/05.%20Products.png" target="_blank"><img src="docs/UI%20Screenshots/05.%20Products.png" width="280" alt="Products"/></a><br/><b>5) Products</b> | Product catalog view with category/status filters and expandable product details. |
+| <a href="docs/UI%20Screenshots/06.%20Sales%20Reps.png" target="_blank"><img src="docs/UI%20Screenshots/06.%20Sales%20Reps.png" width="280" alt="Sales Reps"/></a><br/><b>6) Sales Reps</b> | Sales representative directory with regional filtering and performance-oriented lookup. |
+| <a href="docs/UI%20Screenshots/07.%20Sales%20Orders.png" target="_blank"><img src="docs/UI%20Screenshots/07.%20Sales%20Orders.png" width="280" alt="Sales Orders"/></a><br/><b>7) Sales Orders</b> | Sales order management screen with order status visibility and customer/rep context. |
+| <a href="docs/UI%20Screenshots/08.%20Sales%20Facts.png" target="_blank"><img src="docs/UI%20Screenshots/08.%20Sales%20Facts.png" width="280" alt="Sales Facts"/></a><br/><b>8) Sales Facts</b> | Transactional sales fact table for detailed analytics slicing by customer, product, and region. |
+| <a href="docs/UI%20Screenshots/09.%20Sales%20Trend.png" target="_blank"><img src="docs/UI%20Screenshots/09.%20Sales%20Trend.png" width="280" alt="Sales Trend"/></a><br/><b>9) Sales Trend</b> | Trend analytics view showing performance movement over time. |
+| <a href="docs/UI%20Screenshots/10.%20Sales%20Statistics.png" target="_blank"><img src="docs/UI%20Screenshots/10.%20Sales%20Statistics.png" width="280" alt="Sales Statistics"/></a><br/><b>10) Sales Statistics</b> | Statistical dashboard for aggregated KPIs and top-level sales insights. |
+| <a href="docs/UI%20Screenshots/11.%20Sales%20by%20Region.png" target="_blank"><img src="docs/UI%20Screenshots/11.%20Sales%20by%20Region.png" width="280" alt="Sales by Region"/></a><br/><b>11) Sales by Region</b> | Geographic sales visualization highlighting regional contribution and concentration. |
+| <a href="docs/UI%20Screenshots/12.%20Sales%20Agents%20Example%20Prompts.png" target="_blank"><img src="docs/UI%20Screenshots/12.%20Sales%20Agents%20Example%20Prompts.png" width="280" alt="Sales Agents Example Prompts"/></a><br/><b>12) Sales Agents Example Prompts</b> | Prompt gallery with reusable examples for business and analytics questions. |
+| <a href="docs/UI%20Screenshots/13.%20Sales%20Agent%20-%20Plot%20top%20products%20by%20Price.png" target="_blank"><img src="docs/UI%20Screenshots/13.%20Sales%20Agent%20-%20Plot%20top%20products%20by%20Price.png" width="280" alt="Sales Agent - Plot Top Products by Price"/></a><br/><b>13) Sales Agent - Plot Top Products by Price</b> | AI assistant response rendering a charted analysis for top products by unit price. |
+| <a href="docs/UI%20Screenshots/14.%20Sales%20Agent%20-%20Product%20data%20from%20multiple%20sources.png" target="_blank"><img src="docs/UI%20Screenshots/14.%20Sales%20Agent%20-%20Product%20data%20from%20multiple%20sources.png" width="280" alt="Sales Agent - Product Data from Multiple Sources"/></a><br/><b>14) Sales Agent - Product Data from Multiple Sources</b> | AI response combining product records, descriptions, and supporting document references. |
 
 ## Project Overview
 

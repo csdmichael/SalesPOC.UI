@@ -1,0 +1,45 @@
+<section class="copilot-panel" aria-label="Deal Strategy Copilot panel">
+  <div class="copilot-header">
+    <h2>Deal Strategy Copilot</h2>
+    <button class="btn-clear" (click)="runAutoAnalysis()" [disabled]="loading()">Refresh</button>
+  </div>
+
+  <div *ngIf="loading()" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Running account analysis...</p>
+  </div>
+
+  <div *ngIf="error()" class="copilot-error">{{ error() }}</div>
+
+  <div *ngIf="analysis() as result" class="copilot-body">
+    <article class="copilot-card">
+      <h3>Risk Card</h3>
+      <p>{{ result.riskCard }}</p>
+    </article>
+
+    <article class="copilot-card">
+      <h3>Cross-Sell Card</h3>
+      <p>{{ result.crossSellCard }}</p>
+    </article>
+
+    <article class="copilot-card">
+      <h3>Recommended Actions</h3>
+      <ul>
+        <li *ngFor="let action of result.recommendedActions">{{ action }}</li>
+      </ul>
+    </article>
+
+    <details class="copilot-card">
+      <summary>Executive Summary</summary>
+      <p>{{ result.executiveSummary }}</p>
+    </details>
+
+    <div class="copilot-actions">
+      <button class="btn-clear" (click)="onCreateTask()" [disabled]="actionLoading()">Create Task</button>
+      <button class="btn-clear" (click)="onDraftEmail()" [disabled]="actionLoading()">Draft Email</button>
+      <button class="btn-clear" (click)="onExportSummary()" [disabled]="actionLoading()">Export Summary</button>
+    </div>
+
+    <p *ngIf="actionStatus()" class="action-status">{{ actionStatus() }}</p>
+  </div>
+</section>

@@ -1,0 +1,69 @@
+.copilot-panel {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.copilot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2 {
+    font-size: 1.1rem;
+    color: var(--app-text);
+  }
+}
+
+.copilot-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.copilot-card {
+  border: 1px solid var(--app-border);
+  border-radius: 10px;
+  padding: 12px;
+  background: #fff;
+
+  h3 {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    color: var(--app-text);
+  }
+
+  p,
+  li {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #334155;
+  }
+
+  ul {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+.copilot-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.copilot-error {
+  color: #b91c1c;
+  font-size: 0.85rem;
+}
+
+.action-status {
+  font-size: 0.82rem;
+  color: var(--app-muted);
+}

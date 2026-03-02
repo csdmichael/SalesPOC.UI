@@ -1,0 +1,35 @@
+.account-layout {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
+  align-items: start;
+}
+
+.account-main {
+  overflow: hidden;
+
+  .data-table {
+    white-space: normal;
+  }
+
+  th {
+    width: 200px;
+    background: #f8fafc;
+    color: var(--app-muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  td,
+  th {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f5f9;
+  }
+}
+
+@media (max-width: 1024px) {
+  .account-layout {
+    grid-template-columns: 1fr;
+  }
+}

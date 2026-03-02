@@ -1,0 +1,61 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1>Customer Account</h1>
+    <a class="btn-clear" [routerLink]="['/customers']">Back to Customers</a>
+  </div>
+
+  <div *ngIf="loading()" class="loading-spinner">
+    <div class="spinner"></div>
+    <p>Loading customer account...</p>
+  </div>
+
+  <div *ngIf="error()" class="empty-row">{{ error() }}</div>
+
+  <div *ngIf="customer() as account" class="account-layout">
+    <section class="table-container account-main" aria-label="Customer account details">
+      <table class="data-table">
+        <tbody>
+          <tr>
+            <th>ID</th>
+            <td>{{ account.customerId }}</td>
+          </tr>
+          <tr>
+            <th>Name</th>
+            <td>{{ account.customerName }}</td>
+          </tr>
+          <tr>
+            <th>Type</th>
+            <td>{{ account.customerType || '—' }}</td>
+          </tr>
+          <tr>
+            <th>Industry</th>
+            <td>{{ account.industry || '—' }}</td>
+          </tr>
+          <tr>
+            <th>Country</th>
+            <td>{{ account.country || '—' }}</td>
+          </tr>
+          <tr>
+            <th>State</th>
+            <td>{{ account.state || '—' }}</td>
+          </tr>
+          <tr>
+            <th>City</th>
+            <td>{{ account.city || '—' }}</td>
+          </tr>
+          <tr>
+            <th>Annual Revenue</th>
+            <td>${{ account.annualRevenueUsd || 0 | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <deal-strategy-copilot
+      [customerId]="customerId()"
+      [region]="region()"
+      [repId]="repId()"
+      [userRole]="currentUserRole()">
+    </deal-strategy-copilot>
+  </div>
+</div>

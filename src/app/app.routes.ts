@@ -9,9 +9,11 @@ import { SalesTrendComponent } from './pages/sales-trend/sales-trend.component';
 import { SalesStatisticsComponent } from './pages/sales-statistics/sales-statistics.component';
 import { SalesRegionComponent } from './pages/sales-region/sales-region.component';
 import { LandingComponent } from './pages/landing/landing.component';
+import { CustomerAccountComponent } from './pages/customer-account/customer-account.component';
 
 export const routes: Routes = [
   { path: '', component: LandingComponent, title: 'Welcome' },
+  { path: 'customers/:customerId', component: CustomerAccountComponent, title: 'Customer Account' },
   { path: 'customers', component: CustomersComponent, title: 'Customers' },
   { path: 'products', component: ProductsComponent, title: 'Products' },
   { path: 'sales-reps', component: SalesRepsComponent, title: 'Sales Reps' },

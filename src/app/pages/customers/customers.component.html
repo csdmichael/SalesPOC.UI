@@ -59,7 +59,9 @@
       <tbody>
         <tr *ngFor="let c of pagedCustomers">
           <td>{{ c.customerId }}</td>
-          <td class="name-cell">{{ c.customerName }}</td>
+          <td class="name-cell">
+            <a [routerLink]="['/customers', c.customerId]">{{ c.customerName }}</a>
+          </td>
           <td><span class="tag">{{ c.customerType }}</span></td>
           <td>{{ c.industry }}</td>
           <td>{{ c.country }}</td>

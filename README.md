@@ -83,6 +83,42 @@ This is a proof-of-concept (POC) frontend application built with Angular 21 that
 - **🆕 Responsive Design**: Adaptive UI with Ionic components that work seamlessly on all screen sizes
 - **🆕 Native Features**: Ready for native device capabilities through Capacitor
 
+## Deal Strategy Copilot
+
+The application includes a contextual **Deal Strategy Copilot** on the customer account page.
+
+### Where to Access
+
+- Open **Customers**
+- Select a customer to navigate to `/customers/:customerId`
+- The Deal Strategy Copilot appears in the right-side panel
+
+### How It Works
+
+On page load, the copilot receives account context to ground responses and reduce unnecessary calls:
+
+- `customerId`
+- `region`
+- `repId`
+- `userRole`
+
+It then auto-runs account analysis and returns a structured strategy response.
+
+### Structured Output
+
+- **Risk Card**: Highlights key risks and blockers for the account
+- **Cross-Sell Card**: Identifies relevant upsell/cross-sell opportunities
+- **Recommended Actions**: Lists concrete next steps for the sales team
+- **Executive Summary**: Provides an expandable concise strategy brief
+
+### Action Buttons
+
+From the copilot panel, users can trigger follow-up actions:
+
+- **Create Task**
+- **Draft Email**
+- **Export Summary**
+
 ## Sales Chat Assistant
 
 The application includes an AI-powered Sales Chat Assistant that allows you to interact with your sales data using natural language. The chat icon is located at the **bottom right corner** of the screen.

@@ -1,0 +1,11 @@
+I need to prepare a script for a video that I need to prepare to explain the Sales POC that implemented for Copilot Sdk Challenge at Microsoft. 
+The order should be: 
+1) System overview about User Personas of System which are: a) Sales Managers & Executives to monitor Sales by Product, Region, etc. 
+b) Sales Strategy Team that use Copilot Deal Strategy per customer account to send deal strategies to Account Owners. Explain all UI Screens and AI Chat Assistant and Deal Strategy Copilot per Customer Account. 
+
+2) Architecture starting with data layer (SQL, Cosmos, Storage Blob) then API layer then APIM for API and exposing API as MCP Server as well as MCP servers for all data sources then AI Foundry Agent called Sales-Agent for Chat assistant and Copilot Deal Strategy agent and how backend APIs leverage Azure AI and Copilot sdk to send prompts to agent and get structured results then Front end which reders for any device (Web, Mobile). 
+
+3) Github repos list and github Actions and Workflow files for each repo, powershell scripts to automate deployment of everything including UI, APIs, APIM, API Center Rulesets (different analysis profile for REST vs MCP), MCP Servers and AI Project for Foundry and Copilot Agents 
+
+4) Customer Testimonials from Arrow and SanDisk
+

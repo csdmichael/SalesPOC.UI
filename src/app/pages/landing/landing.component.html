@@ -39,6 +39,17 @@
     </p>
   </section>
 
+  <section class="assistant-card copilot-card" aria-label="Deal Strategy Copilot info">
+    <h2>Deal Strategy Copilot Agent</h2>
+    <p>
+      The Deal Strategy Copilot is an AI-powered agent embedded in each customer account page. It automatically analyzes
+      account data and delivers a comprehensive deal strategy including risk assessment, cross-sell opportunities,
+      recommended actions, and an executive summary. You can also draft follow-up emails and create task lists directly
+      from the copilot panel.
+    </p>
+    <a class="primary-link" routerLink="/customers">Explore Customer Accounts</a>
+  </section>
+
   <p class="preload-status" [class.ready]="preloadComplete()">
     {{ preloadComplete() ? 'Customers and products are preloaded for faster page navigation.' : 'Preloading customers and products for faster navigation...' }}
   </p>

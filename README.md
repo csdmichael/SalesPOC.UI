@@ -1,6 +1,6 @@
 # SalesPOC.UI
 
-A modern Angular-based sales management dashboard application that provides comprehensive views of customers, products, sales representatives, orders, and sales analytics. The application features an AI-powered chatbot for natural language queries powered by Microsoft Foundry Agent.
+A modern Angular-based sales management dashboard application that provides comprehensive views of customers, products, sales representatives, orders, and sales analytics. The application features an AI-powered chatbot for natural language queries powered by Microsoft Foundry Agent, along with a **Copilot Deal Strategy agent** that delivers AI-driven deal analysis, risk assessment, and actionable recommendations for each customer account.
 
 **🎉 Now a Hybrid/Cross-Platform Application!** Built with Ionic Framework and Capacitor, this app runs seamlessly on web, iOS, and Android devices.
 

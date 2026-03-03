@@ -47,6 +47,7 @@ For GitHub Copilot SDK Enterprise Challenge packaging, use:
 | [SalesPOC.AI](https://github.com/csdmichael/SalesPOC.AI) | AI Agent (Azure AI Foundry) |
 | [SalesPOC.APIM](https://github.com/csdmichael/SalesPOC.APIM) | API Management |
 | [SalesPOC.APIC](https://github.com/csdmichael/SalesPOC.APIC) | API Center project |
+| [SalesPOC.MCP](https://github.com/csdmichael/SalesPOC.MCP) | MCP Servers |
 
 ## UI Screenshots
 

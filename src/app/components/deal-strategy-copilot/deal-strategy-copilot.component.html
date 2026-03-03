@@ -34,6 +34,19 @@
       <p>{{ result.executiveSummary }}</p>
     </details>
 
+    <div *ngIf="emailDrafting()" class="email-progress">
+      <p class="email-progress-label">Drafting email...</p>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill"></div>
+      </div>
+    </div>
+
+    <details class="copilot-card email-card" [class.email-highlight]="emailJustDrafted()" *ngIf="draftedEmail()" open>
+      <summary>Drafted Email</summary>
+      <button class="btn-copy" (click)="onCopyEmail()">{{ emailCopied() ? 'Copied!' : 'Copy Email' }}</button>
+      <pre class="drafted-email">{{ draftedEmail() }}</pre>
+    </details>
+
     <div class="copilot-actions">
       <button class="btn-clear" (click)="onCreateTask()" [disabled]="actionLoading()">Create Task</button>
       <button class="btn-clear" (click)="onDraftEmail()" [disabled]="actionLoading()">Draft Email</button>

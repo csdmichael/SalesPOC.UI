@@ -63,6 +63,89 @@
   font-size: 0.85rem;
 }
 
+.drafted-email {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #334155;
+  margin: 8px 0 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
+
+.email-card {
+  position: relative;
+
+  .btn-copy {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    margin-top: 0;
+  }
+}
+
+.btn-copy {
+  margin-top: 8px;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  border: 1px solid var(--app-border);
+  border-radius: 6px;
+  background: var(--app-surface);
+  color: var(--app-text);
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: #e2e8f0;
+  }
+}
+
+.email-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+}
+
+.email-progress-label {
+  font-size: 0.82rem;
+  color: var(--app-muted);
+  margin: 0;
+}
+
+.progress-bar-track {
+  height: 4px;
+  border-radius: 4px;
+  background: #e2e8f0;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 40%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  animation: progressSlide 1.2s ease-in-out infinite;
+}
+
+@keyframes progressSlide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+.email-highlight {
+  animation: highlightPulse 0.6s ease-out;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+@keyframes highlightPulse {
+  0%   { box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.5); }
+  100% { box-shadow: 0 0 0 2px #3b82f6; }
+}
+
 .action-status {
   font-size: 0.82rem;
   color: var(--app-muted);

@@ -30,6 +30,13 @@ export class DealStrategyCopilotService {
     );
   }
 
+  invokeRaw(prompt: string): Observable<string> {
+    const groundedPrompt = this.buildGroundedPrompt(prompt);
+    return this.chatService.sendMessage(groundedPrompt).pipe(
+      map(response => response.reply)
+    );
+  }
+
   private buildGroundedPrompt(prompt: string): string {
     const contextJson = JSON.stringify(this.context ?? {}, null, 2);
     return [

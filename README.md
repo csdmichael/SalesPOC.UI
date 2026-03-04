@@ -22,6 +22,21 @@ A comprehensive presentation on how to implement the entire application and host
 
 **[Microsoft Azure Apps - Demo Sales POC (PDF)](presentations/Microsoft%20Azure%20Apps%20-%20Demo%20Sales%20POC.pdf)**
 
+## Explanation Video
+
+<a href="docs/Video/Sales%20AI%20Application%20-%20Copilot%20Sdk%20Challenge.mp4">
+  <img src="docs/UI%20Screenshots/01.%20Home.png" width="600" alt="Sales AI Application - Copilot SDK Challenge"/>
+  <br/>
+  <b>▶ Watch: Sales AI Application - Copilot SDK Challenge</b>
+</a>
+
+### YouTube
+
+| Part | Link |
+|---|---|
+| <a href="https://youtu.be/9QeFEh8RJRY"><img src="https://img.youtube.com/vi/9QeFEh8RJRY/hqdefault.jpg" width="280" alt="Part 1"/><br/><b>▶ Part 1</b></a> | [https://youtu.be/9QeFEh8RJRY](https://youtu.be/9QeFEh8RJRY) |
+| <a href="https://youtu.be/1Jrk1kMdFxY"><img src="https://img.youtube.com/vi/1Jrk1kMdFxY/hqdefault.jpg" width="280" alt="Part 2"/><br/><b>▶ Part 2</b></a> | [https://youtu.be/1Jrk1kMdFxY](https://youtu.be/1Jrk1kMdFxY) |
+
 ## Contest Submission Kit
 
 For GitHub Copilot SDK Enterprise Challenge packaging, use:

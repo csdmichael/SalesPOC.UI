@@ -12,7 +12,7 @@
         <option [ngValue]="null">— Select a Customer —</option>
         <option *ngFor="let c of customers" [ngValue]="c.customerId">{{ c.customerName }}</option>
       </select>
-      <div *ngIf="!loadingCustomers && loadCustomersFailed" class="loading-inline">{{ warmupMessage }}</div>
+      <div *ngIf="!loadingCustomers && loadCustomersFailed" class="loading-inline error-text">{{ errorMessage }}</div>
     </div>
     <div class="filter-group" *ngIf="selectedCustomerId">
       <label>Status</label>

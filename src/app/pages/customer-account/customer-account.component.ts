@@ -51,9 +51,8 @@ export class CustomerAccountComponent implements OnInit {
         this.loading.set(false);
       },
       error: () => {
-        if (!this.customer()) {
-          this.error.set('Customer account details are unavailable right now.');
-        }
+        this.customer.set(null);
+        this.error.set('Failed to load customer account details from the server after multiple retries. Please refresh the page or try again later.');
         this.loading.set(false);
       }
     });

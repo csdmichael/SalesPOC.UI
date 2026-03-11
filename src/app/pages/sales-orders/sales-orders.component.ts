@@ -68,7 +68,9 @@ export class SalesOrdersComponent implements OnInit {
       },
       error: () => {
         this.loadingCustomers = false;
-        this.loadCustomersFailed = !hasCachedCustomers;
+        this.loadCustomersFailed = true;
+        this.customers = [];
+        this.errorMessage = 'Failed to load customer data from the server after multiple retries. Please refresh the page or try again later.';
         this.cdr.markForCheck();
       }
     });
@@ -102,7 +104,7 @@ export class SalesOrdersComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = this.warmupMessage;
+        this.errorMessage = 'Failed to load order data from the server after multiple retries. Please refresh the page or try again later.';
         console.error('Sales Orders load error:', err);
         this.cdr.markForCheck();
       }

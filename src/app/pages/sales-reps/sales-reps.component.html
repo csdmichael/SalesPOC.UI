@@ -46,7 +46,7 @@
         </tr>
         <tr *ngIf="filteredReps.length === 0">
           <td colspan="5" class="empty-row">
-            {{ hasActiveFilters ? 'No sales reps match the current filters.' : (loadFailed ? warmupMessage : 'Sales representative data is loading. Please wait and try again shortly.') }}
+            {{ hasActiveFilters ? 'No sales reps match the current filters.' : (loadFailed ? errorMessage : 'Sales representative data is loading. Please wait and try again shortly.') }}
           </td>
         </tr>
       </tbody>

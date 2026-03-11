@@ -16,6 +16,7 @@ export class SalesFactsComponent implements OnInit {
   filteredFacts: SalesFact[] = [];
   loading = true;
   loadFailed = false;
+  errorMessage = '';
   readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
 
   searchCustomer = '';
@@ -52,7 +53,10 @@ export class SalesFactsComponent implements OnInit {
       },
       error: () => {
         this.loading = false;
-        this.loadFailed = !hasCachedData;
+        this.loadFailed = true;
+        this.salesFacts = [];
+        this.filteredFacts = [];
+        this.errorMessage = 'Failed to load sales facts from the server after multiple retries. Please refresh the page or try again later.';
         this.cdr.markForCheck();
       }
     });

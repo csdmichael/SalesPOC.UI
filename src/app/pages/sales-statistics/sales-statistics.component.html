@@ -22,8 +22,8 @@
     <p>{{ warmupMessage }}</p>
   </div>
 
-  <div *ngIf="!loading && loadFailed && salesFacts.length === 0" class="loading-spinner">
-    <p>{{ warmupMessage }}</p>
+  <div *ngIf="!loading && loadFailed" class="loading-spinner">
+    <p>{{ errorMessage }}</p>
   </div>
 
   <div *ngIf="!loading && chartsReady" class="charts-grid">

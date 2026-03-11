@@ -16,6 +16,7 @@ export class SalesRepsComponent implements OnInit {
   filteredReps: SalesRep[] = [];
   loading = true;
   loadFailed = false;
+  errorMessage = '';
   readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
 
   searchName = '';
@@ -46,7 +47,10 @@ export class SalesRepsComponent implements OnInit {
       },
       error: () => {
         this.loading = false;
-        this.loadFailed = !hasCachedData;
+        this.loadFailed = true;
+        this.salesReps = [];
+        this.filteredReps = [];
+        this.errorMessage = 'Failed to load sales rep data from the server after multiple retries. Please refresh the page or try again later.';
         this.cdr.markForCheck();
       }
     });

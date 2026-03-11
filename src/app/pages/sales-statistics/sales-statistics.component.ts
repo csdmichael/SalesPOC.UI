@@ -85,6 +85,7 @@ export class SalesStatisticsComponent implements OnInit, OnDestroy {
   salesFacts: SalesFact[] = [];
   loading = true;
   loadFailed = false;
+  errorMessage = '';
   readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
   chartsReady = false;
 
@@ -119,7 +120,9 @@ export class SalesStatisticsComponent implements OnInit, OnDestroy {
       },
       error: () => {
         this.loading = false;
-        this.loadFailed = !hasCachedData;
+        this.loadFailed = true;
+        this.salesFacts = [];
+        this.errorMessage = 'Failed to load sales statistics from the server after multiple retries. Please refresh the page or try again later.';
         this.cdr.markForCheck();
       }
     });

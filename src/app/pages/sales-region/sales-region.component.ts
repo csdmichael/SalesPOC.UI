@@ -56,6 +56,7 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
   salesFacts: SalesFact[] = [];
   loading = true;
   loadFailed = false;
+  errorMessage = '';
   readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
   map: L.Map | null = null;
   markers: L.CircleMarker[] = [];
@@ -91,7 +92,9 @@ export class SalesRegionComponent implements OnInit, OnDestroy, AfterViewInit {
       },
       error: () => {
         this.loading = false;
-        this.loadFailed = !hasCachedData;
+        this.loadFailed = true;
+        this.salesFacts = [];
+        this.errorMessage = 'Failed to load sales region data from the server after multiple retries. Please refresh the page or try again later.';
         this.cdr.markForCheck();
       }
     });

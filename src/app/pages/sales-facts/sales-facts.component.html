@@ -92,7 +92,7 @@
         </tr>
         <tr *ngIf="filteredFacts.length === 0">
           <td colspan="11" class="empty-row">
-            {{ hasActiveFilters ? 'No sales facts match the current filters.' : (loadFailed ? warmupMessage : 'Sales facts data is loading. Please wait and try again shortly.') }}
+            {{ hasActiveFilters ? 'No sales facts match the current filters.' : (loadFailed ? errorMessage : 'Sales facts data is loading. Please wait and try again shortly.') }}
           </td>
         </tr>
       </tbody>

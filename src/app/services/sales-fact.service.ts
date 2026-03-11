@@ -40,6 +40,7 @@ export class SalesFactService {
         catchError(error => {
           this.circuitOpenUntil = Date.now() + this.CIRCUIT_BREAKER_COOLDOWN_MS;
           this.allCache$ = null;
+          try { sessionStorage.removeItem(this.CACHE_KEY); } catch (e) {}
           return throwError(() => error);
         }),
         shareReplay(1)

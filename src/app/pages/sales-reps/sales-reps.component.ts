@@ -18,6 +18,7 @@ export class SalesRepsComponent implements OnInit {
   loadFailed = false;
   errorMessage = '';
   readonly warmupMessage = 'Backend API may be in idle mode to save cost. Initial load can take a little time while services warm up; once loaded, data is cached for faster access.';
+  usingCachedData = false;
 
   searchName = '';
   filterRegion = '';
@@ -31,23 +32,25 @@ export class SalesRepsComponent implements OnInit {
   constructor(private salesRepService: SalesRepService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    // Preload from sessionStorage cache for instant display
+    // Preload from sessionStorage cache for instant display while API loads
     const cached = this.salesRepService.getCachedAll();
-    const hasCachedData = !!cached?.length;
-    if (cached) {
+    if (cached?.length) {
       this.initializeData(cached);
+      this.usingCachedData = true;
     }
 
     // Fetch fresh data from API (uses shareReplay for in-session caching)
     this.salesRepService.getAll().subscribe({
       next: data => {
         this.loadFailed = false;
+        this.usingCachedData = false;
         this.initializeData(data);
         this.cdr.markForCheck();
       },
       error: () => {
         this.loading = false;
         this.loadFailed = true;
+        this.usingCachedData = false;
         this.salesReps = [];
         this.filteredReps = [];
         this.errorMessage = 'Failed to load sales rep data from the server after multiple retries. Please refresh the page or try again later.';

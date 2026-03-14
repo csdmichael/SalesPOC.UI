@@ -447,3 +447,9 @@ npx cap add android
 - [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli)
 - [Angular Documentation](https://angular.dev)
 - Project generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.3
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+Copyright (c) 2026 Michael Yacoub

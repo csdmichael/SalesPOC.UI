@@ -1,17 +1,18 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, effect, inject, untracked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatMessage, Citation } from '../../models/chat-message.model';
 import { ChatService } from '../../services/chat.service';
+import { ChatLauncherService } from '../../services/chat-launcher.service';
 import { MarkdownPipe } from '../../pipes/markdown.pipe';
 import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-chatbot',
-  standalone: true,
   imports: [CommonModule, FormsModule, MarkdownPipe],
   templateUrl: './chatbot.component.html',
-  styleUrl: './chatbot.component.scss'
+  styleUrl: './chatbot.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatbotComponent {
   isOpen = false;
@@ -19,28 +20,41 @@ export class ChatbotComponent {
   userInput = '';
   sending = false;
 
+  private readonly chatService = inject(ChatService);
+  private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly chatLauncherService = inject(ChatLauncherService);
   private readonly blobUrlPattern = /^https?:\/\/[^"'\s]+\.blob\.core\.windows\.net\//i;
+  private lastHandledRequestId = 0;
+  private queuedPrompt: string | null = null;
 
-  constructor(private chatService: ChatService, private cdr: ChangeDetectorRef) {}
+  private readonly promptLaunchEffect = effect(() => {
+    const request = this.chatLauncherService.request();
+    if (!request || request.id === this.lastHandledRequestId) {
+      return;
+    }
+
+    this.lastHandledRequestId = request.id;
+    untracked(() => this.launchPrompt(request.prompt));
+  });
 
   toggleChat(): void {
     this.isOpen = !this.isOpen;
-    if (this.isOpen && this.messages.length === 0) {
-      this.messages.push({
-        role: 'assistant',
-        content: 'Hi! I\'m the Sales Assistant. Ask me anything about sales data, customers, products, or orders.',
-        timestamp: new Date()
-      });
+    if (this.isOpen) {
+      this.ensureWelcomeMessage();
     }
+
+    this.changeDetectorRef.markForCheck();
   }
 
-  sendMessage(): void {
-    const text = this.userInput.trim();
+  sendMessage(promptText?: string): void {
+    const text = (promptText ?? this.userInput).trim();
     if (!text || this.sending) return;
 
+    this.ensureChatOpen();
     this.messages.push({ role: 'user', content: text, timestamp: new Date() });
     this.userInput = '';
     this.sending = true;
+    this.changeDetectorRef.markForCheck();
 
     this.chatService.sendMessage(text).subscribe({
       next: response => {
@@ -50,8 +64,7 @@ export class ChatbotComponent {
           timestamp: new Date(),
           citations: this.rewriteCitationUrls(response.citations)
         });
-        this.sending = false;
-        this.cdr.markForCheck();
+        this.finishSendCycle();
         setTimeout(() => this.scrollToBottom(), 50);
       },
       error: () => {
@@ -60,8 +73,7 @@ export class ChatbotComponent {
           content: 'Sorry, something went wrong. Please try again.',
           timestamp: new Date()
         });
-        this.sending = false;
-        this.cdr.markForCheck();
+        this.finishSendCycle();
       }
     });
 
@@ -78,6 +90,49 @@ export class ChatbotComponent {
   private scrollToBottom(): void {
     const el = document.querySelector('.chat-messages');
     if (el) el.scrollTop = el.scrollHeight;
+  }
+
+  private launchPrompt(prompt: string): void {
+    this.ensureChatOpen();
+    if (this.sending) {
+      this.queuedPrompt = prompt;
+      this.userInput = prompt;
+      this.changeDetectorRef.markForCheck();
+      return;
+    }
+
+    this.userInput = prompt;
+    this.sendMessage(prompt);
+  }
+
+  private ensureChatOpen(): void {
+    if (!this.isOpen) {
+      this.isOpen = true;
+    }
+
+    this.ensureWelcomeMessage();
+    this.changeDetectorRef.markForCheck();
+  }
+
+  private ensureWelcomeMessage(): void {
+    if (this.messages.length === 0) {
+      this.messages.push({
+        role: 'assistant',
+        content: 'Hi! I\'m the Sales Assistant. Ask me anything about sales data, customers, products, or orders.',
+        timestamp: new Date()
+      });
+    }
+  }
+
+  private finishSendCycle(): void {
+    this.sending = false;
+    this.changeDetectorRef.markForCheck();
+
+    if (this.queuedPrompt) {
+      const queuedPrompt = this.queuedPrompt;
+      this.queuedPrompt = null;
+      this.sendMessage(queuedPrompt);
+    }
   }
 
   /** Rewrites any direct blob storage URLs in citations to use the backend proxy API. */

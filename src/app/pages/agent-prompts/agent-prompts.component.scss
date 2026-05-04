@@ -91,6 +91,7 @@
   line-height: 1.5;
 }
 
+.btn-launch,
 .btn-copy {
   padding: 6px 10px;
   border: 1px solid #e2e8f0;
@@ -109,5 +110,12 @@
   &.copied {
     background: #dcfce7;
     border-color: #86efac;
+  }
+}
+
+.btn-launch {
+  &.launched {
+    background: #dbeafe;
+    border-color: #93c5fd;
   }
 }

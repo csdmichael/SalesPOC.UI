@@ -5,7 +5,7 @@
   </div>
 
   <p class="page-description">
-    Click the <strong>chat icon</strong> at the bottom-right corner of the screen, then copy any prompt below to start interacting with the Sales Assistant.
+    Use the <strong>ask</strong> button to send a sample prompt straight to the Sales Assistant, or copy it to reuse elsewhere.
   </p>
 
   <div class="categories-grid">
@@ -21,6 +21,10 @@
         <div *ngFor="let p of cat.prompts; let i = index" class="prompt-item">
           <div class="prompt-number">{{ i + 1 }}</div>
           <div class="prompt-text">{{ p.text }}</div>
+          <button class="btn-launch" [class.launched]="p.launched" (click)="launchPrompt(p)" [title]="p.launched ? 'Sent to assistant' : 'Ask Sales Assistant'" aria-label="Ask Sales Assistant with this prompt">
+            <span *ngIf="!p.launched">💬</span>
+            <span *ngIf="p.launched">✅</span>
+          </button>
           <button class="btn-copy" [class.copied]="p.copied" (click)="copyToClipboard(p)" [title]="p.copied ? 'Copied!' : 'Copy to clipboard'">
             <span *ngIf="!p.copied">&#x1F4CB;</span>
             <span *ngIf="p.copied">&#x2705;</span>
